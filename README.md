@@ -1,2 +1,3 @@
 # slate
-Slate is an opinionated, configurable React component library built for scalable dev teams on Tailwind and Radix.
+
+https://blog.logrocket.com/how-to-build-component-library-react-typescript/
