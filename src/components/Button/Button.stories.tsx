@@ -5,6 +5,7 @@ import { Button } from './'
 
 const meta: Meta<typeof Button> = {
   component: Button,
+  title: 'Inputs/Button',
   argTypes: args({
     variant: {
       control: {
