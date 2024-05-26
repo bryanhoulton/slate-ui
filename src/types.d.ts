@@ -1,5 +1,5 @@
 type SlateVariant = 'primary' | 'secondary' | 'subtle'
-type SlateSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+type SlateSize = 'sm' | 'md' | 'lg'
 type SlateColor =
   | 'default'
   | 'primary'

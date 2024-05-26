@@ -3,22 +3,26 @@ import { cva } from 'class-variance-authority'
 import { cn } from '../../utilities'
 import { ButtonProps } from './Button.types'
 
-const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>([], {
-  variants: {
-    variant: {
-      primary: 'bg-blue-500 text-white',
-      secondary: 'bg-gray-500 text-white',
-      subtle: 'bg-gray-100 text-gray-500'
-    },
-    size: {
-      xs: 'text-xs',
-      sm: 'px-2 py-1 text-sm',
-      md: 'px-3 py-2 text-base',
-      lg: 'px-4 py-3 text-lg',
-      xl: 'px-5 py-4 text-xl'
+const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
+  [
+    'rounded-lg border text-sm focus:outline-none focus:ring-2',
+    'focus:ring-primary hover:shadow-inner'
+  ],
+  {
+    variants: {
+      variant: {
+        primary: 'bg-primary text-white',
+        secondary: 'bg-secondary text-white',
+        subtle: 'bg-transparent'
+      },
+      size: {
+        sm: 'px-2 h-6',
+        md: 'px-3 h-8',
+        lg: 'px-4 h-10'
+      }
     }
   }
-})
+)
 
 export function Button({
   variant = 'primary',
