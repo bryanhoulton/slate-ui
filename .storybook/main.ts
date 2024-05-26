@@ -1,17 +1,37 @@
-import type { StorybookConfig } from "@storybook/react-vite";
+import postcss from 'postcss'
+
+import type { StorybookConfig } from '@storybook/react-vite'
+
+import * as tailwindcss from '../tailwind.config'
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: ['../src/**/*.stories.@(tsx|mdx)'],
   addons: [
-    "@storybook/addon-onboarding",
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: postcss,
+          postcssOptions: {
+            plugins: {
+              tailwindcss,
+              autoprefixer: {}
+            }
+          }
+        }
+      }
+    },
+    '@storybook/addon-docs'
   ],
   framework: {
-    name: "@storybook/react-vite",
-    options: {},
+    name: '@storybook/react-vite',
+    options: {}
   },
-};
-export default config;
+  docs: {
+    autodocs: true
+  }
+}
+export default config
