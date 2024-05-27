@@ -5,31 +5,31 @@ import { cva } from 'class-variance-authority'
 import * as RSwitch from '@radix-ui/react-switch'
 
 import { cn, gid } from '../../utilities'
+import { Variants } from '../../utilities/types'
 import { Label } from '../Label'
 import { SwitchProps } from './Switch.types'
 
-const switchWrapperVariants = cva(
-  ['duration-150 w-fit rounded-lg flex items-center gap-2 select-none'],
-  {
-    variants: {
-      withBody: {
-        true: 'hover:bg-muted p-1.5',
-        false: ''
-      },
-      disabled: {
-        true: 'cursor-not-allowed',
-        false: 'cursor-pointer'
-      }
+const switchWrapperVariants = cva<
+  Variants<{ withBody: boolean; disabled: boolean }>
+>(['duration-150 w-fit rounded-lg flex items-center gap-2 select-none'], {
+  variants: {
+    withBody: {
+      true: 'hover:bg-muted p-1.5',
+      false: ''
     },
-    compoundVariants: [
-      {
-        withBody: true,
-        disabled: true,
-        className: 'bg-muted'
-      }
-    ]
-  }
-)
+    disabled: {
+      true: 'cursor-not-allowed',
+      false: 'cursor-pointer'
+    }
+  },
+  compoundVariants: [
+    {
+      withBody: true,
+      disabled: true,
+      className: 'bg-muted'
+    }
+  ]
+})
 
 const switchRootVariants = cva([
   'relative h-5 w-8 rounded-full duration-150 shadow-inner',
@@ -45,23 +45,33 @@ const switchThumbVariants = cva([
 ])
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ disabled, label, id = gid(), withBody, ...props }, ref) => {
+  ({ disabled, label, id = gid(), withBody, styles, ...props }, ref) => {
     return (
-      <div className={switchWrapperVariants({ disabled, withBody })}>
+      <div
+        className={switchWrapperVariants({ disabled, withBody })}
+        style={styles?.root}
+      >
         <RSwitch.Root
           className={cn(switchRootVariants())}
           id={id}
-          style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+          style={{
+            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+            ...styles?.switch
+          }}
           disabled={disabled}
           ref={ref}
           {...props}
         >
-          <RSwitch.Thumb className={switchThumbVariants()} />
+          <RSwitch.Thumb
+            className={switchThumbVariants()}
+            style={styles?.thumb}
+          />
         </RSwitch.Root>
         {label && (
           <Label
             className={cn(disabled ? 'cursor-not-allowed' : 'cursor-pointer')}
             htmlFor={id}
+            style={styles?.label}
           >
             {label}
           </Label>

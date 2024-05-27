@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react'
 
 import { LucideIcon } from 'lucide-react'
 
-import { Styleable } from '../../utilities/types'
+import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
 import { ButtonStyles } from '../Button/Button.types'
 import { IconStyles } from '../Icon/Icon.types'
 

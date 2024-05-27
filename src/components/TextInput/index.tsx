@@ -3,6 +3,7 @@ import { forwardRef } from 'react'
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
+import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { TextInputProps } from './TextInput.types'

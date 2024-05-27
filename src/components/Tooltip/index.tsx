@@ -7,7 +7,14 @@ import { TooltipProps } from './Tooltip.types'
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
-    { children, content, delayDuration = 300, withArrow = true, ...props },
+    {
+      children,
+      content,
+      delayDuration = 300,
+      styles,
+      withArrow = true,
+      ...props
+    },
     ref
   ) => {
     return (
@@ -25,6 +32,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               )}
               sideOffset={5}
               ref={ref}
+              style={styles?.content}
               {...props}
             >
               {content}

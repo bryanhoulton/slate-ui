@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, CSSProperties } from 'react'
 
-import { Styleable } from '../../utilities/types'
+import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
 
 export type ButtonStyles = {
   root: CSSProperties
