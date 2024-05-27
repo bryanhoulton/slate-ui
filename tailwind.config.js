@@ -2,7 +2,7 @@ import tailwindCssAnimate from 'tailwindcss-animate'
 import primaryTheme from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
 
-module.exports = {
+export default {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
   theme: {

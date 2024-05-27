@@ -9,6 +9,8 @@ import { TooltipContentProps } from '@radix-ui/react-tooltip';
 type Styleable<T> = {
     styles?: T;
 };
+type SlateVariant = 'primary' | 'secondary' | 'subtle';
+type SlateSize = 'sm' | 'md' | 'lg';
 
 type ButtonStyles = {
     root: CSSProperties;
@@ -20,7 +22,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, Styleable
 
 declare const Button: react.ForwardRefExoticComponent<ButtonProps & react.RefAttributes<HTMLButtonElement>>;
 
-interface SwitchProps extends RSwitch.SwitchProps {
+type SwitchStyles = {
+    root: CSSProperties;
+    switch: CSSProperties;
+    thumb: CSSProperties;
+    label: CSSProperties;
+};
+interface SwitchProps extends RSwitch.SwitchProps, Styleable<SwitchStyles> {
     withBody?: boolean;
     label?: string;
 }
