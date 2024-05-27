@@ -19,7 +19,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   ) => {
     return (
       <RTooltip.Root delayDuration={delayDuration}>
-        <RTooltip.Trigger>{children}</RTooltip.Trigger>
+        <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
         <RTooltip.Portal>
           {content && (
             <RTooltip.Content
