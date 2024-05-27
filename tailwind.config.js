@@ -109,18 +109,21 @@ module.exports = {
       backgroundColor: ({ theme }) => ({
         primary: theme('colors.primary.500'),
         secondary: theme('colors.secondary.500'),
-        white: theme('colors.white')
+        white: theme('colors.white'),
+        muted: theme('colors.gray.100')
       }),
       borderColor: ({ theme }) => ({
         primary: theme('colors.primary.500'),
         secondary: theme('colors.secondary.500'),
-        error: theme('colors.error.500')
+        error: theme('colors.error.500'),
+        muted: theme('colors.gray.100')
       }),
       textColor: ({ theme }) => ({
         primary: theme('colors.gray.900'),
         secondary: theme('colors.gray.500'),
         error: theme('colors.error.500'),
-        white: theme('colors.white')
+        white: theme('colors.white'),
+        muted: theme('colors.gray.500')
       })
     }
   },
