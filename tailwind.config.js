@@ -110,11 +110,13 @@ module.exports = {
       }),
       borderColor: ({ theme }) => ({
         primary: theme('colors.primary.500'),
-        secondary: theme('colors.secondary.500')
+        secondary: theme('colors.secondary.500'),
+        error: theme('colors.error.500')
       }),
       textColor: ({ theme }) => ({
         primary: theme('colors.primary.500'),
-        secondary: theme('colors.secondary.500')
+        secondary: theme('colors.secondary.500'),
+        error: theme('colors.error.500')
       })
     }
   },

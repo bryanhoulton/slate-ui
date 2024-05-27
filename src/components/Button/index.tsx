@@ -13,7 +13,7 @@ const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
       variant: {
         primary: 'bg-primary text-white',
         secondary: 'bg-secondary text-white',
-        subtle: 'bg-transparent'
+        subtle: 'bg-transparent border-transparent hover:shadow-none'
       },
       size: {
         sm: 'px-2 h-6',
