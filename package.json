@@ -1,13 +1,17 @@
 {
-  "name": "slate",
-  "version": "1.0.0",
+  "name": "slate-ui",
+  "version": "1.0.4",
   "description": "Slate is an opinionated, configurable React component library built for scalable dev teams on Tailwind and Radix.",
   "repository": "https://github.com/bryanhoulton/slate.git",
   "author": "Bryan Houlton <brhoulton@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
