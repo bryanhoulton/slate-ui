@@ -1,3 +1,5 @@
+import { forwardRef } from 'react'
+
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
@@ -24,19 +26,15 @@ const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
   }
 )
 
-export function Button({
-  variant = 'primary',
-  size = 'md',
-  className,
-  styles,
-  ...props
-}: ButtonProps) {
-  return (
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = 'primary', size = 'md', className, styles, ...props }, ref) => (
     <button
+      ref={ref}
       className={cn(variants({ variant, size }), className)}
       style={styles?.root}
-    >
-      Click me
-    </button>
+      {...props}
+    />
   )
-}
+)
+
+Button.displayName = 'Button'

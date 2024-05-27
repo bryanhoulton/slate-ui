@@ -1,3 +1,5 @@
+import { forwardRef } from 'react'
+
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
@@ -18,19 +20,21 @@ const variants = cva<
     variant: {
       primary: 'text-primary',
       secondary: 'text-secondary',
-      subtle: 'text-primary'
+      subtle: 'text-inherit'
     }
   }
 })
 
-export function Icon({
-  icon: Icon,
-  className,
-  size = 'md',
-  variant = 'primary',
-  ...props
-}: IconProps) {
-  return (
-    <Icon className={cn(variants({ size, variant }), className)} {...props} />
+export const Icon = forwardRef<SVGSVGElement, IconProps>(
+  (
+    { icon: Icon, className, size = 'md', variant = 'primary', ...props },
+    ref
+  ) => (
+    <Icon
+      ref={ref}
+      className={cn(variants({ size, variant }), className)}
+      {...props}
+    />
   )
-}
+)
+Icon.displayName = 'Icon'

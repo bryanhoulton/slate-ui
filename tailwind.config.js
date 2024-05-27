@@ -18,6 +18,8 @@ module.exports = {
         sans: ['Inter', ...primaryTheme.fontFamily.sans]
       },
       colors: {
+        white: 'var(--white)',
+        black: 'var(--black)',
         gray: {
           50: 'var(--gray-50)',
           100: 'var(--gray-100)',
@@ -106,7 +108,8 @@ module.exports = {
 
       backgroundColor: ({ theme }) => ({
         primary: theme('colors.primary.500'),
-        secondary: theme('colors.secondary.500')
+        secondary: theme('colors.secondary.500'),
+        white: theme('colors.white')
       }),
       borderColor: ({ theme }) => ({
         primary: theme('colors.primary.500'),
@@ -116,7 +119,8 @@ module.exports = {
       textColor: ({ theme }) => ({
         primary: theme('colors.gray.900'),
         secondary: theme('colors.gray.500'),
-        error: theme('colors.error.500')
+        error: theme('colors.error.500'),
+        white: theme('colors.white')
       })
     }
   },

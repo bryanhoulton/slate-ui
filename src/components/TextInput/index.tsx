@@ -1,3 +1,5 @@
+import { forwardRef } from 'react'
+
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
@@ -43,20 +45,23 @@ const variants = cva<
   }
 )
 
-export function TextInput({
-  label,
-  error,
-  value,
-  onChange,
-  className,
-  styles,
-  variant = 'primary',
-  size = 'md',
-  iconLeft,
-  iconRight,
-  ...props
-}: TextInputProps) {
-  return (
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  (
+    {
+      label,
+      error,
+      value,
+      onChange,
+      className,
+      styles,
+      variant = 'primary',
+      size = 'md',
+      iconLeft,
+      iconRight,
+      ...props
+    },
+    ref
+  ) => (
     <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
       <Label styles={styles?.label}>{label}</Label>
       <div className={cn('relative')}>
@@ -78,6 +83,7 @@ export function TextInput({
             iconRight: Boolean(iconRight)
           })}
           onChange={(e) => onChange(e.target.value)}
+          ref={ref}
           {...props}
         />
         {iconRight && (
@@ -95,4 +101,4 @@ export function TextInput({
       )}
     </div>
   )
-}
+)
