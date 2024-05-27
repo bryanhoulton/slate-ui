@@ -1,3 +1,5 @@
+import { Eye, User } from 'lucide-react'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { args } from '../../utilities/stories'
@@ -48,5 +50,18 @@ export const Primary: Story = {
     value: '',
     placeholder: 'Steve Jobs',
     onChange: () => {}
+  }
+}
+
+export const WithIcons: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    label: 'First Name',
+    value: '',
+    placeholder: 'Steve Jobs',
+    onChange: () => {},
+    iconLeft: User,
+    iconRight: Eye
   }
 }

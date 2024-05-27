@@ -114,8 +114,8 @@ module.exports = {
         error: theme('colors.error.500')
       }),
       textColor: ({ theme }) => ({
-        primary: theme('colors.primary.500'),
-        secondary: theme('colors.secondary.500'),
+        primary: theme('colors.gray.900'),
+        secondary: theme('colors.gray.500'),
         error: theme('colors.error.500')
       })
     }
