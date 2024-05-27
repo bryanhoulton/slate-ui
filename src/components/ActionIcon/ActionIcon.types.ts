@@ -17,4 +17,5 @@ export interface ActionIconProps
   icon: LucideIcon
   variant?: SlateVariant
   size?: SlateSize
+  tooltip?: string
 }

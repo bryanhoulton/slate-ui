@@ -4,6 +4,7 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
 import { Icon } from '../Icon'
+import { Tooltip } from '../Tooltip'
 import { ActionIconProps } from './ActionIcon.types'
 
 const variants = cva<
@@ -34,14 +35,19 @@ const variants = cva<
 )
 
 export const ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>(
-  ({ icon, variant = 'primary', size = 'md', className, ...props }, ref) => (
-    <button
-      ref={ref}
-      className={cn(variants({ size, variant }), className)}
-      {...props}
-    >
-      <Icon icon={icon} size={size} variant="subtle" className={className} />
-    </button>
+  (
+    { icon, variant = 'primary', size = 'md', className, tooltip, ...props },
+    ref
+  ) => (
+    <Tooltip content={tooltip}>
+      <button
+        ref={ref}
+        className={cn(variants({ size, variant }), className)}
+        {...props}
+      >
+        <Icon icon={icon} size={size} variant="subtle" className={className} />
+      </button>
+    </Tooltip>
   )
 )
 ActionIcon.displayName = 'ActionIcon'
