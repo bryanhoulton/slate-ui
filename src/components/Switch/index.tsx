@@ -45,10 +45,13 @@ const switchThumbVariants = cva([
 ])
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ disabled, label, id = gid(), withBody, styles, ...props }, ref) => {
+  (
+    { disabled, label, id = gid(), className, withBody, styles, ...props },
+    ref
+  ) => {
     return (
       <div
-        className={switchWrapperVariants({ disabled, withBody })}
+        className={cn(switchWrapperVariants({ disabled, withBody }), className)}
         style={styles?.root}
       >
         <RSwitch.Root
@@ -69,7 +72,10 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
         </RSwitch.Root>
         {label && (
           <Label
-            className={cn(disabled ? 'cursor-not-allowed' : 'cursor-pointer')}
+            className={cn(
+              disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+              'pr-3 flex-1'
+            )}
             htmlFor={id}
             style={styles?.label}
           >

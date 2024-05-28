@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 
-export function cn(...classNames: (string | undefined)[]) {
+export function cn(...classNames: (string | boolean | undefined)[]) {
   return twMerge(classNames.filter(Boolean) as string[])
 }
 

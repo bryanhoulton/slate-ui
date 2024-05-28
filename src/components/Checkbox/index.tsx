@@ -40,10 +40,16 @@ const checkboxRootVariants = cva<Variants<{}>>([
 ])
 
 export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
-  ({ disabled, label, id = gid(), styles, withBody, ...props }, ref) => {
+  (
+    { disabled, label, id = gid(), className, styles, withBody, ...props },
+    ref
+  ) => {
     return (
       <div
-        className={checkboxWrapperVariants({ disabled, withBody })}
+        className={cn(
+          checkboxWrapperVariants({ disabled, withBody }),
+          className
+        )}
         style={styles?.root}
       >
         <RCheckbox.Root
@@ -63,7 +69,10 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
         </RCheckbox.Root>
         {label && (
           <Label
-            className={cn(disabled ? 'cursor-not-allowed' : 'cursor-pointer')}
+            className={cn(
+              disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+              'pr-3'
+            )}
             htmlFor={id}
             style={styles?.label}
           >
