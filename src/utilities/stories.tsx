@@ -1,4 +1,4 @@
-import { ArgTypes } from '@storybook/react/*'
+import { type ArgTypes } from '@storybook/react/*'
 
 export function args<T>(obj: Partial<ArgTypes<T>>): Partial<ArgTypes<T>> {
   return {
