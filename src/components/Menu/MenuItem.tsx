@@ -17,6 +17,7 @@ import { Checkbox } from '../Checkbox'
 import { Switch } from '../Switch'
 import { MenuItemComponentProps } from './MenuItem.types'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
   ({ item }, ref) => {
     switch (item.type) {
@@ -36,7 +37,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
         )
       }
       case 'checkbox': {
-        const { type, withBody = true, className, ...rest } = item
+        const { type: _, withBody = true, className, ...rest } = item
         return (
           <Checkbox
             withBody={withBody}
@@ -60,19 +61,19 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
       case 'text': {
         return <span className="p-2 w-full text-sm">{item.label}</span>
       }
-      case 'subgroup':
+      case 'subgroup': {
         const {
           variant = 'subtle',
           items,
           iconRight = ChevronRight,
           className,
-          type,
+          type: _,
           ...rest
         } = item
 
         return (
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger className="outline-none">
               <Button
                 variant={variant}
                 role="menuitem"
@@ -102,6 +103,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
             </DropdownMenuPortal>
           </DropdownMenuSub>
         )
+      }
       case 'group': {
         return (
           <DropdownMenuGroup
@@ -120,3 +122,4 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
     }
   }
 )
+MenuItemComponent.displayName = 'MenuItemComponent'
