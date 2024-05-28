@@ -26,10 +26,10 @@ const variants = cva<
         lg: 'w-12 h-12'
       },
       variant: {
-        primary: 'text-primary bg-transparent',
+        primary: 'text-default bg-transparent',
         secondary: 'text-white bg-primary',
         subtle:
-          'text-primary border-transparent border-transparent hover:shadow-none'
+          'text-default border-transparent border-transparent hover:shadow-none'
       }
     }
   }

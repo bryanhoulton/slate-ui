@@ -19,7 +19,7 @@ const variants = cva<
       lg: 'w-6 h-6'
     },
     variant: {
-      primary: 'text-primary',
+      primary: 'text-default',
       secondary: 'text-secondary',
       subtle: 'text-inherit'
     }

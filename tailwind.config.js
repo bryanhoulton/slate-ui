@@ -119,7 +119,8 @@ export default {
         muted: theme('colors.gray.100')
       }),
       textColor: ({ theme }) => ({
-        primary: theme('colors.gray.900'),
+        default: theme('colors.gray.900'),
+        primary: theme('colors.primary.500'),
         secondary: theme('colors.gray.500'),
         error: theme('colors.error.500'),
         white: theme('colors.white'),
