@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 
 import { cva } from 'class-variance-authority'
 import { Check } from 'lucide-react'
@@ -41,15 +41,34 @@ const checkboxRootVariants = cva<Variants<{}>>([
 
 export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
   (
-    { disabled, label, id = gid(), className, styles, withBody, ...props },
+    {
+      disabled,
+      label,
+      id = gid(),
+      checked: checkedProp,
+      onCheckedChange: onCheckedChangeProp,
+      className,
+      styles,
+      withBody,
+      onClick,
+      defaultChecked = false,
+      ...props
+    },
     ref
   ) => {
+    const [checked, setChecked] = useState<RCheckbox.CheckedState>(
+      checkedProp ?? defaultChecked
+    )
     return (
       <div
         className={cn(
           checkboxWrapperVariants({ disabled, withBody }),
           className
         )}
+        onClick={() => {
+          setChecked((c) => (c === false ? true : false))
+          onCheckedChangeProp?.(!checked)
+        }}
         style={styles?.root}
       >
         <RCheckbox.Root
@@ -61,6 +80,11 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
           }}
           disabled={disabled}
           ref={ref}
+          checked={checkedProp || checked}
+          onCheckedChange={(c) => {
+            setChecked(c)
+            onCheckedChangeProp?.(c)
+          }}
           {...props}
         >
           <RCheckbox.Indicator style={styles?.indicator}>

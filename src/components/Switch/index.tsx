@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 
 import { cva } from 'class-variance-authority'
 
@@ -46,13 +46,30 @@ const switchThumbVariants = cva([
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
   (
-    { disabled, label, id = gid(), className, withBody, styles, ...props },
+    {
+      disabled,
+      label,
+      id = gid(),
+      checked: checkedProp,
+      onCheckedChange: onCheckedChangeProp,
+      className,
+      withBody,
+      defaultChecked = false,
+      styles,
+      ...props
+    },
     ref
   ) => {
+    const [checked, setChecked] = useState(checkedProp ?? defaultChecked)
+
     return (
       <div
         className={cn(switchWrapperVariants({ disabled, withBody }), className)}
         style={styles?.root}
+        onClick={() => {
+          setChecked((c) => !c)
+          onCheckedChangeProp?.(!checked)
+        }}
       >
         <RSwitch.Root
           className={cn(switchRootVariants())}
@@ -60,6 +77,11 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
           style={{
             WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             ...styles?.switch
+          }}
+          checked={checkedProp ?? checked}
+          onCheckedChange={(e) => {
+            setChecked(e)
+            onCheckedChangeProp?.(e)
           }}
           disabled={disabled}
           ref={ref}
