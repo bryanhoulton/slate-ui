@@ -4,11 +4,12 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
 import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
+import { Icon } from '../Icon'
 import { ButtonProps } from './Button.types'
 
 const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
   [
-    'rounded-lg border text-sm focus:outline-none focus:ring-2',
+    'rounded-lg border flex items-center gap-1 text-sm focus:outline-none focus:ring-2',
     'focus:ring-primary hover:shadow-inner'
   ],
   {
@@ -28,13 +29,29 @@ const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
 )
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', className, styles, ...props }, ref) => (
+  (
+    {
+      variant = 'primary',
+      size = 'md',
+      className,
+      children,
+      styles,
+      iconLeft,
+      iconRight,
+      ...props
+    },
+    ref
+  ) => (
     <button
       ref={ref}
       className={cn(variants({ variant, size }), className)}
       style={styles?.root}
       {...props}
-    />
+    >
+      {iconLeft && <Icon icon={iconLeft} variant="subtle" />}
+      {children}
+      {iconRight && <Icon icon={iconRight} variant="subtle" />}
+    </button>
   )
 )
 

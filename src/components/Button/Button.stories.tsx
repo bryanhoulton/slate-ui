@@ -1,3 +1,5 @@
+import { Plus } from 'lucide-react'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { args } from '../../utilities/stories'
@@ -28,5 +30,19 @@ type Story = StoryObj<typeof Button>
 export const Primary: Story = {
   args: {
     children: 'Click me!'
+  }
+}
+
+export const WithLeftIcon: Story = {
+  args: {
+    children: 'New Item',
+    iconLeft: Plus
+  }
+}
+
+export const WithRightIcon: Story = {
+  args: {
+    children: 'New Item',
+    iconRight: Plus
   }
 }

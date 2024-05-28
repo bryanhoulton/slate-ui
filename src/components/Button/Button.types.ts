@@ -1,5 +1,7 @@
 import { ButtonHTMLAttributes, CSSProperties } from 'react'
 
+import { LucideIcon } from 'lucide-react'
+
 import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
 
 export type ButtonStyles = {
@@ -11,4 +13,6 @@ export interface ButtonProps
     Styleable<ButtonStyles> {
   variant?: SlateVariant
   size?: SlateSize
+  iconLeft?: LucideIcon
+  iconRight?: LucideIcon
 }
