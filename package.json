@@ -75,7 +75,7 @@
     "vite": "^5.2.11"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.{ts,tsx,js}": "eslint --cache --fix",
     "*.--write": "prettier --write"
   }
 }
