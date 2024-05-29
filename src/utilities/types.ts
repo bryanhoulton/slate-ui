@@ -1,5 +1,5 @@
 export interface Styleable<T> {
-  styles?: T
+  styles?: { [K in keyof T]?: T[K] }
 }
 
 export type SlateVariant = 'primary' | 'secondary' | 'subtle'
