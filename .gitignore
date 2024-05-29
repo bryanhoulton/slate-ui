@@ -3,3 +3,4 @@
 **/storybook-static
 **/dist
 .eslintcache
+.DS_Store
