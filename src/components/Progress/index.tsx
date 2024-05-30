@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 import { cn, SlateSize, Variants } from '../../utilities'
 import { ProgressProps } from './Progress.types'
 
-const rootVariants = cva<
+const variants = cva<
   Variants<{
     gap: SlateSize
     size: SlateSize
@@ -38,7 +38,7 @@ export function Progress({
 
   return (
     <div
-      className={cn(rootVariants({ gap, size }), className)}
+      className={cn(variants({ gap, size }), className)}
       style={{ ...styles?.root }}
       {...rest}
     >
