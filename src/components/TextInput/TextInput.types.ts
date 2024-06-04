@@ -1,4 +1,4 @@
-import { CSSProperties, HTMLProps } from 'react'
+import { ChangeEvent, CSSProperties, HTMLProps } from 'react'
 
 import { LucideIcon } from 'lucide-react'
 
@@ -15,12 +15,13 @@ export type TextInputStyles = {
 export interface TextInputProps
   extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'size'>,
     Styleable<TextInputStyles> {
-  label: string
+  label?: string
   variant?: SlateVariant
   size?: SlateSize
   error?: string
-  value: string
+  value?: string
+  defaultValue?: string
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
-  onChange: (value: string) => void
+  onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
 }

@@ -7,16 +7,18 @@ import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
 import { Icon } from '../Icon'
 import { ButtonProps } from './Button.types'
 
-const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
+export const buttonVariants = cva<
+  Variants<{ variant: SlateVariant; size: SlateSize }>
+>(
   [
     'rounded-lg border flex items-center gap-1 text-sm focus:outline-none focus:ring-2',
-    'focus:ring-primary hover:shadow-inner'
+    'hover:shadow-inner ring-offset-1'
   ],
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-white',
-        secondary: 'bg-secondary text-white',
+        primary: 'bg-primary ring-primary text-white',
+        secondary: 'bg-secondary text-white ring-secondary',
         subtle: 'bg-transparent border-transparent hover:shadow-none'
       },
       size: {
@@ -44,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => (
     <button
       ref={ref}
-      className={cn(variants({ variant, size }), className)}
+      className={cn(buttonVariants({ variant, size }), className)}
       style={styles?.root}
       {...props}
     >

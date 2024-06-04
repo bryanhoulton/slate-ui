@@ -47,9 +47,7 @@ export const Primary: Story = {
     variant: 'primary',
     size: 'md',
     label: 'First Name',
-    value: '',
-    placeholder: 'Steve Jobs',
-    onChange: () => {}
+    placeholder: 'Steve Jobs'
   }
 }
 
@@ -58,9 +56,7 @@ export const WithIcons: Story = {
     variant: 'primary',
     size: 'md',
     label: 'First Name',
-    value: '',
     placeholder: 'Steve Jobs',
-    onChange: () => {},
     iconLeft: User,
     iconRight: Eye
   }

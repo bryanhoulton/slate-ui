@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 
 import { cva } from 'class-variance-authority'
 
@@ -8,7 +8,7 @@ import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { TextInputProps } from './TextInput.types'
 
-const variants = cva<
+export const textInputVariants = cva<
   Variants<{
     variant: SlateVariant
     size: SlateSize
@@ -19,13 +19,13 @@ const variants = cva<
 >(
   [
     'rounded-lg border text-sm focus:outline-none focus:ring-2 w-full',
-    'focus:ring-primary hover:shadow-inner transition relative'
+    'hover:shadow-inner transition relative ring-offset-1'
   ],
   {
     variants: {
       variant: {
-        primary: '',
-        secondary: '',
+        primary: 'ring-primary',
+        secondary: 'ring-secondary',
         subtle: 'bg-transparent border-transparent hover:shadow-none'
       },
       size: {
@@ -51,7 +51,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     {
       label,
       error,
-      value,
+      value: valueProp,
+      defaultValue,
       onChange,
       className,
       styles,
@@ -62,44 +63,54 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       ...props
     },
     ref
-  ) => (
-    <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
-      <Label styles={styles?.label}>{label}</Label>
-      <div className={cn('relative')}>
-        {iconLeft && (
-          <Icon
-            variant="secondary"
-            icon={iconLeft}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10"
+  ) => {
+    const [value, setValue] = useState<string>(valueProp ?? defaultValue ?? '')
+    return (
+      <div
+        className={cn('flex flex-col gap-1', className)}
+        style={styles?.root}
+      >
+        {label && <Label styles={styles?.label}>{label}</Label>}
+        <div className={cn('relative')}>
+          {iconLeft && (
+            <Icon
+              variant="secondary"
+              icon={iconLeft}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10"
+            />
+          )}
+          <input
+            style={styles?.input}
+            value={valueProp ?? value}
+            className={textInputVariants({
+              variant,
+              size,
+              error: Boolean(error),
+              iconLeft: Boolean(iconLeft),
+              iconRight: Boolean(iconRight)
+            })}
+            onChange={(e) => {
+              setValue(e.target.value)
+              onChange?.(e.target.value, e)
+            }}
+            ref={ref}
+            {...props}
           />
-        )}
-        <input
-          style={styles?.input}
-          value={value}
-          className={variants({
-            variant,
-            size,
-            error: Boolean(error),
-            iconLeft: Boolean(iconLeft),
-            iconRight: Boolean(iconRight)
-          })}
-          onChange={(e) => onChange(e.target.value)}
-          ref={ref}
-          {...props}
-        />
-        {iconRight && (
-          <Icon
-            variant="secondary"
-            icon={iconRight}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10"
-          />
+          {iconRight && (
+            <Icon
+              variant="secondary"
+              icon={iconRight}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10"
+            />
+          )}
+        </div>
+        {error && (
+          <small className="text-xs text-error ml-1" style={styles?.error}>
+            {error}
+          </small>
         )}
       </div>
-      {error && (
-        <small className="text-xs text-error ml-1" style={styles?.error}>
-          {error}
-        </small>
-      )}
-    </div>
-  )
+    )
+  }
 )
+TextInput.displayName = 'TextInput'

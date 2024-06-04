@@ -126,6 +126,12 @@ export default {
         white: theme('colors.white'),
         muted: theme('colors.gray.500')
       }),
+      ringColor: ({ theme }) => ({
+        primary: theme('colors.primary.500'),
+        secondary: theme('colors.secondary.500'),
+        error: theme('colors.error.500'),
+        muted: theme('colors.gray.100')
+      }),
 
       keyframes: {
         overlayShow: {

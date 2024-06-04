@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...classNames: Array<string | boolean | undefined>): string {
@@ -6,6 +8,27 @@ export function cn(...classNames: Array<string | boolean | undefined>): string {
 
 export function gid(): string {
   return 'slate-' + Math.random().toString(36).substr(2, 9)
+}
+
+export function useSometimesControlled<T>({
+  valueProp,
+  onChangeProp,
+  defaultValue
+}: {
+  valueProp?: T
+  onChangeProp?: (v: T) => void
+  defaultValue: T
+}) {
+  const [value, setValue] = useState<T>(valueProp ?? defaultValue)
+  const onChange = useCallback(
+    (v: T) => {
+      setValue(v)
+      onChangeProp?.(v)
+    },
+    [onChangeProp, setValue]
+  )
+
+  return [valueProp ?? value, onChange] as [T, Dispatch<SetStateAction<T>>]
 }
 
 export * from './types'
