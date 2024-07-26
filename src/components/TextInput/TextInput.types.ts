@@ -20,7 +20,10 @@ export interface TextInputProps
   size?: SlateSize
   error?: string
   value?: string
+<<<<<<< Updated upstream
   defaultValue?: string
+=======
+>>>>>>> Stashed changes
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
