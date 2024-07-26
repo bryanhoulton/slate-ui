@@ -63,7 +63,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       ...props
     },
     ref
-<<<<<<< Updated upstream
   ) => {
     const [value, setValue] = useState<string>(valueProp ?? defaultValue ?? '')
     return (
@@ -96,38 +95,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             }}
             ref={ref}
             {...props}
-=======
-  ) => (
-    <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
-      {label && <Label styles={styles?.label}>{label}</Label>}
-      <div className={cn('relative')}>
-        {iconLeft && (
-          <Icon
-            variant="secondary"
-            icon={iconLeft}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10"
-          />
-        )}
-        <input
-          style={styles?.input}
-          value={value}
-          className={variants({
-            variant,
-            size,
-            error: Boolean(error),
-            iconLeft: Boolean(iconLeft),
-            iconRight: Boolean(iconRight)
-          })}
-          onChange={(e) => onChange?.(e.target.value, e)}
-          ref={ref}
-          {...props}
-        />
-        {iconRight && (
-          <Icon
-            variant="secondary"
-            icon={iconRight}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10"
->>>>>>> Stashed changes
           />
           {iconRight && (
             <Icon
