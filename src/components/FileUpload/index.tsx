@@ -1,21 +1,14 @@
-import {
-  forwardRef,
-  useRef,
-} from 'react';
+import { forwardRef, useRef } from 'react'
 
-import {
-  File,
-  Loader,
-  Upload,
-} from 'lucide-react';
+import { File, Loader, Upload } from 'lucide-react'
 
-import { cn } from '../../utilities';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { FileUploadProps } from './FileUpload.types';
+import { cn } from '../../utilities'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import { FileUploadProps } from './FileUpload.types'
 
 export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
-  ({ className, uploading, subText, ...props }, ref) => {
+  ({ className, uploading, subText, icon = Upload, title, ...props }, ref) => {
     const internalRef = useRef<HTMLInputElement | null>(null)
 
     return (
@@ -34,13 +27,17 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
           ) : (
             <>
               <div className="flex flex-col items-center justify-center pb-3 pt-5">
-                <Icon icon={Upload} size="lg" className="mb-2 h-10 w-10" />
+                <Icon icon={icon} size="lg" className="mb-2 h-10 w-10" />
                 {internalRef?.current?.files?.[0] ? (
                   <div>{internalRef.current.files[0].name}</div>
                 ) : (
                   <p className="mb-2 text-sm">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
+                    {title || (
+                      <>
+                        <span className="font-semibold">Click to upload</span>{' '}
+                        or drag and drop
+                      </>
+                    )}
                   </p>
                 )}
                 {subText && <p>{subText}</p>}
