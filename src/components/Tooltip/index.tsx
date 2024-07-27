@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef } from 'react';
 
-import * as RTooltip from '@radix-ui/react-tooltip'
+import * as RTooltip from '@radix-ui/react-tooltip';
 
-import { cn } from '../../utilities'
-import { TooltipProps } from './Tooltip.types'
+import { cn } from '../../utilities';
+import { TooltipProps } from './Tooltip.types';
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
@@ -28,7 +28,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 'data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade',
                 'data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade',
                 'data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade',
-                `z-50 w-[100%] select-none text-sm rounded-md bg-black text-white px-2 py-1`
+                `z-50 w-[100%] select-none text-sm rounded-md bg-primary text-anti-primary`,
+                'px-2 py-1'
               )}
               sideOffset={5}
               ref={ref}

@@ -1,12 +1,16 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
-import { Icon } from '../Icon'
-import { Tooltip } from '../Tooltip'
-import { ActionIconProps } from './ActionIcon.types'
+import { cn } from '../../utilities';
+import {
+  SlateSize,
+  SlateVariant,
+  Variants,
+} from '../../utilities/types';
+import { Icon } from '../Icon';
+import { Tooltip } from '../Tooltip';
+import { ActionIconProps } from './ActionIcon.types';
 
 const variants = cva<
   Variants<{
@@ -27,7 +31,7 @@ const variants = cva<
       },
       variant: {
         primary: 'text-default bg-transparent',
-        secondary: 'text-white bg-primary',
+        secondary: 'text-anti-primary bg-primary',
         subtle:
           'text-default border-transparent border-transparent hover:shadow-none'
       }

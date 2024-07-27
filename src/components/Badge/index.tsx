@@ -1,18 +1,23 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import { cn, SlateSize, SlateVariant, Variants } from '../../utilities'
-import { Icon } from '../Icon'
-import { BadgeProps } from './Badge.types'
+import {
+  cn,
+  SlateSize,
+  SlateVariant,
+  Variants,
+} from '../../utilities';
+import { Icon } from '../Icon';
+import { BadgeProps } from './Badge.types';
 
 const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
   ['flex gap-1 items-center w-fit px-2 rounded-full'],
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-white',
-        secondary: 'bg-secondary text-white',
+        primary: 'bg-primary text-anti-primary',
+        secondary: 'bg-secondary text-anti-secondary',
         subtle: 'border'
       },
       size: {

@@ -1,11 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
-import { Icon } from '../Icon'
-import { ButtonProps } from './Button.types'
+import { cn } from '../../utilities';
+import {
+  SlateSize,
+  SlateVariant,
+  Variants,
+} from '../../utilities/types';
+import { Icon } from '../Icon';
+import { ButtonProps } from './Button.types';
 
 export const buttonVariants = cva<
   Variants<{ variant: SlateVariant; size: SlateSize }>
@@ -17,8 +21,8 @@ export const buttonVariants = cva<
   {
     variants: {
       variant: {
-        primary: 'bg-primary ring-primary text-white',
-        secondary: 'bg-secondary text-white ring-secondary',
+        primary: 'bg-primary ring-primary text-anti-primary',
+        secondary: 'bg-secondary text-anti-secondary ring-secondary',
         subtle: 'bg-transparent border-transparent hover:shadow-none'
       },
       size: {

@@ -1,15 +1,21 @@
-import { forwardRef, useState } from 'react'
+import {
+  forwardRef,
+  useState,
+} from 'react';
 
-import { cva } from 'class-variance-authority'
-import { Check } from 'lucide-react'
+import { cva } from 'class-variance-authority';
+import { Check } from 'lucide-react';
 
-import * as RCheckbox from '@radix-ui/react-checkbox'
+import * as RCheckbox from '@radix-ui/react-checkbox';
 
-import { cn, gid } from '../../utilities'
-import { Variants } from '../../utilities/types'
-import { Icon } from '../Icon'
-import { Label } from '../Label'
-import { CheckboxProps } from './Checbox.types'
+import {
+  cn,
+  gid,
+} from '../../utilities';
+import { Variants } from '../../utilities/types';
+import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { CheckboxProps } from './Checbox.types';
 
 const checkboxWrapperVariants = cva<
   Variants<{ withBody: boolean; disabled: boolean }>
@@ -33,7 +39,7 @@ const checkboxWrapperVariants = cva<
   ]
 })
 
-const checkboxRootVariants = cva<Variants<{}>>([
+const checkboxRootVariants = cva<Variants<Record<string, never>>>([
   'items-center justify-center flex h-5 w-5 rounded duration-150 shadow-inner',
   'focus:outline-black disabled:cursor-not-allowed disabled:pointer-events-none',
   'data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-200'
@@ -88,7 +94,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
           {...props}
         >
           <RCheckbox.Indicator style={styles?.indicator}>
-            <Icon icon={Check} className="text-white" />
+            <Icon icon={Check} className="text-anti-primary" />
           </RCheckbox.Indicator>
         </RCheckbox.Root>
         {label && (
