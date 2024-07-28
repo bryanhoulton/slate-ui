@@ -1,7 +1,6 @@
-import { useState } from 'react'
-
-import { TextInput } from '../TextInput'
-import { NumberInputProps } from './NumberInput.types'
+import { useSometimesControlled } from '../../utilities';
+import { TextInput } from '../TextInput';
+import { NumberInputProps } from './NumberInput.types';
 
 export function NumberInput({
   min = -Infinity,
@@ -12,8 +11,11 @@ export function NumberInput({
   defaultValue,
   ...rest
 }: NumberInputProps) {
-  const [value, setValue] = useState<number>(valueProp ?? defaultValue ?? 0)
-
+  const [value, setValue] = useSometimesControlled({
+    valueProp,
+    defaultValue: defaultValue ?? min,
+    onChangeProp: onChange
+  })
   return (
     <TextInput
       type={type}
