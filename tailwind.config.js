@@ -1,6 +1,6 @@
-import tailwindCssAnimate from 'tailwindcss-animate';
-import primaryTheme from 'tailwindcss/defaultTheme';
-import plugin from 'tailwindcss/plugin';
+import tailwindCssAnimate from 'tailwindcss-animate'
+import primaryTheme from 'tailwindcss/defaultTheme'
+import plugin from 'tailwindcss/plugin'
 
 export default {
   darkMode: ['class'],
@@ -131,6 +131,12 @@ export default {
         'anti-secondary': theme('colors.anti-secondary')
       }),
       ringColor: ({ theme }) => ({
+        primary: theme('colors.primary.500'),
+        secondary: theme('colors.secondary.500'),
+        error: theme('colors.error.500'),
+        muted: theme('colors.gray.100')
+      }),
+      fill: ({ theme }) => ({
         primary: theme('colors.primary.500'),
         secondary: theme('colors.secondary.500'),
         error: theme('colors.error.500'),

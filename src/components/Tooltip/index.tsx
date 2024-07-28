@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from 'react'
 
-import * as RTooltip from '@radix-ui/react-tooltip';
+import * as RTooltip from '@radix-ui/react-tooltip'
 
-import { cn } from '../../utilities';
-import { TooltipProps } from './Tooltip.types';
+import { cn } from '../../utilities'
+import { TooltipProps } from './Tooltip.types'
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
@@ -37,7 +37,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               {...props}
             >
               {content}
-              {withArrow && <RTooltip.Arrow className="fill-black" />}
+              {withArrow && <RTooltip.Arrow className="fill-primary" />}
             </RTooltip.Content>
           )}
         </RTooltip.Portal>

@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react'
+import { forwardRef, useEffect, useMemo } from 'react'
 
 import { Check } from 'lucide-react'
 
@@ -45,6 +45,7 @@ const SlateComboboxInput = forwardRef<
         onChange={(_, e) => onChange?.(e)}
         variant={variant}
         size={size}
+        className={className as string}
         {...props}
         ref={ref}
       />
@@ -59,6 +60,7 @@ export function Select<IdType extends SlateId>({
   iconRight,
   iconLeft,
   styles,
+  className,
 
   // Theming.
   variant = 'primary',
@@ -100,6 +102,10 @@ export function Select<IdType extends SlateId>({
     [search, items]
   )
 
+  useEffect(() => {
+    setSearch(value?.name || '')
+  }, [value?.name])
+
   return (
     <Combobox
       value={value}
@@ -125,6 +131,7 @@ export function Select<IdType extends SlateId>({
         iconRight={iconRight}
         placeholder="Search..."
         styles={styles?.input}
+        className={className}
       />
       <ComboboxOptions
         anchor="bottom"
