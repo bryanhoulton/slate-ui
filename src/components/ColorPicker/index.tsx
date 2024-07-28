@@ -1,14 +1,15 @@
-import { HexColorPicker } from 'react-colorful';
+import { HexColorPicker } from 'react-colorful'
 
-import * as Popover from '@radix-ui/react-popover';
+import * as Popover from '@radix-ui/react-popover'
 
-import { useSometimesControlled } from '../../utilities';
-import { Button } from '../Button';
-import { ColorPickerProps } from './ColorPicker.types';
+import { useSometimesControlled } from '../../utilities'
+import { Button } from '../Button'
+import { ColorPickerProps } from './ColorPicker.types'
 
 export function ColorPicker({
   value: valueProp,
   onChange,
+  text = 'Pick a color',
   ...rest
 }: ColorPickerProps) {
   const [value, setValue] = useSometimesControlled({
@@ -20,7 +21,7 @@ export function ColorPicker({
     <Popover.Root modal>
       <Popover.Trigger>
         <div className="flex gap-2 items-center">
-          <Button {...rest}>Pick a color</Button>
+          <Button {...rest}>{text}</Button>
           <div
             className="w-6 h-6 rounded-full"
             style={{ backgroundColor: value }}
