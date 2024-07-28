@@ -20,6 +20,11 @@ const meta: Meta<typeof Button> = {
         type: 'select'
       },
       options: ['xs', 'sm', 'md', 'lg', 'xl']
+    },
+    disabled: {
+      control: {
+        type: 'boolean'
+      }
     }
   })
 }
