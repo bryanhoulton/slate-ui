@@ -1,10 +1,10 @@
-import { HexColorPicker } from 'react-colorful'
+import { HexColorPicker } from 'react-colorful';
 
-import * as Popover from '@radix-ui/react-popover'
+import * as Popover from '@radix-ui/react-popover';
 
-import { useSometimesControlled } from '../../utilities'
-import { Button } from '../Button'
-import { ColorPickerProps } from './ColorPicker.types'
+import { useSometimesControlled } from '../../utilities';
+import { Button } from '../Button';
+import { ColorPickerProps } from './ColorPicker.types';
 
 export function ColorPicker({
   value: valueProp,
@@ -23,7 +23,7 @@ export function ColorPicker({
         <div className="flex gap-2 items-center">
           <Button {...rest}>{text}</Button>
           <div
-            className="w-6 h-6 rounded-full"
+            className="w-6 h-6 rounded-full border"
             style={{ backgroundColor: value }}
           />
         </div>
