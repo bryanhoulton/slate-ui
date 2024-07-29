@@ -1,8 +1,8 @@
-import * as RTabs from '@radix-ui/react-tabs'
+import * as RTabs from '@radix-ui/react-tabs';
 
-import { cn } from '../../utilities'
-import { Icon } from '../Icon'
-import { TabsProps } from './Tabs.types'
+import { cn } from '../../utilities';
+import { Icon } from '../Icon';
+import { TabsProps } from './Tabs.types';
 
 export function Tabs({
   tabs,
@@ -15,9 +15,13 @@ export function Tabs({
     <RTabs.Root
       className={cn('flex flex-col', className)}
       defaultValue={defaultTab}
+      style={styles?.root}
       {...props}
     >
-      <RTabs.List className="shrink-0 flex border-b gap-2">
+      <RTabs.List
+        className="shrink-0 flex border-b gap-2"
+        style={styles?.tabContainer}
+      >
         {tabs.map((tab) => (
           <RTabs.Trigger
             key={tab.id}
@@ -28,6 +32,7 @@ export function Tabs({
               'hover:text-muted hover:border-b-2 hover:border-muted'
             )}
             value={tab.id}
+            style={styles?.tab}
           >
             {tab.iconLeft && <Icon icon={tab.iconLeft} variant="subtle" />}
             {tab.name}
@@ -37,7 +42,12 @@ export function Tabs({
       </RTabs.List>
 
       {tabs.map((tab) => (
-        <RTabs.Content key={tab.id} className="p-5" value={tab.id}>
+        <RTabs.Content
+          key={tab.id}
+          className="p-5"
+          value={tab.id}
+          style={styles?.contentContainer}
+        >
           {tab.content}
         </RTabs.Content>
       ))}
