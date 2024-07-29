@@ -47,6 +47,11 @@ export const Primary: Story = {
         iconRight: CalendarSearch
       }
     ],
-    defaultTab: 'tab1'
+    defaultTab: 'tab1',
+    styles: {
+      tabContainer: {
+        backgroundColor: 'red'
+      }
+    }
   }
 }
