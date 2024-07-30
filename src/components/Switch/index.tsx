@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from 'react'
+import { forwardRef } from 'react'
 
 import { cva } from 'class-variance-authority'
 
@@ -59,16 +59,11 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       onChangeProp: onCheckedChangeProp
     })
 
-    useEffect(() => {
-      console.log('checked', checked)
-    }, [checked])
-
     return (
       <div
         className={cn(switchWrapperVariants({ withBody }), className)}
         style={styles?.root}
         onClick={() => {
-          console.log('clicked')
           setChecked((c) => !c)
         }}
       >
