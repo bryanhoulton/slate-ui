@@ -30,10 +30,10 @@ const variants = cva<
         lg: 'w-12 h-12'
       },
       variant: {
-        primary: 'text-default bg-transparent',
+        primary: 'text-default bg-white',
         secondary: 'text-anti-primary bg-primary',
         subtle:
-          'text-default border-transparent border-transparent hover:shadow-none'
+          'text-default bg-transparent border-transparent border-transparent hover:shadow-none'
       }
     }
   }
