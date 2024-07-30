@@ -9,27 +9,20 @@ import { Variants } from '../../utilities/types'
 import { Label } from '../Label'
 import { SwitchProps } from './Switch.types'
 
-const switchWrapperVariants = cva<
-  Variants<{ withBody: boolean; disabled: boolean }>
->(['duration-150 w-fit rounded-lg flex items-center gap-2 select-none'], {
-  variants: {
-    withBody: {
-      true: 'hover:bg-muted p-1.5',
-      false: ''
-    },
-    disabled: {
-      true: 'cursor-not-allowed',
-      false: 'cursor-pointer'
+const switchWrapperVariants = cva<Variants<{ withBody: boolean }>>(
+  [
+    'duration-150 w-fit rounded-lg flex items-center gap-2 select-none',
+    'cursor-pointer disabled:cursor-not-allowed'
+  ],
+  {
+    variants: {
+      withBody: {
+        true: 'hover:bg-muted p-1.5 disabled:bg-muted',
+        false: ''
+      }
     }
-  },
-  compoundVariants: [
-    {
-      withBody: true,
-      disabled: true,
-      className: 'bg-muted'
-    }
-  ]
-})
+  }
+)
 
 const switchRootVariants = cva([
   'relative h-5 w-8 rounded-full duration-150 shadow-inner',
@@ -72,7 +65,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
 
     return (
       <div
-        className={cn(switchWrapperVariants({ disabled, withBody }), className)}
+        className={cn(switchWrapperVariants({ withBody }), className)}
         style={styles?.root}
         onClick={() => {
           console.log('clicked')
@@ -97,13 +90,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
           />
         </RSwitch.Root>
         {label && (
-          <Label
-            className={cn(
-              disabled ? 'cursor-not-allowed' : 'cursor-pointer',
-              'pr-3 flex-1'
-            )}
-            style={styles?.label}
-          >
+          <Label className={cn('pr-3 flex-1')} style={styles?.label}>
             {label}
           </Label>
         )}
