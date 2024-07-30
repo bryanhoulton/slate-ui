@@ -12,6 +12,7 @@ import {
 
 import { cn, gid, SlateId, useSometimesControlled } from '../../utilities'
 import { Icon } from '../Icon'
+import { Label } from '../Label'
 import { TextInput } from '../TextInput'
 import { TextInputProps } from '../TextInput/TextInput.types'
 import { SelectItem, SelectProps } from './Select.types'
@@ -61,6 +62,8 @@ export function Select<IdType extends SlateId>({
   iconLeft,
   styles,
   className,
+  error,
+  label,
 
   // Theming.
   variant = 'primary',
@@ -107,66 +110,74 @@ export function Select<IdType extends SlateId>({
   }, [value?.name])
 
   return (
-    <Combobox
-      value={value}
-      onChange={(v: SelectItem<IdType> | null) => {
-        setValue(v)
-        setSearch(v?.name || '')
-      }}
-      immediate
-      ref={ref}
-    >
-      <ComboboxInput
-        id={id}
-        as={SlateComboboxInput}
-        variant={variant}
-        size={size}
-        value={search}
-        aria-label={id}
-        onChange={(e) => {
-          if (!searchable) return
-          setSearch(e.target.value)
+    <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
+      {label && <Label styles={styles?.label}>{label}</Label>}
+      <Combobox
+        value={value}
+        onChange={(v: SelectItem<IdType> | null) => {
+          setValue(v)
+          setSearch(v?.name || '')
         }}
-        iconLeft={iconLeft}
-        iconRight={iconRight}
-        placeholder="Search..."
-        styles={styles?.input}
-        className={className}
-      />
-      <ComboboxOptions
-        anchor="bottom"
-        className={cn(
-          'rounded-lg mt-1 p-1 flex flex-col gap-1 border bg-white',
-          'w-[--input-width]'
-        )}
-        style={styles?.content}
+        immediate
+        ref={ref}
       >
-        {filteredItems.map((item) => (
-          <ComboboxOption
-            key={item.id}
-            value={item}
-            className={cn(
-              'flex items-center justify-between rounded-lg text-sm p-2 gap-2',
-              'bg-white data-[focus]:bg-muted',
-              value?.id === item.id && 'bg-muted'
-            )}
-            as="button"
-            style={styles?.option}
-          >
-            <div className="flex items-center gap-2">
-              {item.icon && <Icon icon={item.icon} />}
-              {item.name}
-            </div>
+        <ComboboxInput
+          id={id}
+          as={SlateComboboxInput}
+          variant={variant}
+          size={size}
+          value={search}
+          aria-label={id}
+          onChange={(e) => {
+            if (!searchable) return
+            setSearch(e.target.value)
+          }}
+          iconLeft={iconLeft}
+          iconRight={iconRight}
+          placeholder="Search..."
+          styles={styles?.input}
+          className={className}
+        />
+        <ComboboxOptions
+          anchor="bottom"
+          className={cn(
+            'rounded-lg mt-1 p-1 flex flex-col gap-1 border bg-white',
+            'w-[--input-width]'
+          )}
+          style={styles?.content}
+        >
+          {filteredItems.map((item) => (
+            <ComboboxOption
+              key={item.id}
+              value={item}
+              className={cn(
+                'flex items-center justify-between rounded-lg text-sm p-2 gap-2',
+                'bg-white data-[focus]:bg-muted',
+                value?.id === item.id && 'bg-muted'
+              )}
+              as="button"
+              style={styles?.option}
+            >
+              <div className="flex items-center gap-2">
+                {item.icon && <Icon icon={item.icon} />}
+                {item.name}
+              </div>
 
-            {value?.id === item.id && <Icon icon={Check} />}
-          </ComboboxOption>
-        ))}
+              {value?.id === item.id && <Icon icon={Check} />}
+            </ComboboxOption>
+          ))}
 
-        {filteredItems.length === 0 && (
-          <div className="text-muted text-center py-2">No results found!</div>
-        )}
-      </ComboboxOptions>
-    </Combobox>
+          {filteredItems.length === 0 && (
+            <div className="text-muted text-center py-2">No results found!</div>
+          )}
+        </ComboboxOptions>
+      </Combobox>
+      {error && (
+        <small className="text-xs text-error ml-1" style={styles?.error}>
+          {error}
+        </small>
+      )}
+    </div>
   )
 }
 Select.displayName = 'Select'

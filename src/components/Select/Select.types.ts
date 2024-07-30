@@ -3,12 +3,16 @@ import { CSSProperties, HTMLProps } from 'react'
 import { LucideIcon } from 'lucide-react'
 
 import { SlateId, SlateSize, SlateVariant, Styleable } from '../../utilities'
+import { LabelStyles } from '../Label/Label.types'
 import { TextInputStyles } from '../TextInput/TextInput.types'
 
 export type SelectStyles = {
   input: TextInputStyles
   content: CSSProperties
   option: CSSProperties
+  root: CSSProperties
+  label: LabelStyles
+  error: CSSProperties
 }
 
 export type SelectItem<IdType extends SlateId> = {
@@ -25,6 +29,7 @@ export interface SelectProps<IdType extends SlateId>
     Styleable<SelectStyles> {
   variant?: SlateVariant
   size?: SlateSize
+  error?: string
 
   items: SelectItem<IdType>[]
   value: IdType | null
