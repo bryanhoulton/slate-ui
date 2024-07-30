@@ -18,11 +18,13 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       {...props}
     >
       <RSlider.Track
-        className="bg-muted relative grow rounded-full h-[3px]"
+        className={`bg-${styles?.track?.backgroundColor || 'muted'} relative grow rounded-full h-[3px]`}
         style={styles?.track}
       >
         <RSlider.Range
-          className="absolute bg-primary rounded-full h-full"
+          className={`absolute bg-${
+            styles?.range?.backgroundColor || 'primary'
+          } rounded-full h-full`}
           style={styles?.range}
         />
       </RSlider.Track>
