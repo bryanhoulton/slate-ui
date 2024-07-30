@@ -1,14 +1,10 @@
-import { forwardRef } from 'react';
+import { forwardRef } from 'react'
 
-import { cva } from 'class-variance-authority';
+import { cva } from 'class-variance-authority'
 
-import { cn } from '../../utilities';
-import {
-  SlateSize,
-  SlateVariant,
-  Variants,
-} from '../../utilities/types';
-import { IconProps } from './Icon.types';
+import { cn } from '../../utilities'
+import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
+import { IconProps } from './Icon.types'
 
 const variants = cva<
   Variants<{
@@ -16,7 +12,7 @@ const variants = cva<
     variant: SlateVariant
     spin: boolean
   }>
->([''], {
+>(['shrink-0'], {
   variants: {
     size: {
       sm: 'w-3 h-3',

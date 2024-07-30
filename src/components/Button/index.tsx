@@ -13,7 +13,7 @@ export const buttonVariants = cva<
   [
     'rounded-lg border flex items-center gap-1 text-sm focus:outline-none focus:ring-2',
     '!disabled:hover:shadow-inner ring-offset-1 disabled:bg-muted disabled:text-muted',
-    'disabled:cursor-not-allowed'
+    'disabled:cursor-not-allowed shrink-0'
   ],
   {
     variants: {
