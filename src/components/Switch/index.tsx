@@ -1,10 +1,10 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useEffect } from 'react'
 
 import { cva } from 'class-variance-authority'
 
 import * as RSwitch from '@radix-ui/react-switch'
 
-import { cn, gid } from '../../utilities'
+import { cn, gid, useSometimesControlled } from '../../utilities'
 import { Variants } from '../../utilities/types'
 import { Label } from '../Label'
 import { SwitchProps } from './Switch.types'
@@ -60,15 +60,23 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
     },
     ref
   ) => {
-    const [checked, setChecked] = useState(checkedProp ?? defaultChecked)
+    const [checked, setChecked] = useSometimesControlled({
+      valueProp: checkedProp,
+      defaultValue: defaultChecked,
+      onChangeProp: onCheckedChangeProp
+    })
+
+    useEffect(() => {
+      console.log('checked', checked)
+    }, [checked])
 
     return (
       <div
         className={cn(switchWrapperVariants({ disabled, withBody }), className)}
         style={styles?.root}
         onClick={() => {
+          console.log('clicked')
           setChecked((c) => !c)
-          onCheckedChangeProp?.(!checked)
         }}
       >
         <RSwitch.Root
@@ -78,11 +86,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
             WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             ...styles?.switch
           }}
-          checked={checkedProp ?? checked}
-          onCheckedChange={(e) => {
-            setChecked(e)
-            onCheckedChangeProp?.(e)
-          }}
+          checked={checked}
           disabled={disabled}
           ref={ref}
           {...props}
@@ -98,7 +102,6 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
               disabled ? 'cursor-not-allowed' : 'cursor-pointer',
               'pr-3 flex-1'
             )}
-            htmlFor={id}
             style={styles?.label}
           >
             {label}
