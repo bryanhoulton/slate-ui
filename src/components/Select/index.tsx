@@ -1,21 +1,33 @@
-import { forwardRef, useEffect, useMemo } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useMemo,
+} from 'react';
 
-import { Check } from 'lucide-react'
+import { Check } from 'lucide-react';
 
 import {
   Combobox,
   ComboboxInput,
   ComboboxInputProps,
   ComboboxOption,
-  ComboboxOptions
-} from '@headlessui/react'
+  ComboboxOptions,
+} from '@headlessui/react';
 
-import { cn, gid, SlateId, useSometimesControlled } from '../../utilities'
-import { Icon } from '../Icon'
-import { Label } from '../Label'
-import { TextInput } from '../TextInput'
-import { TextInputProps } from '../TextInput/TextInput.types'
-import { SelectItem, SelectProps } from './Select.types'
+import {
+  cn,
+  gid,
+  SlateId,
+  useSometimesControlled,
+} from '../../utilities';
+import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { TextInput } from '../TextInput';
+import { TextInputProps } from '../TextInput/TextInput.types';
+import {
+  SelectItem,
+  SelectProps,
+} from './Select.types';
 
 interface SlateComboboxInputProps
   extends Omit<ComboboxInputProps, 'size' | 'children'>,
@@ -64,6 +76,7 @@ export function Select<IdType extends SlateId>({
   className,
   error,
   label,
+  disabled,
 
   // Theming.
   variant = 'primary',
@@ -137,6 +150,7 @@ export function Select<IdType extends SlateId>({
           placeholder="Search..."
           styles={styles?.input}
           className={className}
+          disabled={disabled}
         />
         <ComboboxOptions
           anchor="bottom"

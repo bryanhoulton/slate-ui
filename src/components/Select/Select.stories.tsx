@@ -1,9 +1,16 @@
-import { BookAudio, HandPlatter, User } from 'lucide-react'
+import {
+  BookAudio,
+  HandPlatter,
+  User,
+} from 'lucide-react';
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { Select } from './'
+import { args } from '../../utilities/stories';
+import { Select } from './';
 
 const meta: Meta<typeof Select> = {
   component: Select,
@@ -27,8 +34,8 @@ const meta: Meta<typeof Select> = {
     ref: { table: { disable: true } },
     id: { table: { disable: true } },
     value: { table: { disable: true } },
-
-    search: { table: { disable: true } }
+    search: { table: { disable: true } },
+    disabled: { control: 'boolean' }
   }),
   args: {
     searchable: true,
