@@ -1,9 +1,15 @@
-import { CalendarSearch, Home } from 'lucide-react'
+import {
+  CalendarSearch,
+  Home,
+} from 'lucide-react';
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { Tabs } from './'
+import { args } from '../../utilities/stories';
+import { Tabs } from './';
 
 const meta: Meta<typeof Tabs> = {
   component: Tabs,
@@ -47,11 +53,6 @@ export const Primary: Story = {
         iconRight: CalendarSearch
       }
     ],
-    defaultTab: 'tab1',
-    styles: {
-      tabContainer: {
-        backgroundColor: 'red'
-      }
-    }
+    defaultTab: 'tab1'
   }
 }
