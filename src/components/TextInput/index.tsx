@@ -1,12 +1,19 @@
-import { forwardRef, useState } from 'react'
+import {
+  forwardRef,
+  useState,
+} from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
-import { Icon } from '../Icon'
-import { Label } from '../Label'
-import { TextInputProps } from './TextInput.types'
+import { cn } from '../../utilities';
+import {
+  SlateSize,
+  SlateVariant,
+  Variants,
+} from '../../utilities/types';
+import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { TextInputProps } from './TextInput.types';
 
 export const textInputVariants = cva<
   Variants<{
@@ -19,7 +26,7 @@ export const textInputVariants = cva<
 >(
   [
     'rounded-lg border text-sm focus:outline-none focus:ring-2 w-full',
-    'hover:shadow-inner transition relative ring-offset-1'
+    'hover:shadow-inner transition relative ring-offset-1 disabled:text-muted'
   ],
   {
     variants: {
