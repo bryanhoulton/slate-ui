@@ -1,8 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { SlateProvider } from '../SlateProvider'
-import { Slider } from './'
+import { args } from '../../utilities/stories';
+import { SlateProvider } from '../SlateProvider';
+import { Slider } from './';
 
 const meta: Meta<typeof Slider> = {
   component: Slider,
@@ -11,7 +14,8 @@ const meta: Meta<typeof Slider> = {
     min: { control: { type: 'number' } },
     max: { control: { type: 'number' } },
     step: { control: { type: 'number' } },
-    value: { control: { type: 'number' } }
+    value: { control: { type: 'number' } },
+    disabled: { control: { type: 'boolean' } }
   }),
   decorators: [
     (Story) => (

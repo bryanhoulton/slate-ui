@@ -7,13 +7,15 @@ import { Tooltip } from '../Tooltip';
 import { SliderProps } from './Slider.types';
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(
-  ({ tooltip, className, styles, ...props }, ref) => (
+  ({ tooltip, className, styles, disabled, ...props }, ref) => (
     <RSlider.Root
       className={cn(
         'relative flex items-center select-none touch-none w-full h-5',
+        disabled && 'opacity-50 pointer-events-none',
         className
       )}
       ref={ref}
+      disabled={disabled}
       style={styles?.root}
       {...props}
     >
