@@ -49,9 +49,10 @@ export const Primary: Story = {
       },
       { id: '3', label: 'Item 3', type: 'text', value: 'Text' },
       { id: '4', label: 'Item 4444', type: 'checkbox' },
+      { id: '5', label: 'Item 5', type: 'text-input', placeholder: 'Item 5' },
       {
-        id: '5',
-        label: 'Item 5',
+        id: '6',
+        label: 'Item 6',
         type: 'subgroup',
         items: [
           { id: '5', label: 'Item 5', type: 'button' },

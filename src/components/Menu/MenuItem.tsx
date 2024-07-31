@@ -15,6 +15,7 @@ import { cn } from '../../utilities'
 import { Button } from '../Button'
 import { Checkbox } from '../Checkbox'
 import { Switch } from '../Switch'
+import { TextInput } from '../TextInput'
 import { MenuItemComponentProps } from './MenuItem.types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -117,6 +118,16 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
               <MenuItemComponent key={subItem.id} item={subItem} />
             ))}
           </DropdownMenuGroup>
+        )
+      }
+      case 'text-input': {
+        const { type, className, ...rest } = item
+        return (
+          <TextInput
+            type={type}
+            className={cn('w-full p-2', className)}
+            {...rest}
+          />
         )
       }
     }

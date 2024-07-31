@@ -1,6 +1,7 @@
 import { ButtonProps } from '../Button/Button.types'
 import { CheckboxProps } from '../Checkbox/Checbox.types'
 import { SwitchProps } from '../Switch/Switch.types'
+import { TextInputProps } from '../TextInput/TextInput.types'
 
 type __MenuItemProps = {
   id: string
@@ -15,6 +16,7 @@ export type CheckboxItem = TypedMenuItem<CheckboxProps, 'checkbox'>
 export type ButtonItem = TypedMenuItem<ButtonProps, 'button'>
 export type TextItem = TypedMenuItem<{ value: string }, 'text'>
 export type SwitchItem = TypedMenuItem<SwitchProps, 'switch'>
+export type TextInputItem = TypedMenuItem<TextInputProps, 'text-input'>
 export type GroupItem = TypedMenuItem<
   {
     items: MenuItem[]
@@ -32,6 +34,7 @@ export type MenuItem =
   | SwitchItem
   | GroupItem
   | ButtonItem
+  | TextInputItem
   | TextItem
   | CheckboxItem
   | SubGroupItem
