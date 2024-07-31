@@ -4,7 +4,10 @@ import {
   useMemo,
 } from 'react';
 
-import { Check } from 'lucide-react';
+import {
+  Check,
+  ChevronDown,
+} from 'lucide-react';
 
 import {
   Combobox,
@@ -60,6 +63,7 @@ const SlateComboboxInput = forwardRef<
         size={size}
         className={className as string}
         {...props}
+        iconRight={ChevronDown}
         ref={ref}
       />
     )
