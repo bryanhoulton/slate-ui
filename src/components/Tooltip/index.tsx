@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef } from 'react';
 
-import * as RTooltip from '@radix-ui/react-tooltip'
+import * as RTooltip from '@radix-ui/react-tooltip';
 
-import { cn } from '../../utilities'
-import { TooltipProps } from './Tooltip.types'
+import { cn } from '../../utilities';
+import { TooltipProps } from './Tooltip.types';
 
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
@@ -13,12 +13,16 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       delayDuration = 300,
       styles,
       withArrow = true,
+      disabled,
       ...props
     },
     ref
   ) => {
     return (
-      <RTooltip.Root delayDuration={delayDuration}>
+      <RTooltip.Root
+        delayDuration={delayDuration}
+        open={disabled ? false : undefined}
+      >
         <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
         <RTooltip.Portal>
           {content && (

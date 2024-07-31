@@ -1,12 +1,16 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
-import { Icon } from '../Icon'
-import { Tooltip } from '../Tooltip'
-import { ActionIconProps } from './ActionIcon.types'
+import { cn } from '../../utilities';
+import {
+  SlateSize,
+  SlateVariant,
+  Variants,
+} from '../../utilities/types';
+import { Icon } from '../Icon';
+import { Tooltip } from '../Tooltip';
+import { ActionIconProps } from './ActionIcon.types';
 
 const variants = cva<
   Variants<{
@@ -16,7 +20,8 @@ const variants = cva<
 >(
   [
     'flex items-center justify-center rounded-lg border focus:outline-none',
-    'focus:ring-2 focus:ring-primary hover:shadow-inner shrink-0'
+    'focus:ring-2 focus:ring-primary not:disabled:hover:shadow-inner shrink-0',
+    'disabled:bg-muted disabled:text-muted disabled:cursor-not-allowed'
   ],
   {
     variants: {
@@ -37,13 +42,22 @@ const variants = cva<
 
 export const ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>(
   (
-    { icon, variant = 'primary', size = 'md', className, tooltip, ...props },
+    {
+      icon,
+      variant = 'primary',
+      size = 'md',
+      className,
+      tooltip,
+      disabled,
+      ...props
+    },
     ref
   ) => (
-    <Tooltip content={tooltip}>
+    <Tooltip content={tooltip} disabled={disabled}>
       <button
         ref={ref}
         className={cn(variants({ size, variant }), className)}
+        disabled={disabled}
         {...props}
       >
         <Icon icon={icon} size={size} variant="subtle" className={className} />

@@ -1,10 +1,13 @@
-import { Plus } from 'lucide-react'
+import { Plus } from 'lucide-react';
 
-import { TooltipProvider } from '@radix-ui/react-tooltip'
-import type { Meta, StoryObj } from '@storybook/react'
+import { TooltipProvider } from '@radix-ui/react-tooltip';
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { ActionIcon } from './'
+import { args } from '../../utilities/stories';
+import { ActionIcon } from './';
 
 const meta: Meta<typeof ActionIcon> = {
   component: ActionIcon,
@@ -29,6 +32,9 @@ const meta: Meta<typeof ActionIcon> = {
       table: {
         disable: true
       }
+    },
+    disabled: {
+      control: 'boolean'
     }
   }),
   decorators: [

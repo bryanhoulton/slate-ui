@@ -1,8 +1,8 @@
-import { CSSProperties } from 'react'
+import { CSSProperties } from 'react';
 
-import { TooltipContentProps } from '@radix-ui/react-tooltip'
+import { TooltipContentProps } from '@radix-ui/react-tooltip';
 
-import { Styleable } from '../../utilities/types'
+import { Styleable } from '../../utilities/types';
 
 export type TooltipStyles = {
   content: CSSProperties
@@ -14,4 +14,5 @@ export interface TooltipProps
   children: React.ReactNode
   delayDuration?: number
   withArrow?: boolean
+  disabled?: boolean
 }
