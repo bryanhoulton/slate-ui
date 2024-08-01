@@ -1,7 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { Switch } from './'
+import { args } from '../../utilities/stories';
+import { Switch } from './';
 
 const meta: Meta<typeof Switch> = {
   component: Switch,
@@ -22,5 +25,7 @@ export default meta
 type Story = StoryObj<typeof Switch>
 
 export const Primary: Story = {
-  args: {}
+  args: {
+    onCheckedChange: (checked) => console.log(checked)
+  }
 }

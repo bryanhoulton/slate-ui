@@ -1,8 +1,8 @@
-import { CSSProperties } from 'react'
+import { CSSProperties } from 'react';
 
-import * as RSwitch from '@radix-ui/react-switch'
+import * as RSwitch from '@radix-ui/react-switch';
 
-import { Styleable } from '../../utilities/types'
+import { Styleable } from '../../utilities/types';
 
 export type SwitchStyles = {
   root: CSSProperties
@@ -16,4 +16,5 @@ export interface SwitchProps
     Styleable<SwitchStyles> {
   withBody?: boolean
   label?: string
+  side?: 'right' | 'left'
 }

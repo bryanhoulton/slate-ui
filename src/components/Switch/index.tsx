@@ -1,15 +1,21 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import * as RSwitch from '@radix-ui/react-switch'
+import * as RSwitch from '@radix-ui/react-switch';
 
-import { cn, gid, useSometimesControlled } from '../../utilities'
-import { Variants } from '../../utilities/types'
-import { Label } from '../Label'
-import { SwitchProps } from './Switch.types'
+import {
+  cn,
+  gid,
+  useSometimesControlled,
+} from '../../utilities';
+import { Variants } from '../../utilities/types';
+import { Label } from '../Label';
+import { SwitchProps } from './Switch.types';
 
-const switchWrapperVariants = cva<Variants<{ withBody: boolean }>>(
+const switchWrapperVariants = cva<
+  Variants<{ withBody: boolean; side: SwitchProps['side'] }>
+>(
   [
     'duration-150 w-fit rounded-lg flex items-center gap-2 select-none',
     'cursor-pointer disabled:cursor-not-allowed'
@@ -19,13 +25,17 @@ const switchWrapperVariants = cva<Variants<{ withBody: boolean }>>(
       withBody: {
         true: 'hover:bg-muted p-1.5 disabled:bg-muted',
         false: ''
+      },
+      side: {
+        left: 'flex-row-reverse',
+        right: 'flex-row'
       }
     }
   }
 )
 
 const switchRootVariants = cva([
-  'relative h-5 w-8 rounded-full duration-150 shadow-inner',
+  'relative h-5 w-8 rounded-full duration-150 shadow-inner cursor-pointer',
   'focus:outline-black disabled:cursor-not-allowed disabled:pointer-events-none',
   'data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-200'
 ])
@@ -49,6 +59,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
       withBody,
       defaultChecked = false,
       styles,
+      side = 'right',
       ...props
     },
     ref
@@ -61,7 +72,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
 
     return (
       <div
-        className={cn(switchWrapperVariants({ withBody }), className)}
+        className={cn(switchWrapperVariants({ withBody, side }), className)}
         style={styles?.root}
         onClick={() => {
           setChecked((c) => !c)
@@ -85,7 +96,10 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
           />
         </RSwitch.Root>
         {label && (
-          <Label className={cn('pr-3 flex-1')} style={styles?.label}>
+          <Label
+            className={cn('pr-3 flex-1 cursor-pointer')}
+            style={styles?.label}
+          >
             {label}
           </Label>
         )}
