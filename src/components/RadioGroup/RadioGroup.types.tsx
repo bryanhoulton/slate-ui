@@ -7,13 +7,16 @@ import {
   SlateId,
   Styleable,
 } from '../../utilities';
+import { LabelStyles } from '../Label/Label.types';
 
 export interface RadioGroupStyles {
   root: CSSProperties
+  wrapper: CSSProperties
   item: CSSProperties
   title: CSSProperties
   description: CSSProperties
   dot: CSSProperties
+  label: LabelStyles
 }
 
 export interface RadioItem<T extends SlateId> {

@@ -29,6 +29,7 @@ type Story = StoryObj<typeof RadioGroup>
 
 export const Primary: Story = {
   args: {
+    label: 'Radio Group',
     items: [
       { id: 1, name: 'Item 1', description: 'Description 1' },
       { id: 2, name: 'Item 2', description: 'Description 2' },
