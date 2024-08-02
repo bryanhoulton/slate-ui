@@ -34,7 +34,7 @@ export function RadioGroup<T extends SlateId>({
       {items.map((item) => (
         <div
           className={cn(
-            'flex items-center gap-2 cursor-pointer w-fit py-2 pl-3 pr-4 rounded-lg duration-150',
+            'flex items-center gap-2 cursor-pointer w-fit py-2 pl-3 pr-4 rounded-lg duration-150 border',
             item.id === value ? 'bg-primary text-white' : 'hover:bg-muted'
           )}
           key={item.id}
