@@ -146,7 +146,7 @@ export function Select<IdType extends SlateId>({
           anchor="bottom"
           className={cn(
             'rounded-lg mt-1 p-1 flex flex-col gap-1 border bg-white',
-            'w-[--input-width]'
+            'w-[--input-width] z-50 pointer-events-auto'
           )}
           style={styles?.content}
         >

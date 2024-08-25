@@ -23,7 +23,7 @@ export function Modal({
           <Dialog.Content
             className={cn(
               'max-h-[95vh] min-w-96 max-w-[95vw]',
-              'bg-white overflow-hidden rounded-xl shadow',
+              'bg-white overflow-hidden rounded-lg shadow',
               'flex flex-col outline-none',
               className
             )}
