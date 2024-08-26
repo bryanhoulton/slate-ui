@@ -1,14 +1,10 @@
-import { HTMLAttributes } from 'react';
+import { HTMLProps } from 'react'
 
-import { LucideIcon } from 'lucide-react';
+import { LucideIcon } from 'lucide-react'
 
-import {
-  SlateSize,
-  SlateVariant,
-  Styleable,
-} from '../../utilities/types';
-import { ButtonStyles } from '../Button/Button.types';
-import { IconStyles } from '../Icon/Icon.types';
+import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
+import { ButtonStyles } from '../Button/Button.types'
+import { IconStyles } from '../Icon/Icon.types'
 
 export type ActionIconStyles = {
   button?: ButtonStyles
@@ -16,7 +12,7 @@ export type ActionIconStyles = {
 }
 
 export interface ActionIconProps
-  extends HTMLAttributes<HTMLButtonElement>,
+  extends Omit<HTMLProps<HTMLButtonElement>, 'size'>,
     Styleable<ActionIconStyles> {
   icon: LucideIcon
   variant?: SlateVariant
