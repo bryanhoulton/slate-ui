@@ -148,7 +148,12 @@ export function Table<R extends RowType>({
               <td colSpan={columns.length}>
                 <div className="text-muted flex flex-col items-center justify-center gap-2 py-12 text-base">
                   {emptyState?.icon && (
-                    <Icon icon={emptyState.icon} variant="subtle" size="lg" />
+                    <Icon
+                      icon={emptyState.icon}
+                      variant="subtle"
+                      strokeWidth={1.5}
+                      className="w-12 h-12"
+                    />
                   )}
                   <div className="">
                     {emptyState?.title || 'There are no items to display'}

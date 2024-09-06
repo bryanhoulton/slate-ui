@@ -1,6 +1,6 @@
 import {
   Calendar,
-  Construction,
+  Gauge,
   User,
 } from 'lucide-react';
 
@@ -137,7 +137,7 @@ export const Empty: Story = {
   args: {
     rows: [],
     emptyState: {
-      icon: Construction,
+      icon: Gauge,
       title: 'Woah! No data here!',
       button: {
         iconLeft: Calendar,
