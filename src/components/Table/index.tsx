@@ -1,13 +1,20 @@
-import { useRef } from 'react'
+import { useRef } from 'react';
 
-import { cva } from 'class-variance-authority'
-import { Info } from 'lucide-react'
+import { cva } from 'class-variance-authority';
+import { Info } from 'lucide-react';
 
-import { cn, useSometimesControlled } from '../../utilities'
-import { Icon } from '../Icon'
-import { Pagination } from '../Pagination'
-import { Tooltip } from '../Tooltip'
-import { RowType, TableProps } from './Table.types'
+import {
+  cn,
+  useSometimesControlled,
+} from '../../utilities';
+import { Button } from '../Button';
+import { Icon } from '../Icon';
+import { Pagination } from '../Pagination';
+import { Tooltip } from '../Tooltip';
+import {
+  RowType,
+  TableProps,
+} from './Table.types';
 
 export const tableVariants = cva(['table-auto divide-y'], {
   variants: {}
@@ -42,6 +49,7 @@ export function Table<R extends RowType>({
   page: pageProp,
   rows,
   loading,
+  emptyState,
   onRowClick,
   totalRows: totalRowsProp,
   onPageChange: onPageChangeProp,
@@ -138,8 +146,14 @@ export function Table<R extends RowType>({
           {!loading && rowsToShow.length === 0 && (
             <tr>
               <td colSpan={columns.length}>
-                <div className="text-muted flex items-center justify-center py-12 text-base">
-                  There are no items to display
+                <div className="text-muted flex flex-col items-center justify-center gap-2 py-12 text-base">
+                  {emptyState?.icon && (
+                    <Icon icon={emptyState.icon} variant="subtle" size="lg" />
+                  )}
+                  <div className="">
+                    {emptyState?.title || 'There are no items to display'}
+                  </div>
+                  {emptyState?.button && <Button {...emptyState.button} />}
                 </div>
               </td>
             </tr>

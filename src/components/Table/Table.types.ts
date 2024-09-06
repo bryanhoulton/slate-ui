@@ -1,9 +1,14 @@
-import { CSSProperties, ReactNode, TableHTMLAttributes } from 'react'
+import {
+  CSSProperties,
+  ReactNode,
+  TableHTMLAttributes,
+} from 'react';
 
-import { LucideIcon } from 'lucide-react'
+import { LucideIcon } from 'lucide-react';
 
-import { Styleable } from '../../utilities'
-import { PaginationProps } from '../Pagination/Pagination.types'
+import { Styleable } from '../../utilities';
+import { ButtonProps } from '../Button/Button.types';
+import { PaginationProps } from '../Pagination/Pagination.types';
 
 export type TableStyles = {
   table: CSSProperties
@@ -27,6 +32,11 @@ export interface TableProps<R extends RowType>
   columns: TableColumn<R>[]
   rows: R[]
   loading?: boolean
+  emptyState?: {
+    icon?: LucideIcon
+    title?: string
+    button?: ButtonProps
+  }
 
   onRowClick?: (row: R) => void
 
