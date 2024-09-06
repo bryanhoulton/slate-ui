@@ -32,7 +32,13 @@ export const SlateProvider = ({ children }: PropsWithChildren) => {
       <ConfirmContext.Provider
         value={{
           confirm: (args) => {
-            setConfirmProps(args)
+            setConfirmProps({
+              ...args,
+              onConfirm: () => {
+                args.onConfirm?.()
+                setConfirmOpen(false)
+              }
+            })
             setConfirmOpen(true)
           }
         }}
