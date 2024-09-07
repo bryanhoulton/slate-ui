@@ -1,8 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { Button } from '../Button'
-import { Confirm } from './'
+import { args } from '../../utilities/stories';
+import { Button } from '../Button';
+import { Confirm } from './';
 
 const meta: Meta<typeof Confirm> = {
   component: Confirm,
@@ -25,6 +28,10 @@ type Story = StoryObj<typeof Confirm>
 export const Primary: Story = {
   args: {
     title: 'Are you sure?',
-    description: 'This action cannot be undone.'
+    description: 'This action cannot be undone.',
+    onConfirm: async () => {
+      // sleep for 1 second
+      return await new Promise((resolve) => setTimeout(resolve, 1000))
+    }
   }
 }
