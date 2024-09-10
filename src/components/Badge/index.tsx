@@ -17,8 +17,8 @@ const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
     variants: {
       variant: {
         primary: 'bg-primary text-anti-primary',
-        secondary: 'bg-secondary text-anti-secondary',
-        subtle: 'border'
+        secondary: 'bg-secondary text-anti-secondary border',
+        subtle: ''
       },
       size: {
         sm: 'h-4 text-xs',
