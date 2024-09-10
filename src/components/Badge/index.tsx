@@ -1,10 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
+import { cva } from 'class-variance-authority';
 
-import { cn, SlateSize, SlateVariant, Variants } from '../../utilities'
-import { Icon } from '../Icon'
-import { BadgeProps } from './Badge.types'
+import {
+  cn,
+  SlateSize,
+  SlateVariant,
+  Variants,
+} from '../../utilities';
+import { Icon } from '../Icon';
+import { BadgeProps } from './Badge.types';
 
 const variants = cva<Variants<{ variant: SlateVariant; size: SlateSize }>>(
   ['flex gap-1 items-center w-fit px-2 rounded-full shrink-0'],
@@ -31,9 +36,9 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       iconLeft,
       iconRight,
       size = 'md',
-      label,
       className,
       styles,
+      children,
       ...rest
     },
     ref
@@ -52,7 +57,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         style={styles?.root}
       >
         {iconLeft && <Icon icon={iconLeft} variant="subtle" />}
-        {label}
+        {children}
         {iconRight && <Icon icon={iconRight} variant="subtle" />}
       </span>
     )

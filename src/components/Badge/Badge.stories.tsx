@@ -1,9 +1,12 @@
-import { Check } from 'lucide-react'
+import { Check } from 'lucide-react';
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/react';
 
-import { args } from '../../utilities/stories'
-import { Badge } from './'
+import { args } from '../../utilities/stories';
+import { Badge } from './';
 
 const meta: Meta<typeof Badge> = {
   component: Badge,
@@ -31,7 +34,7 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     size: 'md',
-    label: 'Active'
+    children: 'Active'
   }
 }
 
@@ -39,7 +42,7 @@ export const WithIcon: Story = {
   args: {
     variant: 'primary',
     size: 'md',
-    label: 'Active',
+    children: 'Active',
     iconLeft: Check
   }
 }

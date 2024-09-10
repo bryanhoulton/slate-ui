@@ -1,19 +1,25 @@
-import { CSSProperties, HTMLProps } from 'react'
+import {
+  CSSProperties,
+  HTMLProps,
+} from 'react';
 
-import { LucideIcon } from 'lucide-react'
+import { LucideIcon } from 'lucide-react';
 
-import { SlateSize, SlateVariant, Styleable } from '../../utilities'
+import {
+  SlateSize,
+  SlateVariant,
+  Styleable,
+} from '../../utilities';
 
 export type BadgeStyles = {
   root: CSSProperties
 }
 
 export interface BadgeProps
-  extends Omit<HTMLProps<HTMLSpanElement>, 'size' | 'children'>,
+  extends Omit<HTMLProps<HTMLSpanElement>, 'size'>,
     Styleable<BadgeStyles> {
   variant?: SlateVariant
   size?: SlateSize
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
-  label: string
 }
