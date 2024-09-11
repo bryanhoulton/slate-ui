@@ -1,16 +1,17 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 
-import { Edit } from 'lucide-react';
+import { Edit } from 'lucide-react'
 
-import { useSometimesControlled } from '../../utilities';
-import { Icon } from '../Icon';
-import { EditableTextProps } from './EditableText.types';
+import { cn, useSometimesControlled } from '../../utilities'
+import { Icon } from '../Icon'
+import { EditableTextProps } from './EditableText.types'
 
 export function EditableText({
   value: valueProp,
   onChange: onChangeProp,
   placeholder = 'Edit this text',
   defaultValue,
+  className,
   ...props
 }: EditableTextProps) {
   const [value, setValue] = useSometimesControlled({
@@ -22,7 +23,10 @@ export function EditableText({
 
   return (
     <div
-      className="hover:focus-within:bg-muted hover:bg-muted focus-within:bg-muted flex gap-2 items-center transition rounded-lg p-1 px-2 w-fit"
+      className={cn(
+        'hover:focus-within:bg-muted hover:bg-muted focus-within:bg-muted flex gap-2 items-center transition rounded-lg p-1 px-2 w-fit',
+        className
+      )}
       onClick={() => {
         if (ref.current) {
           ref.current.focus()
