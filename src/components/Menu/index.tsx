@@ -15,6 +15,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
       autoFocus,
       side,
       alignOffset,
+      collisionPadding = 4,
       ...props
     },
     ref
@@ -28,6 +29,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
             'bg-white p-1 border border-muted shadow-sm rounded-lg flex flex-col gap-1'
           )}
           sideOffset={4}
+          collisionPadding={collisionPadding}
           ref={ref}
           align={align}
           alignOffset={alignOffset}
@@ -41,3 +43,4 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
     </DropdownMenu.Root>
   )
 )
+Menu.displayName = 'Menu'

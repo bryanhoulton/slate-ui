@@ -6,14 +6,14 @@ import {
 import { Styleable } from '../../utilities/types'
 import { MenuItem } from './MenuItem.types'
 
-export type MenuStyles = {}
+export type MenuStyles = Record<string, never>
 
 export interface MenuProps
   extends DropdownMenuProps,
     Styleable<MenuStyles>,
     Pick<
       DropdownMenuContentProps,
-      'align' | 'alignOffset' | 'side' | 'autoFocus'
+      'align' | 'alignOffset' | 'side' | 'autoFocus' | 'collisionPadding'
     > {
   items: MenuItem[]
   children: React.ReactNode
