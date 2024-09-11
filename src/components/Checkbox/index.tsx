@@ -1,21 +1,15 @@
-import {
-  forwardRef,
-  useState,
-} from 'react';
+import { forwardRef, useEffect } from 'react'
 
-import { cva } from 'class-variance-authority';
-import { Check } from 'lucide-react';
+import { cva } from 'class-variance-authority'
+import { Check } from 'lucide-react'
 
-import * as RCheckbox from '@radix-ui/react-checkbox';
+import * as RCheckbox from '@radix-ui/react-checkbox'
 
-import {
-  cn,
-  gid,
-} from '../../utilities';
-import { Variants } from '../../utilities/types';
-import { Icon } from '../Icon';
-import { Label } from '../Label';
-import { CheckboxProps } from './Checbox.types';
+import { cn, gid, useSometimesControlled } from '../../utilities'
+import { Variants } from '../../utilities/types'
+import { Icon } from '../Icon'
+import { Label } from '../Label'
+import { CheckboxProps } from './Checbox.types'
 
 const checkboxWrapperVariants = cva<
   Variants<{ withBody: boolean; disabled: boolean }>
@@ -62,18 +56,25 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
     },
     ref
   ) => {
-    const [checked, setChecked] = useState<RCheckbox.CheckedState>(
-      checkedProp ?? defaultChecked
-    )
+    const [checked, setChecked] = useSometimesControlled({
+      valueProp: checkedProp,
+      defaultValue: defaultChecked,
+      onChangeProp: onCheckedChangeProp
+    })
+
+    useEffect(() => {
+      console.log(checked)
+    }, [checked])
+
     return (
       <div
         className={cn(
           checkboxWrapperVariants({ disabled, withBody }),
           className
         )}
-        onClick={() => {
+        onClick={(e) => {
+          console.log(e)
           setChecked((c) => (c === false ? true : false))
-          onCheckedChangeProp?.(!checked)
         }}
         style={styles?.root}
       >
@@ -86,11 +87,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
           }}
           disabled={disabled}
           ref={ref}
-          checked={checkedProp || checked}
-          onCheckedChange={(c) => {
-            setChecked(c)
-            onCheckedChangeProp?.(c)
-          }}
+          checked={checked}
           {...props}
         >
           <RCheckbox.Indicator style={styles?.indicator}>
@@ -103,7 +100,6 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
               disabled ? 'cursor-not-allowed' : 'cursor-pointer',
               'pr-3'
             )}
-            htmlFor={id}
             style={styles?.label}
           >
             {label}
