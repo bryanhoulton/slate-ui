@@ -1,15 +1,19 @@
-import { forwardRef, useEffect } from 'react'
+import { forwardRef } from 'react';
 
-import { cva } from 'class-variance-authority'
-import { Check } from 'lucide-react'
+import { cva } from 'class-variance-authority';
+import { Check } from 'lucide-react';
 
-import * as RCheckbox from '@radix-ui/react-checkbox'
+import * as RCheckbox from '@radix-ui/react-checkbox';
 
-import { cn, gid, useSometimesControlled } from '../../utilities'
-import { Variants } from '../../utilities/types'
-import { Icon } from '../Icon'
-import { Label } from '../Label'
-import { CheckboxProps } from './Checbox.types'
+import {
+  cn,
+  gid,
+  useSometimesControlled,
+} from '../../utilities';
+import { Variants } from '../../utilities/types';
+import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { CheckboxProps } from './Checbox.types';
 
 const checkboxWrapperVariants = cva<
   Variants<{ withBody: boolean; disabled: boolean }>
@@ -62,20 +66,13 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
       onChangeProp: onCheckedChangeProp
     })
 
-    useEffect(() => {
-      console.log(checked)
-    }, [checked])
-
     return (
       <div
         className={cn(
           checkboxWrapperVariants({ disabled, withBody }),
           className
         )}
-        onClick={(e) => {
-          console.log(e)
-          setChecked((c) => (c === false ? true : false))
-        }}
+        onClick={() => setChecked((c) => (c === false ? true : false))}
         style={styles?.root}
       >
         <RCheckbox.Root
