@@ -7,7 +7,7 @@ import {
 import { LucideIcon } from 'lucide-react';
 
 import { Styleable } from '../../utilities';
-import { ButtonProps } from '../Button/Button.types';
+import { EmptyStateProps } from '../EmptyState/EmptyState.types';
 import { PaginationProps } from '../Pagination/Pagination.types';
 
 export type TableStyles = {
@@ -32,11 +32,7 @@ export interface TableProps<R extends RowType>
   columns: TableColumn<R>[]
   rows: R[]
   loading?: boolean
-  emptyState?: {
-    icon?: LucideIcon
-    title?: string
-    button?: ButtonProps
-  }
+  emptyState?: EmptyStateProps
 
   onRowClick?: (row: R) => void
 

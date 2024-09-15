@@ -1,10 +1,13 @@
-import { useRef } from 'react'
+import { useRef } from 'react';
 
-import { Edit } from 'lucide-react'
+import { Edit } from 'lucide-react';
 
-import { cn, useSometimesControlled } from '../../utilities'
-import { Icon } from '../Icon'
-import { EditableTextProps } from './EditableText.types'
+import {
+  cn,
+  useSometimesControlled,
+} from '../../utilities';
+import { Icon } from '../Icon';
+import { EditableTextProps } from './EditableText.types';
 
 export function EditableText({
   value: valueProp,
@@ -36,7 +39,7 @@ export function EditableText({
       <input
         ref={ref}
         value={value}
-        className="focus:outline-none"
+        className="focus:outline-none flex-1 min-w-0"
         onChange={(e) => setValue(e.target.value)}
         size={value.length || placeholder.length}
         placeholder={placeholder}

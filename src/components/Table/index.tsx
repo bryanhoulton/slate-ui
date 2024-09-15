@@ -7,7 +7,7 @@ import {
   cn,
   useSometimesControlled,
 } from '../../utilities';
-import { Button } from '../Button';
+import { EmptyState } from '../EmptyState';
 import { Icon } from '../Icon';
 import { Pagination } from '../Pagination';
 import { Tooltip } from '../Tooltip';
@@ -143,23 +143,10 @@ export function Table<R extends RowType>({
             ))}
 
           {/* Empty state. */}
-          {!loading && rowsToShow.length === 0 && (
+          {!loading && emptyState && rowsToShow.length === 0 && (
             <tr>
               <td colSpan={columns.length}>
-                <div className="text-muted flex flex-col items-center justify-center gap-2 py-12 text-base">
-                  {emptyState?.icon && (
-                    <Icon
-                      icon={emptyState.icon}
-                      variant="subtle"
-                      strokeWidth={1.5}
-                      className="w-12 h-12"
-                    />
-                  )}
-                  <div className="">
-                    {emptyState?.title || 'There are no items to display'}
-                  </div>
-                  {emptyState?.button && <Button {...emptyState.button} />}
-                </div>
+                <EmptyState {...emptyState} />
               </td>
             </tr>
           )}
