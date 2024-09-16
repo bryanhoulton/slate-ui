@@ -29,7 +29,10 @@ export function ColorPicker({
         </div>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content className="bg-white rounded border p-2" sideOffset={4}>
+        <Popover.Content
+          className="bg-white rounded border p-2 z-50"
+          sideOffset={4}
+        >
           <HexColorPicker color={value} onChange={setValue} />
         </Popover.Content>
       </Popover.Portal>
