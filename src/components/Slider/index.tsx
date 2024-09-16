@@ -9,7 +9,10 @@ import { SliderProps } from './Slider.types'
 
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(
   ({ tooltip, className, styles, disabled, label, ...props }, ref) => (
-    <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
+    <div
+      className={cn('flex flex-col gap-1 w-full', className)}
+      style={styles?.root}
+    >
       <Label>{label}</Label>
       <RSlider.Root
         className={cn(
