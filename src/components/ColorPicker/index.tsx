@@ -1,15 +1,15 @@
-import { HexColorPicker } from 'react-colorful';
+import { HexColorPicker } from 'react-colorful'
 
-import * as Popover from '@radix-ui/react-popover';
+import * as Popover from '@radix-ui/react-popover'
 
-import { useSometimesControlled } from '../../utilities';
-import { Button } from '../Button';
-import { ColorPickerProps } from './ColorPicker.types';
+import { cn, useSometimesControlled } from '../../utilities'
+import { TextInput } from '../TextInput'
+import { ColorPickerProps } from './ColorPicker.types'
 
 export function ColorPicker({
   value: valueProp,
   onChange,
-  text = 'Pick a color',
+  className,
   ...rest
 }: ColorPickerProps) {
   const [value, setValue] = useSometimesControlled({
@@ -18,24 +18,33 @@ export function ColorPicker({
     defaultValue: '#000000'
   })
   return (
-    <Popover.Root modal>
-      <Popover.Trigger>
-        <div className="flex gap-2 items-center">
-          <Button {...rest}>{text}</Button>
-          <div
-            className="w-6 h-6 rounded-full border"
+    <div className={cn('flex gap-1 items-end', className)}>
+      <TextInput
+        type="text"
+        className="flex-1"
+        placeholder="Pick a color"
+        value={value}
+        onChange={setValue}
+        {...rest}
+      />
+
+      <Popover.Root modal>
+        <Popover.Trigger className="h-8">
+          <button
+            className="w-8 h-8 rounded-lg border"
             style={{ backgroundColor: value }}
           />
-        </div>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          className="bg-white rounded border p-2 z-50"
-          sideOffset={4}
-        >
-          <HexColorPicker color={value} onChange={setValue} />
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+        </Popover.Trigger>
+        <Popover.Portal>
+          <Popover.Content
+            className="bg-white rounded border p-2 z-50 flex flex-col gap-2"
+            sideOffset={4}
+            autoFocus={false}
+          >
+            <HexColorPicker color={value} onChange={setValue} />
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover.Root>
+    </div>
   )
 }
