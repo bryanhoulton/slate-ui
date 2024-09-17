@@ -29,7 +29,7 @@ export function ColorPicker({
       />
 
       <Popover.Root modal>
-        <Popover.Trigger className="h-8">
+        <Popover.Trigger className="h-8" asChild>
           <button
             className="w-8 h-8 rounded-lg border"
             style={{ backgroundColor: value }}
