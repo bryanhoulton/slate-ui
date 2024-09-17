@@ -52,9 +52,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       style={styles?.root}
       {...props}
     >
-      {iconLeft && <Icon icon={iconLeft} variant="subtle" />}
+      {iconLeft && (
+        <Icon icon={iconLeft} variant="subtle" style={styles?.icon} />
+      )}
       {children}
-      {iconRight && <Icon icon={iconRight} variant="subtle" />}
+      {iconRight && (
+        <Icon icon={iconRight} variant="subtle" style={styles?.icon} />
+      )}
     </button>
   )
 )

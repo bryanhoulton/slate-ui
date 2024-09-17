@@ -6,6 +6,7 @@ import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
 
 export type ButtonStyles = {
   root: CSSProperties
+  icon: CSSProperties
 }
 
 export interface ButtonProps
