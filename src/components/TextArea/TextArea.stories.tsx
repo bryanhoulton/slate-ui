@@ -1,15 +1,7 @@
-import {
-  Eye,
-  User,
-} from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react'
 
-import type {
-  Meta,
-  StoryObj,
-} from '@storybook/react';
-
-import { args } from '../../utilities/stories';
-import { TextArea } from './';
+import { args } from '../../utilities/stories'
+import { TextArea } from './'
 
 const meta: Meta<typeof TextArea> = {
   component: TextArea,
@@ -54,16 +46,5 @@ export const Primary: Story = {
     size: 'md',
     label: 'First Name',
     placeholder: 'Steve Jobs'
-  }
-}
-
-export const WithIcons: Story = {
-  args: {
-    variant: 'primary',
-    size: 'md',
-    label: 'First Name',
-    placeholder: 'Steve Jobs',
-    iconLeft: User,
-    iconRight: Eye
   }
 }

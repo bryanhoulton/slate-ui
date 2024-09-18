@@ -1,17 +1,7 @@
-import {
-  ChangeEvent,
-  CSSProperties,
-  HTMLProps,
-} from 'react';
+import { ChangeEvent, CSSProperties, HTMLProps } from 'react'
 
-import { LucideIcon } from 'lucide-react';
-
-import {
-  SlateSize,
-  SlateVariant,
-  Styleable,
-} from '../../utilities/types';
-import { LabelStyles } from '../Label/Label.types';
+import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
+import { LabelStyles } from '../Label/Label.types'
 
 export type TextAreaStyles = {
   label: LabelStyles
@@ -29,7 +19,5 @@ export interface TextAreaProps
   error?: string
   value?: string
   defaultValue?: string
-  iconLeft?: LucideIcon
-  iconRight?: LucideIcon
   onChange?: (value: string, event: ChangeEvent<HTMLTextAreaElement>) => void
 }
