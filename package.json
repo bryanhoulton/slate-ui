@@ -1,14 +1,14 @@
 {
   "name": "slate-ui",
-  "version": "1.0.77",
+  "version": "1.0.79",
   "description": "Slate is an opinionated, configurable React component library built for scalable dev teams on Tailwind and Radix.",
-  "repository": "https://github.com/bryanhoulton/slate.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanhoulton/slate.git"
+  },
   "author": "Bryan Houlton <brhoulton@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/cjs/index.d.ts",
   "files": [
     "dist/**"
   ],
