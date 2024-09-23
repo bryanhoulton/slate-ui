@@ -1,8 +1,11 @@
-import { cn, useSometimesControlled } from '../../utilities'
-import { Button } from '../Button'
-import { Select } from '../Select'
-import { SelectItem } from '../Select/Select.types'
-import { PaginationProps } from './Pagination.types'
+import {
+  cn,
+  useSometimesControlled,
+} from '../../utilities';
+import { Button } from '../Button';
+import { Select } from '../Select';
+import { SelectItem } from '../Select/Select.types';
+import { PaginationProps } from './Pagination.types';
 
 export function Pagination({
   pageSize,
@@ -41,7 +44,8 @@ export function Pagination({
         />
 
         <span>
-          of <span className="text-default">{maxRow}</span> results
+          of <span className="text-default">{maxRow.toLocaleString()}</span>{' '}
+          results
         </span>
       </div>
 
