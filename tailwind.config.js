@@ -1,6 +1,6 @@
-import tailwindCssAnimate from 'tailwindcss-animate';
-import primaryTheme from 'tailwindcss/defaultTheme';
-import plugin from 'tailwindcss/plugin';
+import tailwindCssAnimate from 'tailwindcss-animate'
+import primaryTheme from 'tailwindcss/defaultTheme'
+import plugin from 'tailwindcss/plugin'
 
 export default {
   darkMode: ['class'],
@@ -144,16 +144,31 @@ export default {
       }),
 
       keyframes: {
-        overlayShow: {
-          from: { opacity: '0' },
-          to: { opacity: '1' }
-        },
         contentShow: {
           from: {
             opacity: '0',
             transform: 'translate(0, 5%) scale(0.96)'
           },
           to: { opacity: '1', transform: 'translate(0, 0) scale(1)' }
+        },
+        bump: {
+          '0%': {
+            transform: 'scale(1)'
+          },
+          '10%': {
+            transform: 'scale(1.05)'
+          },
+          '50%': {
+            transform: 'scale(1)'
+          }
+        },
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+        spinCcw: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' }
         },
         slideDownAndFade: {
           from: { opacity: '0', transform: 'translateY(-2px)' },
@@ -173,8 +188,10 @@ export default {
         }
       },
       animation: {
-        overlayShow: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
-        contentShow: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        contentShow: 'contentShow 150ms ease-out',
+        bump: 'bump 1s infinite',
+        spin: 'spin 1s linear infinite',
+        spinCcw: 'spinCcw 2s linear infinite',
         slideDownAndFade:
           'slideDownAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideLeftAndFade:
@@ -182,6 +199,9 @@ export default {
         slideUpAndFade: 'slideUpAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideRightAndFade:
           'slideRightAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)'
+      },
+      transitionDelay: {
+        1500: '1500ms'
       }
     }
   },
