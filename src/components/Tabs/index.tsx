@@ -19,7 +19,7 @@ export function Tabs({
       {...props}
     >
       <RTabs.List
-        className="shrink-0 flex border-b gap-2"
+        className="shrink-0 flex border-b gap-2 px-2"
         style={styles?.tabContainer}
       >
         {tabs.map((tab) => (
