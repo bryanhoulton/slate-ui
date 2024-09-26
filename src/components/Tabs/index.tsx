@@ -28,7 +28,7 @@ export function Tabs({
             className={cn(
               'px-2 py-3 flex items-center justify-center text-sm',
               'leading-none select-none gap-2',
-              'data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary',
+              'data-[state=active]:text-primary border-b-2 border-b-transparent data-[state=active]:border-b-primary',
               'hover:text-muted hover:border-b-2 hover:border-muted'
             )}
             value={tab.id}
