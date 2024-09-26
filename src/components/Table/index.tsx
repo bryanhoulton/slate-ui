@@ -131,7 +131,7 @@ export function Table<R extends RowType>({
 
           {/* Loading state. Pulsing skeleton. */}
           {loading &&
-            Array.from({ length: pageSize }).map((_, i) => (
+            Array.from({ length: pageSize || 10 }).map((_, i) => (
               // eslint-disable-next-line react/no-array-index-key
               <tr key={i}>
                 {columns.map((column) => (
