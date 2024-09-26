@@ -16,4 +16,5 @@ export interface ButtonProps
   size?: SlateSize
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
+  loading?: boolean
 }

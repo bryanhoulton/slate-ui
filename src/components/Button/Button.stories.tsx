@@ -25,6 +25,11 @@ const meta: Meta<typeof Button> = {
       control: {
         type: 'boolean'
       }
+    },
+    loading: {
+      control: {
+        type: 'boolean'
+      }
     }
   })
 }
