@@ -1,16 +1,12 @@
-import { forwardRef } from 'react';
+import { forwardRef } from 'react'
 
-import { cva } from 'class-variance-authority';
+import { cva } from 'class-variance-authority'
 
-import { cn } from '../../utilities';
-import {
-  SlateSize,
-  SlateVariant,
-  Variants,
-} from '../../utilities/types';
-import { Icon } from '../Icon';
-import { Tooltip } from '../Tooltip';
-import { ActionIconProps } from './ActionIcon.types';
+import { cn } from '../../utilities'
+import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
+import { Icon } from '../Icon'
+import { Tooltip } from '../Tooltip'
+import { ActionIconProps } from './ActionIcon.types'
 
 const variants = cva<
   Variants<{
@@ -21,7 +17,8 @@ const variants = cva<
   [
     'flex items-center justify-center rounded-lg border focus:outline-none',
     'focus:ring-2 focus:ring-primary not:disabled:hover:shadow-inner shrink-0',
-    'disabled:bg-muted disabled:text-muted disabled:cursor-not-allowed'
+    'disabled:bg-muted disabled:text-muted disabled:cursor-not-allowed',
+    'active:scale-[98%]'
   ],
   {
     variants: {

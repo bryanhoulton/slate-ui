@@ -173,6 +173,9 @@ export default {
         h5: { fontSize: '0.83em' },
         h6: { fontSize: '0.67em' }
       })
+    }),
+    plugin(function ({ addVariant }) {
+      addVariant('child', '& > *')
     })
   ]
 }

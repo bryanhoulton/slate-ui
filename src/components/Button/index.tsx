@@ -12,9 +12,9 @@ export const buttonVariants = cva<
   Variants<{ variant: SlateVariant; size: SlateSize; loading: boolean }>
 >(
   [
-    'rounded-lg border text-sm focus:outline-none focus:ring-2',
+    'rounded-lg border text-sm focus:outline-none focus:ring-2 flex items-center gap-1',
     '!disabled:hover:shadow-inner ring-offset-1 disabled:bg-muted disabled:text-muted',
-    'disabled:cursor-not-allowed shrink-0 relative'
+    'disabled:cursor-not-allowed shrink-0 relative '
   ],
   {
     variants: {
@@ -30,7 +30,8 @@ export const buttonVariants = cva<
         lg: 'px-4 h-10'
       },
       loading: {
-        true: 'cursor-not-allowed'
+        true: 'cursor-not-allowed !text-transparent',
+        false: 'active:enabled:scale-[98%]'
       }
     }
   }
@@ -60,20 +61,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       {...props}
     >
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 visible flex items-center justify-center text-muted">
           <Icon icon={ShipWheel} variant="subtle" className="animate-spin" />
         </div>
       )}
 
-      <div className={cn('flex items-center gap-1', loading && 'invisible')}>
-        {iconLeft && (
-          <Icon icon={iconLeft} variant="subtle" style={styles?.icon} />
-        )}
-        {children}
-        {iconRight && (
-          <Icon icon={iconRight} variant="subtle" style={styles?.icon} />
-        )}
-      </div>
+      {iconLeft && (
+        <Icon icon={iconLeft} variant="subtle" style={styles?.icon} />
+      )}
+      {children}
+      {iconRight && (
+        <Icon icon={iconRight} variant="subtle" style={styles?.icon} />
+      )}
     </button>
   )
 )
