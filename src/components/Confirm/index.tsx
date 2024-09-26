@@ -57,7 +57,7 @@ export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
             style={styles?.content}
           >
             <Dialog.Title
-              className="m-0 text-md font-medium"
+              className="m-0 text-md font-medium border-b"
               style={styles?.title}
             >
               {title}
@@ -70,7 +70,7 @@ export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
                 {description}
               </Dialog.Description>
             )}
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end gap-2 border-t">
               <Dialog.Close asChild>
                 <Button
                   variant="subtle"

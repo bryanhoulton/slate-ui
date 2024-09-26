@@ -1,6 +1,6 @@
-import tailwindCssAnimate from 'tailwindcss-animate'
-import primaryTheme from 'tailwindcss/defaultTheme'
-import plugin from 'tailwindcss/plugin'
+import tailwindCssAnimate from 'tailwindcss-animate';
+import primaryTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   darkMode: ['class'],
@@ -151,7 +151,7 @@ export default {
         contentShow: {
           from: {
             opacity: '0',
-            transform: 'translate(-50%, -48%) scale(0.96)'
+            transform: 'translate(-50%, -40%) scale(0.96)'
           },
           to: { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' }
         }
