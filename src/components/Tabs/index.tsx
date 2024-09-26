@@ -41,10 +41,10 @@ export function Tabs({
         ))}
       </RTabs.List>
 
-      {tabs.map((tab) => (
+      {tabs.map(({ padding = true, ...tab }) => (
         <RTabs.Content
           key={tab.id}
-          className="p-5"
+          className={cn(padding && 'p-5')}
           value={tab.id}
           style={styles?.contentContainer}
         >

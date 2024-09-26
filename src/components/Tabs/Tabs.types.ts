@@ -1,10 +1,13 @@
-import { CSSProperties, ReactNode } from 'react'
+import {
+  CSSProperties,
+  ReactNode,
+} from 'react';
 
-import { LucideIcon } from 'lucide-react'
+import { LucideIcon } from 'lucide-react';
 
-import { TabsProps as RTabsProps } from '@radix-ui/react-tabs'
+import { TabsProps as RTabsProps } from '@radix-ui/react-tabs';
 
-import { Styleable } from '../../utilities/types'
+import { Styleable } from '../../utilities/types';
 
 export type TabsStyles = {
   tab: CSSProperties
@@ -16,10 +19,10 @@ export type TabsStyles = {
 export type Tab = {
   id: string
   name: string
-  query?: string
   content: ReactNode
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
+  padding?: boolean
 }
 export interface TabsProps
   extends Omit<RTabsProps, 'defaultValue' | 'orientation'>,
