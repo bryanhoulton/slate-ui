@@ -1,6 +1,6 @@
 {
   "name": "slate-ui",
-  "version": "1.0.93",
+  "version": "1.0.94",
   "description": "Slate is an opinionated, configurable React component library built for scalable dev teams on Tailwind and Radix.",
   "repository": {
     "type": "git",
