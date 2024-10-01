@@ -45,13 +45,13 @@ const SlateComboboxInput = forwardRef<
     ref
   ) => {
     return (
-      <div className="flex gap-2 items-end">
+      <div className={cn('flex gap-2 items-end', className as string)}>
         <TextInput
           value={value?.toLocaleString() || ''}
           onChange={(_, e) => onChange?.(e)}
           variant={variant}
           size={size}
-          className={className as string}
+          className="flex-1"
           {...props}
           iconRight={ChevronDown}
           ref={ref}
@@ -151,11 +151,14 @@ export function Select<IdType extends SlateId>({
           styles={styles?.input}
           className={className}
           disabled={disabled}
-          onClear={() => {
-            if (!clearable) return
-            setValue(null)
-            setSearch('')
-          }}
+          onClear={
+            clearable
+              ? () => {
+                  setValue(null)
+                  setSearch('')
+                }
+              : undefined
+          }
         />
         <ComboboxOptions
           anchor="bottom"
