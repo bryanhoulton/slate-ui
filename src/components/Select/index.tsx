@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useMemo } from 'react'
 
-import { Check, ChevronDown } from 'lucide-react'
+import { Check, ChevronDown, X } from 'lucide-react'
 
 import {
   Combobox,
@@ -11,6 +11,7 @@ import {
 } from '@headlessui/react'
 
 import { cn, gid, SlateId, useSometimesControlled } from '../../utilities'
+import { ActionIcon } from '../ActionIcon'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { TextInput } from '../TextInput'
@@ -22,7 +23,9 @@ interface SlateComboboxInputProps
     Pick<
       TextInputProps,
       'variant' | 'size' | 'iconLeft' | 'iconRight' | 'styles'
-    > {}
+    > {
+  onClear?: () => void
+}
 
 const SlateComboboxInput = forwardRef<
   HTMLInputElement,
@@ -34,6 +37,7 @@ const SlateComboboxInput = forwardRef<
       className,
       onChange,
       displayValue,
+      onClear,
       value,
       size = 'md',
       ...props
@@ -41,16 +45,19 @@ const SlateComboboxInput = forwardRef<
     ref
   ) => {
     return (
-      <TextInput
-        value={value?.toLocaleString() || ''}
-        onChange={(_, e) => onChange?.(e)}
-        variant={variant}
-        size={size}
-        className={className as string}
-        {...props}
-        iconRight={ChevronDown}
-        ref={ref}
-      />
+      <div className="flex gap-2 items-end">
+        <TextInput
+          value={value?.toLocaleString() || ''}
+          onChange={(_, e) => onChange?.(e)}
+          variant={variant}
+          size={size}
+          className={className as string}
+          {...props}
+          iconRight={ChevronDown}
+          ref={ref}
+        />
+        {onClear && value && <ActionIcon icon={X} onClick={onClear} />}
+      </div>
     )
   }
 )
@@ -76,6 +83,7 @@ export function Select<IdType extends SlateId>({
   value: valueProp,
   onChange,
   defaultValue = null,
+  clearable,
 
   // Search controls.
   searchable = true,
@@ -143,6 +151,11 @@ export function Select<IdType extends SlateId>({
           styles={styles?.input}
           className={className}
           disabled={disabled}
+          onClear={() => {
+            if (!clearable) return
+            setValue(null)
+            setSearch('')
+          }}
         />
         <ComboboxOptions
           anchor="bottom"

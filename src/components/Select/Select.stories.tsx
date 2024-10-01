@@ -1,16 +1,10 @@
-import {
-  BookAudio,
-  HandPlatter,
-  User,
-} from 'lucide-react';
+import { BookAudio, HandPlatter, User } from 'lucide-react'
 
-import type {
-  Meta,
-  StoryObj,
-} from '@storybook/react';
+import { TooltipProvider } from '@radix-ui/react-tooltip'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { args } from '../../utilities/stories';
-import { Select } from './';
+import { args } from '../../utilities/stories'
+import { Select } from './'
 
 const meta: Meta<typeof Select> = {
   component: Select,
@@ -35,13 +29,21 @@ const meta: Meta<typeof Select> = {
     id: { table: { disable: true } },
     value: { table: { disable: true } },
     search: { table: { disable: true } },
-    disabled: { control: 'boolean' }
+    disabled: { control: 'boolean' },
+    clearable: { control: 'boolean' }
   }),
   args: {
     searchable: true,
     variant: 'primary',
     size: 'md'
-  }
+  },
+  decorators: [
+    (Story) => (
+      <TooltipProvider>
+        <Story />
+      </TooltipProvider>
+    )
+  ]
 }
 
 export default meta

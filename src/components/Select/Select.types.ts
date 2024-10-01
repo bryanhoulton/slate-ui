@@ -35,6 +35,7 @@ export interface SelectProps<IdType extends SlateId>
   value: IdType | null
   defaultValue?: IdType | null
   onChange: (value: IdType | null, item: SelectItem<IdType> | null) => void
+  clearable?: boolean
 
   searchable?: boolean
   search?: string
