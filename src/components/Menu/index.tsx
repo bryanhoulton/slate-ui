@@ -1,10 +1,10 @@
-import { forwardRef } from 'react';
+import { forwardRef } from 'react'
 
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
-import { cn } from '../../utilities';
-import { MenuProps } from './Menu.types';
-import { MenuItemComponent } from './MenuItem';
+import { cn } from '../../utilities'
+import { MenuProps } from './Menu.types'
+import { MenuItemComponent } from './MenuItem'
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(
   (
@@ -36,7 +36,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
           alignOffset={alignOffset}
           autoFocus={autoFocus}
         >
-          {items.map((item) => (
+          {items.slice(0, 1000).map((item) => (
             <MenuItemComponent key={item.id} item={item} />
           ))}
         </DropdownMenu.Content>

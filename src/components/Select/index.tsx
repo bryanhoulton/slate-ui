@@ -1,36 +1,21 @@
-import {
-  forwardRef,
-  useEffect,
-  useMemo,
-} from 'react';
+import { forwardRef, useEffect, useMemo } from 'react'
 
-import {
-  Check,
-  ChevronDown,
-} from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react'
 
 import {
   Combobox,
   ComboboxInput,
   ComboboxInputProps,
   ComboboxOption,
-  ComboboxOptions,
-} from '@headlessui/react';
+  ComboboxOptions
+} from '@headlessui/react'
 
-import {
-  cn,
-  gid,
-  SlateId,
-  useSometimesControlled,
-} from '../../utilities';
-import { Icon } from '../Icon';
-import { Label } from '../Label';
-import { TextInput } from '../TextInput';
-import { TextInputProps } from '../TextInput/TextInput.types';
-import {
-  SelectItem,
-  SelectProps,
-} from './Select.types';
+import { cn, gid, SlateId, useSometimesControlled } from '../../utilities'
+import { Icon } from '../Icon'
+import { Label } from '../Label'
+import { TextInput } from '../TextInput'
+import { TextInputProps } from '../TextInput/TextInput.types'
+import { SelectItem, SelectProps } from './Select.types'
 
 interface SlateComboboxInputProps
   extends Omit<ComboboxInputProps, 'size' | 'children'>,
@@ -168,7 +153,7 @@ export function Select<IdType extends SlateId>({
           )}
           style={styles?.content}
         >
-          {filteredItems.map((item) => (
+          {filteredItems.slice(0, 1000).map((item) => (
             <ComboboxOption
               key={item.id}
               value={item}
