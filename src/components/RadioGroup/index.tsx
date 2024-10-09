@@ -1,10 +1,6 @@
-import {
-  cn,
-  SlateId,
-  useSometimesControlled,
-} from '../../utilities';
-import { Label } from '../Label';
-import { RadioGroupProps } from './RadioGroup.types';
+import { cn, SlateId, useSometimesControlled } from '../../utilities'
+import { Label } from '../Label'
+import { RadioGroupProps } from './RadioGroup.types'
 
 export function RadioGroup<T extends SlateId>({
   items,
@@ -39,7 +35,9 @@ export function RadioGroup<T extends SlateId>({
           <div
             className={cn(
               'flex items-center gap-2 cursor-pointer w-fit py-2 pl-3 pr-4 rounded-lg duration-150 border',
-              item.id === value ? 'bg-primary text-white' : 'hover:bg-muted'
+              item.id === value
+                ? 'bg-primary text-white'
+                : 'bg-white hover:bg-muted'
             )}
             key={item.id}
             onClick={() => setValue(item.id)}
