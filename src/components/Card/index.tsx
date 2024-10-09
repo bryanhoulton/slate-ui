@@ -33,3 +33,4 @@ export function Card({
     </div>
   )
 }
+Card.displayName = 'Card'
