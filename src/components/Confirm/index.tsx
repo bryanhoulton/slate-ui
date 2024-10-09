@@ -1,13 +1,20 @@
-import React, { forwardRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useState,
+} from 'react';
 
-import { Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react';
 
-import * as Dialog from '@radix-ui/react-dialog'
+import * as Dialog from '@radix-ui/react-dialog';
 
-import { cn, useSometimesControlled } from '../../utilities'
-import { Button } from '../Button'
-import { Icon } from '../Icon'
-import { ConfirmProps } from './Confirm.types'
+import {
+  cn,
+  useSometimesControlled,
+} from '../../utilities';
+import { Button } from '../Button';
+import { Icon } from '../Icon';
+import { ConfirmProps } from './Confirm.types';
 
 export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
   (
@@ -32,6 +39,12 @@ export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
       defaultValue: defaultOpenProp
     })
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+      if (open) {
+        setLoading(false)
+      }
+    }, [open])
 
     return (
       <Dialog.Root open={open} onOpenChange={setOpen} {...props}>
