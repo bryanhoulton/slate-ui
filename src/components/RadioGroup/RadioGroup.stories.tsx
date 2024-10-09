@@ -1,10 +1,7 @@
-import type {
-  Meta,
-  StoryObj,
-} from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { args } from '../../utilities/stories';
-import { RadioGroup } from './';
+import { args } from '../../utilities/stories'
+import { RadioGroup } from './'
 
 const meta: Meta<typeof RadioGroup> = {
   component: RadioGroup,
@@ -33,7 +30,7 @@ export const Primary: Story = {
     items: [
       { id: 1, name: 'Item 1', description: 'Description 1' },
       { id: 2, name: 'Item 2', description: 'Description 2' },
-      { id: 3, name: 'Item 3', description: 'Description 3' }
+      { id: 3, name: 'A supppper long item!', description: 'Description 3' }
     ]
   }
 }

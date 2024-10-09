@@ -25,7 +25,7 @@ export function RadioGroup<T extends SlateId>({
 
       <div
         className={cn(
-          'flex gap-1',
+          'flex gap-1 items-stretch w-fit',
           orientation === 'vertical' && 'flex-col',
           className
         )}
@@ -34,7 +34,7 @@ export function RadioGroup<T extends SlateId>({
         {items.map((item) => (
           <div
             className={cn(
-              'flex items-center gap-2 cursor-pointer w-fit py-2 pl-3 pr-4 rounded-lg duration-150 border',
+              'flex items-center gap-2 cursor-pointer py-2 pl-3 pr-4 rounded-lg duration-150 border',
               item.id === value
                 ? 'bg-primary text-white'
                 : 'bg-white hover:bg-muted'
