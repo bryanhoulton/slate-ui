@@ -37,7 +37,7 @@ export function ColorPicker({
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content
-            className="bg-white rounded border p-2 z-50 flex flex-col gap-2"
+            className="bg-white rounded border p-2 z-40 flex flex-col gap-2"
             sideOffset={4}
             autoFocus={false}
           >

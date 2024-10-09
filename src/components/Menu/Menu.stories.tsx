@@ -40,9 +40,10 @@ export const Primary: Story = {
           },
           {
             id: '2',
-            label: 'Item 2',
+            label: 'Confirmable',
             type: 'button',
-            iconLeft: User
+            iconLeft: User,
+            confirm: { title: 'Confirm', description: 'Are you sure?' }
           },
           { id: '3', label: 'Item 3', type: 'switch' }
         ]
@@ -57,7 +58,12 @@ export const Primary: Story = {
         items: [
           { id: '5', label: 'Item 5', type: 'button' },
           { id: '6', label: 'Item 6', type: 'button' },
-          { id: '7', label: 'Item 7', type: 'button' }
+          {
+            id: '7',
+            label: 'Confirmable',
+            type: 'button',
+            confirm: { title: 'Confirm', description: 'Are you sure?' }
+          }
         ]
       }
     ]

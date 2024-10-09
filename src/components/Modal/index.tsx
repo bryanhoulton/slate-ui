@@ -1,7 +1,7 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from '@radix-ui/react-dialog'
 
-import { cn } from '../../utilities';
-import { ModalProps } from './Modal.types';
+import { cn } from '../../utilities'
+import { ModalProps } from './Modal.types'
 
 export function Modal({
   closeOnClickOutside = true,
@@ -16,10 +16,10 @@ export function Modal({
     <Dialog.Root {...props}>
       <Dialog.Portal>
         <div
-          className="fixed inset-0 z-40"
+          className="fixed inset-0 z-30"
           style={{ background: 'rgba(0, 0, 0, .25)', ...styles?.overlay }}
         />
-        <div className="fixed inset-0 z-40 flex items-center justify-center">
+        <div className="fixed inset-0 z-30 flex items-center justify-center">
           <Dialog.Content
             className={cn(
               'max-h-[95vh] min-w-96 max-w-[95vw]',

@@ -1,11 +1,13 @@
 import { ButtonProps } from '../Button/Button.types'
 import { CheckboxProps } from '../Checkbox/Checbox.types'
+import { ConfirmProps } from '../Confirm/Confirm.types'
 import { SwitchProps } from '../Switch/Switch.types'
 import { TextInputProps } from '../TextInput/TextInput.types'
 
 type __MenuItemProps = {
   id: string
   label: string
+  confirm?: ConfirmProps
 }
 
 type TypedMenuItem<T, K extends string> = Omit<T, 'type'> & {

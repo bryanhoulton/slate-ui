@@ -1,19 +1,13 @@
-import React, {
-  forwardRef,
-  useState,
-} from 'react';
+import React, { forwardRef, useState } from 'react'
 
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react'
 
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from '@radix-ui/react-dialog'
 
-import {
-  cn,
-  useSometimesControlled,
-} from '../../utilities';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { ConfirmProps } from './Confirm.types';
+import { cn, useSometimesControlled } from '../../utilities'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import { ConfirmProps } from './Confirm.types'
 
 export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
   (
@@ -45,13 +39,13 @@ export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
         <Dialog.Portal>
           <Dialog.Overlay
             style={styles?.overlay}
-            className="fixed inset-0 bg-[rgba(0,0,0,.3)] data-[state=open]:animate-overlayShow"
+            className="fixed z-50 inset-0 bg-[rgba(0,0,0,.3)] data-[state=open]:animate-overlayShow"
           />
           <Dialog.Content
             ref={ref}
             className={cn(
               'data-[state=open]:animate-contentShow fixed top-[50%] left-[50%]',
-              'max-h-[85vh] w-[90vw] max-w-[500px]'
+              'max-h-[85vh] w-[90vw] max-w-[500px] z-50'
             )}
           >
             <div
