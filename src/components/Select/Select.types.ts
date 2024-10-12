@@ -11,7 +11,7 @@ export type SelectStyles = {
   content: CSSProperties
   option: CSSProperties
   root: CSSProperties
-  label: LabelStyles
+  label: Styleable<LabelStyles>
   error: CSSProperties
 }
 
