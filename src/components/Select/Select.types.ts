@@ -7,11 +7,11 @@ import { LabelStyles } from '../Label/Label.types'
 import { TextInputStyles } from '../TextInput/TextInput.types'
 
 export type SelectStyles = {
-  input: Styleable<TextInputStyles>
+  input: Partial<TextInputStyles>
   content: CSSProperties
   option: CSSProperties
   root: CSSProperties
-  label: Styleable<LabelStyles>
+  label: Partial<LabelStyles>
   error: CSSProperties
 }
 
