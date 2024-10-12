@@ -7,7 +7,7 @@ import { LabelStyles } from '../Label/Label.types'
 import { TextInputStyles } from '../TextInput/TextInput.types'
 
 export type SelectStyles = {
-  input: TextInputStyles
+  input: Styleable<TextInputStyles>
   content: CSSProperties
   option: CSSProperties
   root: CSSProperties
