@@ -58,3 +58,14 @@ export const Primary: Story = {
     ]
   }
 }
+
+export const LeftIcon: Story = {
+  args: {
+    items: [
+      { id: 1, name: 'Item 1', icon: User },
+      { id: 2, name: 'Item 2', icon: BookAudio },
+      { id: 3, name: 'Item 3', icon: HandPlatter }
+    ],
+    iconLeft: User
+  }
+}
