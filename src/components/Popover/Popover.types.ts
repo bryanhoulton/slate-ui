@@ -14,4 +14,5 @@ export interface PopoverProps
   content: React.ReactNode
   side: RPopover.PopoverContentProps['side']
   className?: string
+  collisionPadding?: number
 }

@@ -8,6 +8,7 @@ export function Popover({
   content,
   className,
   side,
+  collisionPadding = 4,
   ...props
 }: PopoverProps) {
   return (
@@ -25,6 +26,7 @@ export function Popover({
           )}
           sideOffset={5}
           side={side}
+          collisionPadding={collisionPadding}
         >
           {content}
         </RPopover.Content>
