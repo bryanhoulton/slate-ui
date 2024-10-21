@@ -13,7 +13,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       className={cn('flex flex-col gap-1 w-full', className)}
       style={styles?.root}
     >
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       <RSlider.Root
         className={cn(
           'relative flex items-center select-none touch-none w-full h-5',
