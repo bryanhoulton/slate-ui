@@ -1,6 +1,6 @@
 import * as RPopover from '@radix-ui/react-popover'
 
-import { cn } from '../../utilities'
+import { cn, useSometimesControlled } from '../../utilities'
 import { PopoverProps } from './Popover.types'
 
 export function Popover({
@@ -9,10 +9,19 @@ export function Popover({
   className,
   side,
   collisionPadding = 4,
+  open: openProp,
+  onOpenChange,
+  defaultOpen,
   ...props
 }: PopoverProps) {
+  const [open, setOpen] = useSometimesControlled<boolean>({
+    valueProp: openProp,
+    onChangeProp: onOpenChange,
+    defaultValue: defaultOpen ?? false
+  })
+
   return (
-    <RPopover.Root {...props}>
+    <RPopover.Root open={open} onOpenChange={setOpen} {...props}>
       <RPopover.Trigger asChild>{children}</RPopover.Trigger>
       <RPopover.Portal>
         <RPopover.Content
