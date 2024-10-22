@@ -12,7 +12,7 @@ export interface PopoverProps
   extends RPopover.PopoverProps,
     Styleable<PopoverStyles> {
   content: React.ReactNode
-  side: RPopover.PopoverContentProps['side']
+  side?: RPopover.PopoverContentProps['side']
   className?: string
   collisionPadding?: number
 }

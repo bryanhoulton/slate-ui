@@ -1,3 +1,4 @@
+import { PopoverProps } from '../Popover/Popover.types'
 import { TextInputProps } from '../TextInput/TextInput.types'
 
 export interface ColorPickerProps
@@ -6,4 +7,5 @@ export interface ColorPickerProps
   onChange?: (value: string) => void
   text?: string
   label?: string
+  side?: PopoverProps['side']
 }
