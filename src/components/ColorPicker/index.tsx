@@ -29,6 +29,7 @@ export function ColorPicker({
         {...rest}
       />
 
+      {/* Cant use our popover for memo issues. */}
       <Popover.Root modal>
         <Popover.Trigger className="h-8" asChild>
           <button
