@@ -47,9 +47,7 @@ export const WithSelect: Story = {
       <>
         <div className="flex flex-col p-4 gap-2">
           <h3 className="text-lg">Add Field Mapping</h3>
-          <span className="text-muted">
-            Map a Voyage property to a HubSpot property.
-          </span>
+          <span className="text-muted">Map X to Y.</span>
           <div className="flex gap-2 mt-4 items-center">
             <Select
               items={[
@@ -69,7 +67,7 @@ export const WithSelect: Story = {
               value={null}
               onChange={() => {}}
               className="flex-1"
-              placeholder="Select a Voyage property..."
+              placeholder="Select a property..."
             />
             <Icon icon={ArrowRight} />
             <Select
