@@ -1,7 +1,11 @@
-import { cn, SlateId, useSometimesControlled } from '../../utilities'
-import { Icon } from '../Icon'
-import { Label } from '../Label'
-import { RadioGroupProps } from './RadioGroup.types'
+import {
+  cn,
+  SlateId,
+  useSometimesControlled,
+} from '../../utilities';
+import { Icon } from '../Icon';
+import { Label } from '../Label';
+import { RadioGroupProps } from './RadioGroup.types';
 
 export function RadioGroup<T extends SlateId>({
   items,
@@ -12,6 +16,7 @@ export function RadioGroup<T extends SlateId>({
   styles,
   label,
   orientation = 'vertical',
+  disabled,
   ...props
 }: RadioGroupProps<T>) {
   const [value, setValue] = useSometimesControlled<T | null>({
@@ -38,10 +43,11 @@ export function RadioGroup<T extends SlateId>({
               'flex items-center gap-2 cursor-pointer py-2 pl-3 pr-4 rounded-lg duration-150 border',
               item.id === value
                 ? 'bg-primary text-white'
-                : 'bg-white hover:bg-muted'
+                : 'bg-white hover:bg-muted',
+              disabled && 'cursor-not-allowed opacity-60'
             )}
             key={item.id}
-            onClick={() => setValue(item.id)}
+            onClick={() => !disabled && setValue(item.id)}
             style={styles?.item}
           >
             <button
