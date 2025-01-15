@@ -1,6 +1,9 @@
 import { CSSProperties, HTMLProps } from 'react'
 
+import { LucideIcon } from 'lucide-react'
+
 import { SlateId, Styleable } from '../../utilities'
+import { IconStyles } from '../Icon/Icon.types'
 import { LabelStyles } from '../Label/Label.types'
 
 export interface RadioGroupStyles {
@@ -11,12 +14,16 @@ export interface RadioGroupStyles {
   description: CSSProperties
   dot: CSSProperties
   label: LabelStyles
+  iconLeft: IconStyles
+  iconRight: IconStyles
 }
 
 export interface RadioItem<T extends SlateId> {
   id: T
   name: string
   description?: string
+  iconRight?: LucideIcon
+  iconLeft?: LucideIcon
 }
 export interface RadioGroupProps<T extends SlateId>
   extends Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'value'>,

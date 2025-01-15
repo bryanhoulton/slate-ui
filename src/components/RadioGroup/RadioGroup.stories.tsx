@@ -1,3 +1,5 @@
+import { Plus } from 'lucide-react'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { args } from '../../utilities/stories'
@@ -28,8 +30,8 @@ export const Primary: Story = {
   args: {
     label: 'Radio Group',
     items: [
-      { id: 1, name: 'Item 1', description: 'Description 1' },
-      { id: 2, name: 'Item 2', description: 'Description 2' },
+      { id: 1, name: 'Item 1', description: 'Description 1', iconRight: Plus },
+      { id: 2, name: 'Item 2', description: 'Description 2', iconLeft: Plus },
       { id: 3, name: 'A supppper long item!', description: 'Description 3' }
     ]
   }

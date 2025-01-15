@@ -1,4 +1,5 @@
 import { cn, SlateId, useSometimesControlled } from '../../utilities'
+import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { RadioGroupProps } from './RadioGroup.types'
 
@@ -50,6 +51,14 @@ export function RadioGroup<T extends SlateId>({
               )}
               style={styles?.dot}
             />
+            {item.iconLeft && (
+              <Icon
+                icon={item.iconLeft}
+                styles={styles?.iconLeft}
+                className="w-4 h-4"
+                variant="subtle"
+              />
+            )}
             <div className="flex flex-col">
               <span className="text-sm" style={styles?.title}>
                 {item.name}
@@ -63,6 +72,14 @@ export function RadioGroup<T extends SlateId>({
                 </span>
               )}
             </div>
+            {item.iconRight && (
+              <Icon
+                icon={item.iconRight}
+                styles={styles?.iconRight}
+                className="w-4 h-4 ml-auto"
+                variant="subtle"
+              />
+            )}
           </div>
         ))}
       </div>
