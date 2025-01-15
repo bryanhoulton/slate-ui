@@ -1,13 +1,7 @@
-import {
-  CSSProperties,
-  HTMLProps,
-} from 'react';
+import { CSSProperties, HTMLProps } from 'react'
 
-import {
-  SlateId,
-  Styleable,
-} from '../../utilities';
-import { LabelStyles } from '../Label/Label.types';
+import { SlateId, Styleable } from '../../utilities'
+import { LabelStyles } from '../Label/Label.types'
 
 export interface RadioGroupStyles {
   root: CSSProperties
@@ -25,11 +19,11 @@ export interface RadioItem<T extends SlateId> {
   description?: string
 }
 export interface RadioGroupProps<T extends SlateId>
-  extends Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
+  extends Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'value'>,
     Styleable<RadioGroupStyles> {
   items: RadioItem<T>[]
-  value: T
-  onChange: (value: T) => void
+  value: T | null
+  onChange: (value: T | null) => void
   defaultValue?: T
   orientation?: 'horizontal' | 'vertical'
 }

@@ -13,10 +13,10 @@ export function RadioGroup<T extends SlateId>({
   orientation = 'vertical',
   ...props
 }: RadioGroupProps<T>) {
-  const [value, setValue] = useSometimesControlled({
-    valueProp,
+  const [value, setValue] = useSometimesControlled<T | null>({
+    valueProp: valueProp,
     onChangeProp,
-    defaultValue: defaultValue ?? items[0].id
+    defaultValue: defaultValue ?? null
   })
 
   return (
