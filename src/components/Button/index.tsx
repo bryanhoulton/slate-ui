@@ -1,10 +1,14 @@
 import { forwardRef } from 'react'
 
 import { cva } from 'class-variance-authority'
-import { ShipWheel } from 'lucide-react'
+import { LoaderCircle } from 'lucide-react'
 
 import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
+import {
+  SlateSize,
+  SlateVariant,
+  Variants
+} from '../../utilities/types'
 import { Icon } from '../Icon'
 import { ButtonProps } from './Button.types'
 
@@ -62,7 +66,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     >
       {loading && (
         <div className="absolute inset-0 visible flex items-center justify-center text-muted">
-          <Icon icon={ShipWheel} variant="subtle" className="animate-spin" />
+          <Icon icon={LoaderCircle} variant="subtle" className="animate-spin" />
         </div>
       )}
 
