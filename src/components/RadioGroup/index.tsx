@@ -1,11 +1,7 @@
-import {
-  cn,
-  SlateId,
-  useSometimesControlled,
-} from '../../utilities';
-import { Icon } from '../Icon';
-import { Label } from '../Label';
-import { RadioGroupProps } from './RadioGroup.types';
+import { cn, SlateId, useSometimesControlled } from '../../utilities'
+import { Icon } from '../Icon'
+import { Label } from '../Label'
+import { RadioGroupProps } from './RadioGroup.types'
 
 export function RadioGroup<T extends SlateId>({
   items,
@@ -52,7 +48,7 @@ export function RadioGroup<T extends SlateId>({
           >
             <button
               className={cn(
-                'w-3 h-3 rounded-full',
+                'w-3 h-3 shrink-0 rounded-full',
                 item.id === value ? 'bg-white' : 'border'
               )}
               style={styles?.dot}
