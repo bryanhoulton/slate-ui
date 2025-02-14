@@ -1,8 +1,14 @@
-import { CSSProperties, HTMLProps } from 'react'
+import {
+  CSSProperties,
+  HTMLProps
+} from 'react'
 
 import { LucideIcon } from 'lucide-react'
 
-import { SlateId, Styleable } from '../../utilities'
+import {
+  SlateId,
+  Styleable
+} from '../../utilities'
 import { IconStyles } from '../Icon/Icon.types'
 import { LabelStyles } from '../Label/Label.types'
 
@@ -20,7 +26,7 @@ export interface RadioGroupStyles {
 
 export interface RadioItem<T extends SlateId> {
   id: T
-  name: string
+  name: React.ReactNode
   description?: string
   iconRight?: LucideIcon
   iconLeft?: LucideIcon
