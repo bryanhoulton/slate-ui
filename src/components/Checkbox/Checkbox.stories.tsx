@@ -1,10 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
+
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react'
 
 import { args } from '../../utilities/stories'
 import { Checkbox } from './'
+import { CheckboxProps } from './Checbox.types'
 
-const meta: Meta<typeof Checkbox> = {
-  component: Checkbox,
+function CheckboxStory({
+  checked: _checked,
+  onCheckedChange: _onCheckedChange,
+  ...props
+}: CheckboxProps) {
+  const [checked, setChecked] = useState(false)
+  return (
+    <Checkbox
+      {...props}
+      checked={checked}
+      onCheckedChange={(value) => setChecked(value === false)}
+    />
+  )
+}
+
+const meta: Meta<typeof CheckboxStory> = {
+  component: CheckboxStory,
   title: 'Inputs/Checkbox',
   argTypes: args({
     withBody: { control: 'boolean' },
@@ -19,8 +40,10 @@ const meta: Meta<typeof Checkbox> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Checkbox>
+type Story = StoryObj<typeof CheckboxStory>
 
 export const Primary: Story = {
-  args: {}
+  args: {
+    withBody: true
+  }
 }

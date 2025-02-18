@@ -1,13 +1,31 @@
+import { useState } from 'react'
+
 import type {
   Meta,
-  StoryObj,
-} from '@storybook/react';
+  StoryObj
+} from '@storybook/react'
 
-import { args } from '../../utilities/stories';
-import { Switch } from './';
+import { args } from '../../utilities/stories'
+import { Switch } from './'
+import { SwitchProps } from './Switch.types'
 
-const meta: Meta<typeof Switch> = {
-  component: Switch,
+function SwitchStory({
+  checked: _checked,
+  onCheckedChange: _onCheckedChange,
+  ...props
+}: SwitchProps) {
+  const [checked, setChecked] = useState(false)
+  return (
+    <Switch
+      {...props}
+      checked={checked}
+      onCheckedChange={(value) => setChecked(value)}
+    />
+  )
+}
+
+const meta: Meta<typeof SwitchStory> = {
+  component: SwitchStory,
   title: 'Inputs/Switch',
   argTypes: args({
     withBody: { control: 'boolean' },
@@ -22,10 +40,8 @@ const meta: Meta<typeof Switch> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Switch>
+type Story = StoryObj<typeof SwitchStory>
 
 export const Primary: Story = {
-  args: {
-    onCheckedChange: (checked) => console.log(checked)
-  }
+  args: {}
 }

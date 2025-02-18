@@ -1,11 +1,17 @@
-import { forwardRef } from 'react'
+import {
+  forwardRef,
+  useState
+} from 'react'
 
 import { cva } from 'class-variance-authority'
 import { Check } from 'lucide-react'
 
 import * as RCheckbox from '@radix-ui/react-checkbox'
 
-import { cn, gid, useSometimesControlled } from '../../utilities'
+import {
+  cn,
+  gid
+} from '../../utilities'
 import { Variants } from '../../utilities/types'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
@@ -56,11 +62,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
     },
     ref
   ) => {
-    const [checked, setChecked] = useSometimesControlled({
-      valueProp: checkedProp,
-      defaultValue: defaultChecked,
-      onChangeProp: onCheckedChangeProp
-    })
+    const [checked, setChecked] = useState(checkedProp ?? defaultChecked)
 
     return (
       <div
@@ -68,7 +70,10 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
           checkboxWrapperVariants({ disabled, withBody }),
           className
         )}
-        onClick={() => setChecked((c) => (c === false ? true : false))}
+        onClick={() => {
+          setChecked((c) => (c === false ? true : false))
+          onCheckedChangeProp?.(checked)
+        }}
         style={styles?.root}
       >
         <RCheckbox.Root
@@ -78,9 +83,10 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
             WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             ...styles?.checkbox
           }}
+          onCheckedChange={() => {}}
           disabled={disabled}
           ref={ref}
-          checked={checked}
+          checked={checkedProp ?? checked}
           {...props}
         >
           <RCheckbox.Indicator style={styles?.indicator}>
