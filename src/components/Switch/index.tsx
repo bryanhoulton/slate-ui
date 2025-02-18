@@ -1,6 +1,6 @@
 import {
   forwardRef,
-  useState
+  memo
 } from 'react'
 
 import { cva } from 'class-variance-authority'
@@ -49,63 +49,65 @@ const switchThumbVariants = cva([
   'data-[state=unchecked]:translate-x-1'
 ])
 
+function SwitchRootWrapper(props: React.ComponentProps<typeof RSwitch.Root>) {
+  const MemoizedRoot = memo(RSwitch.Root)
+  // @ts-expect-error: This is a workaround for the Radix-UI bug
+  return <MemoizedRoot {...props} />
+}
+
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
   (
     {
       disabled,
       label,
       id = gid(),
-      checked: checkedProp,
-      onCheckedChange: onCheckedChangeProp,
       className,
       withBody,
-      defaultChecked = false,
       styles,
+      onClick,
       side = 'right',
       ...props
     },
     ref
-  ) => {
-    const [checked, setChecked] = useState(checkedProp ?? defaultChecked)
-
-    return (
-      <div
-        className={cn(switchWrapperVariants({ withBody, side }), className)}
-        style={styles?.root}
-        onClick={() => {
-          setChecked((c) => !c)
-          onCheckedChangeProp?.(checked)
+  ) => (
+    <div
+      className={cn(switchWrapperVariants({ withBody, side }), className)}
+      style={styles?.root}
+      onClick={(e) => {
+        if (!disabled && props.onCheckedChange) {
+          // Only trigger if not clicking the switch itself to avoid double triggers
+          if (!(e.target as HTMLElement).closest('[role="switch"]')) {
+            props.onCheckedChange(!props.checked)
+          }
+        }
+      }}
+    >
+      <SwitchRootWrapper
+        className={cn(switchRootVariants())}
+        id={id}
+        style={{
+          WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+          ...styles?.switch
         }}
+        disabled={disabled}
+        ref={ref}
+        type="button"
+        {...props}
       >
-        <RSwitch.Root
-          className={cn(switchRootVariants())}
-          id={id}
-          style={{
-            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-            ...styles?.switch
-          }}
-          onCheckedChange={() => {}}
-          checked={checkedProp ?? checked}
-          disabled={disabled}
-          ref={ref}
-          type="button"
-          {...props}
+        <RSwitch.Thumb
+          className={switchThumbVariants()}
+          style={styles?.thumb}
+        />
+      </SwitchRootWrapper>
+      {label && (
+        <Label
+          className={cn('pr-3 flex-1 cursor-pointer')}
+          style={styles?.label}
         >
-          <RSwitch.Thumb
-            className={switchThumbVariants()}
-            style={styles?.thumb}
-          />
-        </RSwitch.Root>
-        {label && (
-          <Label
-            className={cn('pr-3 flex-1 cursor-pointer')}
-            style={styles?.label}
-          >
-            {label}
-          </Label>
-        )}
-      </div>
-    )
-  }
+          {label}
+        </Label>
+      )}
+    </div>
+  )
 )
 Switch.displayName = 'Switch'

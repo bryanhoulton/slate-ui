@@ -1,6 +1,6 @@
 import {
   forwardRef,
-  useState
+  memo
 } from 'react'
 
 import { cva } from 'class-variance-authority'
@@ -45,54 +45,67 @@ const checkboxRootVariants = cva<Variants<Record<string, never>>>([
   'data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-200'
 ])
 
+/* IMPORTANT: This specific implementation is required to work around a Radix-UI bug
+ * Issue: https://github.com/radix-ui/primitives/issues/3192
+ *
+ * The bug causes the app to crash due to infinite state updates.
+ * This wrapper ensures that:
+ * - The memo is recreated on each render
+ * - The component maintains its stability and interactivity
+ */
+function CheckboxRootWrapper(
+  props: React.ComponentProps<typeof RCheckbox.Root>
+) {
+  const MemoizedRoot = memo(RCheckbox.Root)
+  // @ts-expect-error: This is a workaround for the Radix-UI bug
+  return <MemoizedRoot {...props} />
+}
+
 export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
   (
     {
       disabled,
       label,
       id = gid(),
-      checked: checkedProp,
-      onCheckedChange: onCheckedChangeProp,
       className,
       styles,
       withBody,
       onClick,
-      defaultChecked = false,
       ...props
     },
     ref
   ) => {
-    const [checked, setChecked] = useState(checkedProp ?? defaultChecked)
-
     return (
       <div
         className={cn(
           checkboxWrapperVariants({ disabled, withBody }),
           className
         )}
-        onClick={() => {
-          setChecked((c) => (c === false ? true : false))
-          onCheckedChangeProp?.(checked)
-        }}
         style={styles?.root}
+        onClick={(e) => {
+          if (!disabled && props.onCheckedChange) {
+            // Only trigger if not clicking the switch itself to avoid double triggers
+            if (!(e.target as HTMLElement).closest('[role="switch"]')) {
+              props.onCheckedChange(!props.checked)
+            }
+          }
+        }}
       >
-        <RCheckbox.Root
+        <CheckboxRootWrapper
           className={cn(checkboxRootVariants())}
           id={id}
           style={{
             WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
             ...styles?.checkbox
           }}
-          onCheckedChange={() => {}}
           disabled={disabled}
           ref={ref}
-          checked={checkedProp ?? checked}
           {...props}
         >
           <RCheckbox.Indicator style={styles?.indicator}>
             <Icon icon={Check} className="text-anti-primary" />
           </RCheckbox.Indicator>
-        </RCheckbox.Root>
+        </CheckboxRootWrapper>
         {label && (
           <Label
             className={cn(
