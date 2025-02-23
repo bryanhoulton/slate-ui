@@ -1,4 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react'
 
 import { args } from '../../utilities/stories'
 import { TextArea } from './'
@@ -17,7 +20,7 @@ const meta: Meta<typeof TextArea> = {
       control: {
         type: 'select'
       },
-      options: ['xs', 'sm', 'md', 'lg', 'xl']
+      options: ['sm', 'md', 'lg']
     },
     label: {
       control: {

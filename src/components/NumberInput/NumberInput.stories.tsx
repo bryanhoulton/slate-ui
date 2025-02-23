@@ -1,6 +1,12 @@
-import { Eye, User } from 'lucide-react'
+import {
+  Eye,
+  User
+} from 'lucide-react'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react'
 
 import { args } from '../../utilities/stories'
 import { NumberInput } from './'
@@ -19,7 +25,7 @@ const meta: Meta<typeof NumberInput> = {
       control: {
         type: 'select'
       },
-      options: ['xs', 'sm', 'md', 'lg', 'xl']
+      options: ['sm', 'md', 'lg']
     },
     label: {
       control: {

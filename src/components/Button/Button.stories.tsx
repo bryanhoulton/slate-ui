@@ -1,6 +1,9 @@
 import { Plus } from 'lucide-react'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react'
 
 import { args } from '../../utilities/stories'
 import { Button } from './'
@@ -19,7 +22,7 @@ const meta: Meta<typeof Button> = {
       control: {
         type: 'select'
       },
-      options: ['xs', 'sm', 'md', 'lg', 'xl']
+      options: ['sm', 'md', 'lg']
     },
     disabled: {
       control: {

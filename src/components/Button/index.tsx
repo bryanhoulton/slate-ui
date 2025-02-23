@@ -29,9 +29,9 @@ export const buttonVariants = cva<
           'bg-transparent border-transparent hover:shadow-none disabled:bg-transparent'
       },
       size: {
-        sm: 'px-2 h-6',
+        sm: 'px-2 h-6 text-sm',
         md: 'px-3 h-8',
-        lg: 'px-4 h-10'
+        lg: 'px-4 h-10 text-lg'
       },
       loading: {
         true: 'cursor-not-allowed !text-transparent',
