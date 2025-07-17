@@ -3,12 +3,18 @@ import { useRef } from 'react'
 import { cva } from 'class-variance-authority'
 import { Info } from 'lucide-react'
 
-import { cn, useSometimesControlled } from '../../utilities'
+import {
+  cn,
+  useSometimesControlled
+} from '../../utilities'
 import { EmptyState } from '../EmptyState'
 import { Icon } from '../Icon'
 import { Pagination } from '../Pagination'
 import { Tooltip } from '../Tooltip'
-import { RowType, TableProps } from './Table.types'
+import {
+  RowType,
+  TableProps
+} from './Table.types'
 
 export const tableVariants = cva(['table-auto divide-y'], {
   variants: {}
@@ -130,7 +136,7 @@ export function Table<R extends RowType>({
               <tr key={i}>
                 {columns.map((column) => (
                   <td className="px-2 py-4" key={column.id}>
-                    <div className="bg-muted animate-pulse rounded-lg py-2 text-base"></div>
+                    <div className="bg-muted-test animate-pulse rounded-lg py-2 text-base"></div>
                   </td>
                 ))}
               </tr>

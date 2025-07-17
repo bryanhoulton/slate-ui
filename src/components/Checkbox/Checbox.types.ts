@@ -16,4 +16,5 @@ export interface CheckboxProps
     Styleable<CheckboxStyles> {
   withBody?: boolean
   label?: string
+  onCheckedChange?: (value: boolean) => void
 }

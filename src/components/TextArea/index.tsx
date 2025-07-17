@@ -1,9 +1,16 @@
-import { forwardRef, useState } from 'react'
+import {
+  forwardRef,
+  useState
+} from 'react'
 
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
+import {
+  SlateSize,
+  SlateVariant,
+  Variants
+} from '../../utilities/types'
 import { Label } from '../Label'
 import { TextAreaProps } from './TextArea.types'
 
@@ -16,7 +23,7 @@ export const textAreaVariants = cva<
 >(
   [
     'rounded-lg border text-sm focus:outline-none focus:ring-2 w-full h-full',
-    'hover:shadow-inner transition relative ring-offset-1 py-1.5 min-h-16'
+    'transition relative ring-offset-1 py-1.5 min-h-16'
   ],
   {
     variants: {

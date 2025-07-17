@@ -1,4 +1,8 @@
-import { cn, SlateId, useSometimesControlled } from '../../utilities'
+import {
+  cn,
+  SlateId,
+  useSometimesControlled
+} from '../../utilities'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { RadioGroupProps } from './RadioGroup.types'
@@ -39,7 +43,7 @@ export function RadioGroup<T extends SlateId>({
               'flex items-center gap-2 cursor-pointer py-2 pl-3 pr-4 rounded-lg duration-150 border',
               item.id === value
                 ? 'bg-primary text-white'
-                : 'bg-white hover:bg-muted',
+                : 'bg-white hover:bg-muted-test',
               disabled && 'cursor-not-allowed opacity-60'
             )}
             key={item.id}

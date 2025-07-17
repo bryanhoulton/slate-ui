@@ -1,6 +1,10 @@
 import { cva } from 'class-variance-authority'
 
-import { cn, SlateSize, Variants } from '../../utilities'
+import {
+  cn,
+  SlateSize,
+  Variants
+} from '../../utilities'
 import { ProgressProps } from './Progress.types'
 
 const variants = cva<
@@ -47,7 +51,7 @@ export function Progress({
         return (
           <div
             key={i}
-            className={cn('overflow-hidden rounded bg-muted')}
+            className={cn('overflow-hidden rounded bg-muted-test')}
             style={{
               width: `${100 / sections}%`
             }}

@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 import type {
   Meta,
   StoryObj,
-} from '@storybook/react';
+} from '@storybook/react-vite';
 
 import { args } from '../../utilities/stories';
 import { Badge } from './';

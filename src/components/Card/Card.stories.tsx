@@ -1,4 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react-vite'
 
 import { SlateProvider } from '../SlateProvider'
 import { Card } from './'
@@ -21,7 +24,7 @@ type Story = StoryObj<typeof Card>
 export const Primary: Story = {
   args: {
     children: 'Click me!',
-    preview: <div className="bg-muted h-full w-full"></div>,
+    preview: <div className="bg-muted-test h-full w-full"></div>,
     menu: {
       items: [
         {

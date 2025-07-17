@@ -13,7 +13,7 @@ export const SelectItemComponent = forwardRef<HTMLDivElement, SelectItemProps>(
         className={cn(
           'leading-none text-sm rounded-lg flex items-center justify-between relative px-2 py-1 cursor-pointer',
           'select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none',
-          'hover:bg-muted',
+          'hover:bg-muted-test',
           selected && 'text-primary'
         )}
         {...props}
@@ -28,3 +28,4 @@ export const SelectItemComponent = forwardRef<HTMLDivElement, SelectItemProps>(
     )
   }
 )
+SelectItemComponent.displayName = 'SelectItemComponent'

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type {
   Meta,
   StoryObj
-} from '@storybook/react'
+} from '@storybook/react-vite'
 
 import { args } from '../../utilities/stories'
 import { Checkbox } from './'
@@ -19,7 +19,7 @@ function CheckboxStory({
     <Checkbox
       {...props}
       checked={checked}
-      onCheckedChange={(value) => setChecked(value === false)}
+      onCheckedChange={(value) => setChecked(value)}
     />
   )
 }

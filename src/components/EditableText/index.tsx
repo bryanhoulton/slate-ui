@@ -1,13 +1,13 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 
-import { Edit } from 'lucide-react';
+import { Edit } from 'lucide-react'
 
 import {
   cn,
-  useSometimesControlled,
-} from '../../utilities';
-import { Icon } from '../Icon';
-import { EditableTextProps } from './EditableText.types';
+  useSometimesControlled
+} from '../../utilities'
+import { Icon } from '../Icon'
+import { EditableTextProps } from './EditableText.types'
 
 export function EditableText({
   value: valueProp,
@@ -27,7 +27,7 @@ export function EditableText({
   return (
     <div
       className={cn(
-        'hover:focus-within:bg-muted hover:bg-muted focus-within:bg-muted flex gap-2 items-center transition rounded-lg p-1 px-2 w-fit',
+        'hover:focus-within:bg-muted-test hover:bg-muted-test focus-within:bg-muted-test flex gap-2 items-center transition rounded-lg p-1 px-2 w-fit',
         className
       )}
       onClick={() => {

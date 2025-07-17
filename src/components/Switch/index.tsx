@@ -25,7 +25,7 @@ const switchWrapperVariants = cva<
   {
     variants: {
       withBody: {
-        true: 'hover:bg-muted p-1.5 disabled:bg-muted',
+        true: 'hover:bg-muted-test p-1.5 disabled:bg-muted-test',
         false: ''
       },
       side: {

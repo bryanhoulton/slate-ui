@@ -1,7 +1,7 @@
 import { BookAudio, HandPlatter, User } from 'lucide-react'
 
 import { TooltipProvider } from '@radix-ui/react-tooltip'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { args } from '../../utilities/stories'
 import { Select } from './'

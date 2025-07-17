@@ -31,7 +31,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
             <Button
               variant={variant}
               role="menuitem"
-              className={cn('w-full hover:bg-muted gap-2', className)}
+              className={cn('w-full hover:bg-muted-test gap-2', className)}
               ref={ref}
               {...rest}
             >
@@ -81,7 +81,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
                   variant={variant}
                   role="menuitem"
                   className={cn(
-                    'w-full justify-between hover:bg-muted',
+                    'w-full justify-between hover:bg-muted-test',
                     className
                   )}
                   ref={ref}
@@ -94,7 +94,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
               <DropdownMenuPortal>
                 <DropdownMenuSubContent
                   className={cn(
-                    'bg-white p-1 border border-muted shadow-sm rounded-lg flex flex-col gap-1'
+                    'bg-white p-1 border border-muted-test shadow-sm rounded-lg flex flex-col gap-1'
                   )}
                   sideOffset={8}
                   ref={ref}
@@ -111,7 +111,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
           return (
             <DropdownMenuGroup
               key={item.id}
-              className="border-b border-muted py-1 flex flex-col gap-1"
+              className="border-b border-muted-test py-1 flex flex-col gap-1"
             >
               <DropdownMenuLabel className="text-xs pl-2 text-muted uppercase">
                 {item.label}

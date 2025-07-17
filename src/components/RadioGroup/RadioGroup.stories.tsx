@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { args } from '../../utilities/stories'
 import { RadioGroup } from './'

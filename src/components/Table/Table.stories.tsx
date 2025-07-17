@@ -7,7 +7,7 @@ import {
 import {
   Meta,
   StoryObj,
-} from '@storybook/react';
+} from '@storybook/react-vite';
 
 import { TooltipProvider } from '../Tooltip';
 import { Table } from './';

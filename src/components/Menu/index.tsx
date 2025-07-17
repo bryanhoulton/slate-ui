@@ -26,7 +26,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           className={cn(
-            'bg-white p-1 border border-muted shadow-sm rounded-lg flex flex-col gap-1',
+            'bg-white p-1 border border-muted-test shadow-sm rounded-lg flex flex-col gap-1',
             'data-[state=open]:animate-slideDownAndFade z-40'
           )}
           sideOffset={4}

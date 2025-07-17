@@ -3,7 +3,7 @@ import { MousePointerClick } from 'lucide-react'
 import type {
   Meta,
   StoryObj
-} from '@storybook/react'
+} from '@storybook/react-vite'
 
 import { ActionIcon } from '../ActionIcon'
 import { SlateProvider } from '../SlateProvider'

@@ -1,6 +1,14 @@
-import { forwardRef, useEffect, useMemo } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useMemo
+} from 'react'
 
-import { Check, ChevronDown, X } from 'lucide-react'
+import {
+  Check,
+  ChevronDown,
+  X
+} from 'lucide-react'
 
 import {
   Combobox,
@@ -10,13 +18,21 @@ import {
   ComboboxOptions
 } from '@headlessui/react'
 
-import { cn, gid, SlateId, useSometimesControlled } from '../../utilities'
+import {
+  cn,
+  gid,
+  SlateId,
+  useSometimesControlled
+} from '../../utilities'
 import { ActionIcon } from '../ActionIcon'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { TextInput } from '../TextInput'
 import { TextInputProps } from '../TextInput/TextInput.types'
-import { SelectItem, SelectProps } from './Select.types'
+import {
+  SelectItem,
+  SelectProps
+} from './Select.types'
 
 interface SlateComboboxInputProps
   extends Omit<ComboboxInputProps, 'size' | 'children'>,
@@ -164,7 +180,7 @@ export function Select<IdType extends SlateId>({
           anchor="bottom"
           className={cn(
             'rounded-lg mt-1 p-1 flex flex-col gap-1 border bg-white',
-            'w-[--input-width] z-40 pointer-events-auto',
+            'w-(--input-width) z-40 pointer-events-auto shadow-sm',
             'animate-slideDownAndFade'
           )}
           style={styles?.content}
@@ -175,8 +191,8 @@ export function Select<IdType extends SlateId>({
               value={item}
               className={cn(
                 'flex items-center justify-between rounded-lg text-sm p-2 gap-2',
-                'bg-white data-[focus]:bg-muted',
-                value?.id === item.id && 'bg-muted'
+                'bg-white data-[focus]:bg-muted-test',
+                value?.id === item.id && 'bg-muted-test'
               )}
               as="button"
               style={styles?.option}
