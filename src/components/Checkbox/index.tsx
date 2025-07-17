@@ -57,7 +57,6 @@ function CheckboxRootWrapper(
   props: React.ComponentProps<typeof RCheckbox.Root>
 ) {
   const MemoizedRoot = memo(RCheckbox.Root)
-  // @ts-expect-error: This is a workaround for the Radix-UI bug
   return <MemoizedRoot {...props} />
 }
 

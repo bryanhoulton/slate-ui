@@ -6,7 +6,7 @@ Slate UI is an opinionated, configurable React component library built for scala
 
 ## Core Technologies
 
-- **React 18+** - Modern React with hooks and TypeScript
+- **React 19+** - Modern React with hooks and TypeScript
 - **Tailwind CSS** - Utility-first CSS framework with custom design tokens
 - **Radix UI** - Accessible, unstyled UI primitives
 - **Class Variance Authority (CVA)** - For component variant management
@@ -25,7 +25,8 @@ yarn add slate-ui
 
 Make sure your project includes these peer dependencies:
 
-- `react ^18.3.1`
+- `react ^19.0.0`
+- `react-dom ^19.0.0`
 - `tailwindcss ^3.4.3`
 
 ## Setup

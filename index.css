@@ -81,7 +81,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-primary-50);
+    border-color: var(--color-primary-100);
     outline-color: var(--color-primary-200);
   }
 }

@@ -51,7 +51,6 @@ const switchThumbVariants = cva([
 
 function SwitchRootWrapper(props: React.ComponentProps<typeof RSwitch.Root>) {
   const MemoizedRoot = memo(RSwitch.Root)
-  // @ts-expect-error: This is a workaround for the Radix-UI bug
   return <MemoizedRoot {...props} />
 }
 
