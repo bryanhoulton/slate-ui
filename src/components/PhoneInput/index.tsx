@@ -210,6 +210,10 @@ const formatPhoneNumber = (number: string, format?: string): string => {
   if (!format) return number
 
   const cleaned = number.replace(/\D/g, '')
+
+  // If no digits, return empty string to show placeholder
+  if (cleaned.length === 0) return ''
+
   let formatted = format
 
   for (let i = 0; i < cleaned.length; i++) {
@@ -262,6 +266,17 @@ const smartFormatPhoneNumber = (
 
   const cleanedNew = newValue.replace(/\D/g, '')
   const cleanedOld = oldValue.replace(/\D/g, '')
+
+  // If no digits, return empty string to show placeholder
+  if (cleanedNew.length === 0) {
+    return { formatted: '', newCursorPosition: 0 }
+  }
+
+  // If we're transitioning from empty to having content, put cursor at end
+  if (cleanedOld.length === 0 && cleanedNew.length > 0) {
+    const formatted = formatPhoneNumber(cleanedNew, format)
+    return { formatted, newCursorPosition: formatted.length }
+  }
 
   // Detect if user is deleting
   const isDeleting =
@@ -351,6 +366,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       useState<CountryCode>(defaultCountryData)
     const [displayValue, setDisplayValue] = useState(() => {
       const initialValue = value || defaultValue || ''
+      if (!initialValue) return ''
       return autoFormat
         ? formatPhoneNumber(initialValue, defaultCountryData.format)
         : initialValue
