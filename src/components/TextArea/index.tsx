@@ -38,7 +38,7 @@ export const textAreaVariants = cva<
         lg: 'px-4 h-10'
       },
       error: {
-        true: 'border-error'
+        true: 'border-error-500'
       }
     }
   }
@@ -83,7 +83,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
         />
         {error && (
-          <small className="text-xs text-error ml-1" style={styles?.error}>
+          <small className="text-xs text-error-500 ml-1" style={styles?.error}>
             {error}
           </small>
         )}

@@ -212,7 +212,7 @@ export function Select<IdType extends SlateId>({
         </ComboboxOptions>
       </Combobox>
       {error && (
-        <small className="text-xs text-error ml-1" style={styles?.error}>
+        <small className="text-xs text-error-500 ml-1" style={styles?.error}>
           {error}
         </small>
       )}
