@@ -110,7 +110,7 @@ export function Select<IdType extends SlateId>({
 }: SelectProps<IdType>) {
   const [value, setValue] = useSometimesControlled<SelectItem<IdType> | null>({
     valueProp: items.find((item) => item.id === valueProp),
-    onChangeProp: (v) => onChange?.(v?.id || null, v || null),
+    onChangeProp: (v) => onChange?.(v?.id ?? null, v ?? null),
     defaultValue: items.find((item) => item.id === defaultValue) ?? null
   })
   const [search, setSearch] = useSometimesControlled<string>({
