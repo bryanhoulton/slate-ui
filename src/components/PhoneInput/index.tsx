@@ -1,25 +1,12 @@
-import {
-  forwardRef,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
 
-import {
-  cn,
-  gid,
-  useSometimesControlled
-} from '../../utilities'
+import { cn, gid, useSometimesControlled } from '../../utilities'
 import { Button } from '../Button'
 import { Label } from '../Label'
 import { Menu } from '../Menu'
 import { MenuItem } from '../Menu/MenuItem.types'
 import { TextInput } from '../TextInput'
-import {
-  CountryCode,
-  PhoneInputProps
-} from './PhoneInput.types'
+import { CountryCode, PhoneInputProps } from './PhoneInput.types'
 
 // Default country data with major countries
 const DEFAULT_COUNTRIES: CountryCode[] = [
@@ -348,6 +335,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       validatePhoneNumber: enableValidation = true,
       className,
       styles,
+      size,
       required,
       ...props
     },
@@ -503,8 +491,14 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           {/* Country Select */}
           <Menu items={countryItems}>
             <Button
-              className="w-8 h-8 p-0 flex items-center justify-center"
+              className={cn(
+                'p-0 flex items-center justify-center',
+                size === 'sm' && 'w-6 h-6',
+                size === 'md' && 'w-8 h-8',
+                size === 'lg' && 'w-10 h-10'
+              )}
               variant="secondary"
+              size={size}
               styles={styles?.countrySelect}
             >
               {selectedCountry.flag}
@@ -519,6 +513,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
             value={displayValue}
             onChange={handlePhoneChange}
             error={displayError}
+            size={size}
             style={styles?.input?.input}
             className={cn('flex-1 relative')}
             {...props}
