@@ -41,6 +41,11 @@ const meta: Meta<typeof NumberInput> = {
       control: {
         type: 'text'
       }
+    },
+    prefix: {
+      control: {
+        type: 'text'
+      }
     }
   })
 }

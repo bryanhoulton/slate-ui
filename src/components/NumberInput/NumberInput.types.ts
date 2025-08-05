@@ -7,4 +7,5 @@ export interface NumberInputProps
   value?: number
   onChange?: (value: number) => void
   defaultValue?: number
+  prefix?: string
 }

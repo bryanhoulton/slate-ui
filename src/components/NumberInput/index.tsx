@@ -1,6 +1,6 @@
-import { useSometimesControlled } from '../../utilities';
-import { TextInput } from '../TextInput';
-import { NumberInputProps } from './NumberInput.types';
+import { useSometimesControlled } from '../../utilities'
+import { TextInput } from '../TextInput'
+import { NumberInputProps } from './NumberInput.types'
 
 export function NumberInput({
   min = -Infinity,
@@ -9,6 +9,7 @@ export function NumberInput({
   onChange,
   type = 'number',
   defaultValue,
+  prefix,
   ...rest
 }: NumberInputProps) {
   const [value, setValue] = useSometimesControlled({
@@ -18,10 +19,11 @@ export function NumberInput({
   })
   return (
     <TextInput
-      type={type}
-      value={value.toString()}
+      type={prefix ? 'text' : type}
+      value={`${prefix || ''}${value}`}
       onChange={(v) => {
-        const newValue = Number(v)
+        const strippedValue = v.replace(prefix ?? '', '')
+        const newValue = Number(strippedValue)
         if (newValue >= min && newValue <= max) {
           setValue(newValue)
           onChange?.(newValue)
