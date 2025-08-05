@@ -51,14 +51,14 @@ export function Progress({
         return (
           <div
             key={i}
-            className={cn('overflow-hidden rounded bg-muted-light')}
+            className={cn('overflow-hidden rounded-full bg-muted-light')}
             style={{
               width: `${100 / sections}%`,
               ...styles?.barWrapper
             }}
           >
             <div
-              className={cn('h-full rounded bg-primary')}
+              className={cn('h-full rounded-full bg-primary')}
               style={{
                 width: Math.min(valueLeft / stepSize, 1) * 100 + '%',
                 transition: 'width 0.3s linear',
