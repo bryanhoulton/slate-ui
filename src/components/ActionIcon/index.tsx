@@ -21,7 +21,7 @@ const variants = cva<
   [
     'flex items-center justify-center rounded-lg border focus:outline-none',
     'focus:ring-2 focus:ring-primary not:disabled:hover:shadow-inner shrink-0',
-    'disabled:bg-muted-test disabled:text-muted disabled:cursor-not-allowed',
+    'disabled:bg-muted-light disabled:text-muted disabled:cursor-not-allowed',
     'active:scale-[98%]'
   ],
   {

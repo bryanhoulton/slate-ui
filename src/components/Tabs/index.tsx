@@ -29,7 +29,7 @@ export function Tabs({
               'px-2 py-3 flex items-center justify-center text-sm',
               'leading-none select-none gap-2 cursor-pointer',
               'data-[state=active]:text-primary border-b-2 border-b-transparent data-[state=active]:border-b-primary',
-              'hover:text-muted hover:border-b-2 hover:border-muted-test'
+              'hover:text-muted hover:border-b-2 hover:border-muted-light'
             )}
             value={tab.id}
             style={styles?.tab}

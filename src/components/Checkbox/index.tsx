@@ -22,7 +22,7 @@ const checkboxWrapperVariants = cva<
 >(['duration-150 w-fit rounded-lg flex items-center gap-2 select-none'], {
   variants: {
     withBody: {
-      true: 'hover:bg-muted-test p-1.5',
+      true: 'hover:bg-muted-light p-1.5',
       false: ''
     },
     disabled: {
@@ -34,7 +34,7 @@ const checkboxWrapperVariants = cva<
     {
       withBody: true,
       disabled: true,
-      className: 'bg-muted-test'
+      className: 'bg-muted-light'
     }
   ]
 })

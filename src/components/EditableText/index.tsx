@@ -27,7 +27,7 @@ export function EditableText({
   return (
     <div
       className={cn(
-        'hover:focus-within:bg-muted-test hover:bg-muted-test focus-within:bg-muted-test flex gap-2 items-center transition rounded-lg p-1 px-2 w-fit',
+        'hover:focus-within:bg-muted-light hover:bg-muted-light focus-within:bg-muted-light flex gap-2 items-center transition rounded-lg p-1 px-2 w-fit',
         className
       )}
       onClick={() => {

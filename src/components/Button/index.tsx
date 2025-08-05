@@ -17,7 +17,7 @@ export const buttonVariants = cva<
 >(
   [
     'rounded-lg border text-sm focus:outline-none focus:ring-2 flex items-center gap-1',
-    '!disabled:hover:shadow-inner ring-offset-1 disabled:bg-muted-test disabled:text-muted',
+    '!disabled:hover:shadow-inner ring-offset-1 disabled:bg-muted-light disabled:text-muted',
     'disabled:cursor-not-allowed shrink-0 relative justify-between'
   ],
   {

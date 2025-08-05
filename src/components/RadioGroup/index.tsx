@@ -43,7 +43,7 @@ export function RadioGroup<T extends SlateId>({
               'flex items-center gap-2 cursor-pointer py-2 pl-3 pr-4 rounded-lg duration-150 border',
               item.id === value
                 ? 'bg-primary text-white'
-                : 'bg-white hover:bg-muted-test',
+                : 'bg-white hover:bg-muted-light',
               disabled && 'cursor-not-allowed opacity-60'
             )}
             key={item.id}

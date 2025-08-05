@@ -191,8 +191,8 @@ export function Select<IdType extends SlateId>({
               value={item}
               className={cn(
                 'flex items-center justify-between rounded-lg text-sm p-2 gap-2',
-                'bg-white data-[focus]:bg-muted-test',
-                value?.id === item.id && 'bg-muted-test'
+                'bg-white data-[focus]:bg-muted-light',
+                value?.id === item.id && 'bg-muted-light'
               )}
               as="button"
               style={styles?.option}

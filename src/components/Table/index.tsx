@@ -136,7 +136,7 @@ export function Table<R extends RowType>({
               <tr key={i}>
                 {columns.map((column) => (
                   <td className="px-2 py-4" key={column.id}>
-                    <div className="bg-muted-test animate-pulse rounded-lg py-2 text-base"></div>
+                    <div className="bg-muted-light animate-pulse rounded-lg py-2 text-base"></div>
                   </td>
                 ))}
               </tr>

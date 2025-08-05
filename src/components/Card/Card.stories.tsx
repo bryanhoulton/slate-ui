@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Card>
 export const Primary: Story = {
   args: {
     children: 'Click me!',
-    preview: <div className="bg-muted-test h-full w-full"></div>,
+    preview: <div className="bg-muted-light h-full w-full"></div>,
     menu: {
       items: [
         {

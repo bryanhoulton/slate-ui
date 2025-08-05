@@ -17,7 +17,7 @@
   --color-primary: var(--color-primary-500);
   --color-anti-primary: var(--color-white);
   --color-muted: var(--color-primary-300);
-  --color-muted-test: var(--color-primary-50);
+  --color-muted-light: var(--color-primary-50);
 
   --color-secondary-50: #f2f0ff;
   --color-secondary-100: #e0dff2;
