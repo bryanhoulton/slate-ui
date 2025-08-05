@@ -1,9 +1,16 @@
-import { CSSProperties, HTMLProps } from 'react'
+import {
+  CSSProperties,
+  HTMLProps
+} from 'react'
 
-import { SlateSize, Styleable } from '../../utilities'
+import {
+  SlateSize,
+  Styleable
+} from '../../utilities'
 
 export interface ProgressStyles {
   root?: CSSProperties
+  barWrapper?: CSSProperties
   bar?: CSSProperties
 }
 

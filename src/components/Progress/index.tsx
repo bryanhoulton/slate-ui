@@ -53,7 +53,8 @@ export function Progress({
             key={i}
             className={cn('overflow-hidden rounded bg-muted-test')}
             style={{
-              width: `${100 / sections}%`
+              width: `${100 / sections}%`,
+              ...styles?.barWrapper
             }}
           >
             <div
