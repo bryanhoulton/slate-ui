@@ -1,12 +1,25 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 
-import { cn, gid, useSometimesControlled } from '../../utilities'
+import {
+  cn,
+  gid,
+  useSometimesControlled
+} from '../../utilities'
 import { Button } from '../Button'
 import { Label } from '../Label'
 import { Menu } from '../Menu'
 import { MenuItem } from '../Menu/MenuItem.types'
 import { TextInput } from '../TextInput'
-import { CountryCode, PhoneInputProps } from './PhoneInput.types'
+import {
+  CountryCode,
+  PhoneInputProps
+} from './PhoneInput.types'
 
 // Default country data with major countries
 const DEFAULT_COUNTRIES: CountryCode[] = [
@@ -498,7 +511,6 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                 size === 'lg' && 'w-10 h-10'
               )}
               variant="secondary"
-              size={size}
               styles={styles?.countrySelect}
             >
               {selectedCountry.flag}

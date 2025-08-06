@@ -18,7 +18,7 @@ export const buttonVariants = cva<
   [
     'rounded-lg border text-sm focus:outline-none focus:ring-2 flex items-center gap-1',
     '!disabled:hover:shadow-inner ring-offset-1 disabled:bg-muted-light disabled:text-muted',
-    'disabled:cursor-not-allowed shrink-0 relative justify-between'
+    'disabled:cursor-not-allowed shrink-0 relative justify-between shrink-0'
   ],
   {
     variants: {
@@ -29,9 +29,9 @@ export const buttonVariants = cva<
           'bg-transparent border-transparent hover:shadow-none disabled:bg-transparent'
       },
       size: {
-        sm: 'px-2 h-6 text-sm',
-        md: 'px-3 h-8',
-        lg: 'px-4 h-10 text-lg'
+        sm: 'px-2 min-w-6 h-6 text-sm',
+        md: 'px-3 min-w-8 h-8',
+        lg: 'px-4 min-w-10 h-10 text-lg'
       },
       loading: {
         true: 'cursor-not-allowed !text-transparent',
