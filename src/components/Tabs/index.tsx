@@ -35,7 +35,7 @@ export function Tabs({
             style={styles?.tab}
           >
             {tab.iconLeft && <Icon icon={tab.iconLeft} variant="subtle" />}
-            <span className="hidden sm:block">{tab.name}</span>
+            <span>{tab.name}</span>
             {tab.iconRight && <Icon icon={tab.iconRight} variant="subtle" />}
           </RTabs.Trigger>
         ))}
