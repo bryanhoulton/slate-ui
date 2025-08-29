@@ -39,5 +39,4 @@ export interface RadioGroupProps<T extends SlateId>
   onChange: (value: T | null) => void
   defaultValue?: T
   orientation?: 'horizontal' | 'vertical'
-  renderItemName?: (item: RadioItem<T>) => React.ReactNode
 }
