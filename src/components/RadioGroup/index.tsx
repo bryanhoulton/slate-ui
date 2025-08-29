@@ -17,6 +17,7 @@ export function RadioGroup<T extends SlateId>({
   label,
   orientation = 'vertical',
   disabled,
+  renderItemName,
   ...props
 }: RadioGroupProps<T>) {
   const [value, setValue] = useSometimesControlled<T | null>({
@@ -67,7 +68,7 @@ export function RadioGroup<T extends SlateId>({
             )}
             <div className="flex flex-col">
               <span className="text-sm" style={styles?.title}>
-                {item.name}
+                {renderItemName ? renderItemName(item) : item.name}
               </span>
               {item.description && (
                 <span
