@@ -21,7 +21,7 @@ export const SelectItemComponent = forwardRef<HTMLDivElement, SelectItemProps>(
       >
         <div className="flex gap-1 items-center">
           {icon && <Icon icon={icon} variant="subtle" />}
-          <span>{name}</span>
+          <span className="text-left">{name}</span>
         </div>
         {selected && <Icon icon={Check} variant="subtle" />}
       </div>
