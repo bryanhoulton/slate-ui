@@ -5,7 +5,10 @@ import React, {
 
 import { LucideIcon } from 'lucide-react'
 
-import { Styleable } from '../../utilities'
+import {
+  SlateId,
+  Styleable
+} from '../../utilities'
 
 export type AccordionStyles = {
   root: CSSProperties
@@ -15,31 +18,34 @@ export type AccordionStyles = {
   icon: CSSProperties
 }
 
-export interface AccordionItemData {
-  id: string
+export interface AccordionItemData<IdType extends SlateId> {
+  id: IdType
   title: React.ReactNode
   content: React.ReactNode
   leftIcon?: LucideIcon
   disabled?: boolean
 }
 
-export interface AccordionProps
-  extends Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
+export interface AccordionProps<IdType extends SlateId = SlateId>
+  extends Omit<
+      HTMLProps<HTMLDivElement>,
+      'onChange' | 'value' | 'defaultValue'
+    >,
     Styleable<AccordionStyles> {
-  items: AccordionItemData[]
+  items: AccordionItemData<IdType>[]
   type?: 'single' | 'multiple'
   collapsible?: boolean
-  defaultValue?: string | string[]
-  value?: string | string[]
-  onChange?: (value: string | string[] | null) => void
+  defaultValue?: IdType | IdType[]
+  value?: IdType | IdType[]
+  onChange?: (value: IdType | IdType[] | null) => void
   disabled?: boolean
 }
 
-export interface AccordionItemProps
+export interface AccordionItemProps<IdType extends SlateId = SlateId>
   extends Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'onToggle'>,
     Styleable<Pick<AccordionStyles, 'item' | 'trigger' | 'content' | 'icon'>> {
-  item: AccordionItemData
+  item: AccordionItemData<IdType>
   isOpen: boolean
-  onToggle: (id: string) => void
+  onToggle: (id: IdType) => void
   disabled?: boolean
 }

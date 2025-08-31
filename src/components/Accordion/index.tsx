@@ -7,14 +7,17 @@ import {
 
 import { ChevronDown } from 'lucide-react'
 
-import { cn } from '../../utilities'
+import {
+  cn,
+  SlateId
+} from '../../utilities'
 import { Icon } from '../Icon'
 import {
   AccordionItemProps,
   AccordionProps
 } from './Accordion.types'
 
-const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
+const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps<SlateId>>(
   (
     { item, isOpen, onToggle, disabled = false, className, styles, ...props },
     ref
@@ -99,7 +102,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
 
 AccordionItem.displayName = 'AccordionItem'
 
-export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+export const Accordion = forwardRef<HTMLDivElement, AccordionProps<SlateId>>(
   (
     {
       items,
@@ -119,7 +122,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const isControlled = value !== undefined
 
     // Initialize internal state for uncontrolled mode
-    const [internalValue, setInternalValue] = useState<string | string[]>(
+    const [internalValue, setInternalValue] = useState<SlateId | SlateId[]>(
       () => {
         if (defaultValue !== undefined) {
           return defaultValue
@@ -134,14 +137,17 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       if (type === 'multiple') {
         return Array.isArray(currentValue) ? currentValue : []
       }
-      return typeof currentValue === 'string' && currentValue
+      return (typeof currentValue === 'string' ||
+        typeof currentValue === 'number') &&
+        currentValue !== '' &&
+        currentValue !== 0
         ? [currentValue]
         : []
     }, [currentValue, type])
 
     const handleToggle = useCallback(
-      (itemId: string) => {
-        let newValue: string | string[] | null
+      (itemId: SlateId) => {
+        let newValue: SlateId | SlateId[] | null
 
         if (type === 'multiple') {
           const currentArray = Array.isArray(currentValue) ? currentValue : []
