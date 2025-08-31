@@ -181,7 +181,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps<SlateId>>(
       <div
         ref={ref}
         className={cn(
-          'divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white',
+          'divide-y divide-gray-200 rounded-lg overflow-hidden border border-gray-200 bg-white',
           className
         )}
         style={styles?.root}
