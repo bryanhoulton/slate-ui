@@ -51,7 +51,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps<SlateId>>(
           type="button"
           className={cn(
             'flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium',
-            'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-sm',
+            'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded-lg',
             'hover:bg-gray-50 transition-colors',
             isItemDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           )}
@@ -89,7 +89,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps<SlateId>>(
           aria-labelledby={`accordion-trigger-${item.id}`}
           className={cn(
             'overflow-hidden transition-all duration-200 ease-in-out',
-            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
           )}
           style={styles?.content}
         >
@@ -181,7 +181,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps<SlateId>>(
       <div
         ref={ref}
         className={cn(
-          'divide-y divide-gray-200 rounded-lg overflow-hidden border border-gray-200 bg-white',
+          'divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white',
           className
         )}
         style={styles?.root}
