@@ -89,7 +89,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps<SlateId>>(
           aria-labelledby={`accordion-trigger-${item.id}`}
           className={cn(
             'overflow-hidden transition-all duration-200 ease-in-out',
-            isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+            isOpen ? 'opacity-100' : 'max-h-0 opacity-0'
           )}
           style={styles?.content}
         >
