@@ -11,6 +11,7 @@ import {
   cn,
   SlateId
 } from '../../utilities'
+import { Badge } from '../Badge'
 import { Icon } from '../Icon'
 import {
   AccordionItemProps,
@@ -19,7 +20,16 @@ import {
 
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps<SlateId>>(
   (
-    { item, isOpen, onToggle, disabled = false, className, styles, ...props },
+    {
+      item,
+      isOpen,
+      onToggle,
+      disabled = false,
+      className,
+      styles,
+      badge,
+      ...props
+    },
     ref
   ) => {
     const handleToggle = useCallback(() => {
@@ -73,14 +83,18 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps<SlateId>>(
             )}
             <span>{item.title}</span>
           </div>
-          <Icon
-            icon={ChevronDown}
-            className={cn(
-              'h-4 w-4 transition-transform duration-200',
-              isOpen && 'rotate-180'
-            )}
-            style={styles?.icon}
-          />
+
+          <div className="flex items-center gap-2">
+            {badge && <Badge {...badge} />}
+            <Icon
+              icon={ChevronDown}
+              className={cn(
+                'h-4 w-4 transition-transform duration-200',
+                isOpen && 'rotate-180'
+              )}
+              style={styles?.icon}
+            />
+          </div>
         </button>
 
         <div
@@ -195,6 +209,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps<SlateId>>(
             onToggle={handleToggle}
             disabled={disabled}
             styles={styles}
+            badge={item.badge}
           />
         ))}
       </div>

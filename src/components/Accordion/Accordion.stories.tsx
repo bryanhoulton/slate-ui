@@ -1,10 +1,13 @@
 import {
+  AlertCircle,
   BookOpen,
+  CheckCircle,
   Code,
   CreditCard,
   HelpCircle,
   Phone,
   Settings,
+  Star,
   Zap
 } from 'lucide-react'
 
@@ -200,5 +203,62 @@ export const CustomStyling: Story = {
         backgroundColor: '#f1f5f9'
       }
     }
+  }
+}
+
+export const WithBadges: Story = {
+  args: {
+    items: [
+      {
+        id: '1',
+        title: 'Premium Features',
+        leftIcon: Star,
+        badge: {
+          children: 'New',
+          variant: 'primary',
+          size: 'sm'
+        },
+        content:
+          'Unlock advanced features including priority support, custom integrations, and enhanced analytics. Perfect for growing businesses.'
+      },
+      {
+        id: '2',
+        title: 'Documentation',
+        leftIcon: BookOpen,
+        badge: {
+          children: 'Updated',
+          variant: 'secondary',
+          size: 'sm',
+          iconLeft: CheckCircle
+        },
+        content:
+          'Comprehensive guides and API documentation. Recently updated with new examples and best practices.'
+      },
+      {
+        id: '3',
+        title: 'Support Center',
+        leftIcon: HelpCircle,
+        badge: {
+          children: '24/7',
+          variant: 'subtle',
+          size: 'sm'
+        },
+        content:
+          'Get help when you need it. Our support team is available around the clock to assist with any questions or issues.'
+      },
+      {
+        id: '4',
+        title: 'System Status',
+        leftIcon: Settings,
+        badge: {
+          children: 'Issues',
+          variant: 'primary',
+          size: 'sm',
+          iconLeft: AlertCircle
+        },
+        content:
+          'Current system status and any ongoing maintenance. We strive to keep our services running smoothly with minimal downtime.'
+      }
+    ]
   }
 }

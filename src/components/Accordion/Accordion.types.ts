@@ -9,6 +9,7 @@ import {
   SlateId,
   Styleable
 } from '../../utilities'
+import { BadgeProps } from '../Badge/Badge.types'
 
 export type AccordionStyles = {
   root: CSSProperties
@@ -23,6 +24,7 @@ export interface AccordionItemData<IdType extends SlateId> {
   title: React.ReactNode
   content: React.ReactNode
   leftIcon?: LucideIcon
+  badge?: BadgeProps
   disabled?: boolean
 }
 
@@ -46,6 +48,7 @@ export interface AccordionItemProps<IdType extends SlateId = SlateId>
     Styleable<Pick<AccordionStyles, 'item' | 'trigger' | 'content' | 'icon'>> {
   item: AccordionItemData<IdType>
   isOpen: boolean
+  badge?: BadgeProps
   onToggle: (id: IdType) => void
   disabled?: boolean
 }
