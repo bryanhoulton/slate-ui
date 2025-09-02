@@ -1,16 +1,9 @@
-import {
-  forwardRef,
-  useState
-} from 'react'
+import { forwardRef, useState } from 'react'
 
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
-import {
-  SlateSize,
-  SlateVariant,
-  Variants
-} from '../../utilities/types'
+import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { TextInputProps } from './TextInput.types'
@@ -86,8 +79,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         <div className={cn('relative')}>
           {iconLeft && (
             <Icon
-              variant="secondary"
               icon={iconLeft}
+              variant={variant}
               className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10"
             />
           )}
@@ -110,8 +103,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           />
           {iconRight && (
             <Icon
-              variant="secondary"
               icon={iconRight}
+              variant={variant}
               className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10"
             />
           )}
