@@ -19,7 +19,7 @@ const meta: Meta<typeof NumberInput> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle']
+      options: ['primary', 'secondary', 'subtle', 'error']
     },
     size: {
       control: {

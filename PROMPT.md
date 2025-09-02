@@ -74,6 +74,9 @@ All components follow a consistent variant system:
 - **primary** - Main brand colors, high emphasis
 - **secondary** - Secondary brand colors, medium emphasis
 - **subtle** - Low emphasis, minimal styling
+- **error** - Error states, light red background with dark red text
+- **info** - Informational states, light blue background with dark blue text
+- **success** - Success states, light green background with dark green text
 
 ### Sizes
 
@@ -306,7 +309,7 @@ Most components share these common props:
 
 ```tsx
 interface CommonProps {
-  variant?: 'primary' | 'secondary' | 'subtle'
+  variant?: 'primary' | 'secondary' | 'subtle' | 'error' | 'info' | 'success'
   size?: 'sm' | 'md' | 'lg'
   className?: string
   disabled?: boolean

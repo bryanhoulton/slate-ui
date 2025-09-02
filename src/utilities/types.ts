@@ -4,7 +4,7 @@ export interface Styleable<T extends Record<string, any>> {
 }
 
 export type SlateId = string | number
-export type SlateVariant = 'primary' | 'secondary' | 'subtle'
+export type SlateVariant = 'primary' | 'secondary' | 'subtle' | 'error' | 'info' | 'success'
 export type SlateSize = 'sm' | 'md' | 'lg'
 export type SlateColor =
   | 'default'

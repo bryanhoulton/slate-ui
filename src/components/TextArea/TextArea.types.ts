@@ -1,6 +1,13 @@
-import { ChangeEvent, CSSProperties, HTMLProps } from 'react'
+import {
+  ChangeEvent,
+  CSSProperties,
+  HTMLProps
+} from 'react'
 
-import { SlateSize, SlateVariant, Styleable } from '../../utilities/types'
+import {
+  SlateVariant,
+  Styleable
+} from '../../utilities/types'
 import { LabelStyles } from '../Label/Label.types'
 
 export type TextAreaStyles = {
@@ -15,7 +22,6 @@ export interface TextAreaProps
     Styleable<TextAreaStyles> {
   label?: string
   variant?: SlateVariant
-  size?: SlateSize
   error?: string
   value?: string
   defaultValue?: string

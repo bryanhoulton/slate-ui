@@ -1,6 +1,9 @@
 import { Eye } from 'lucide-react'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react-vite'
 
 import { args } from '../../utilities/stories'
 import { Icon } from './'
@@ -18,7 +21,7 @@ const meta: Meta<typeof Icon> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle']
+      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
     },
     size: {
       control: {

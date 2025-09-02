@@ -23,13 +23,18 @@ const variants = cva<
     variant: {
       primary: 'bg-primary text-anti-primary',
       secondary: 'bg-secondary text-anti-secondary border',
-      subtle: ''
+      subtle: '',
+      error: 'bg-error text-anti-error',
+      info: 'bg-blue-100 text-blue-700',
+      success: 'bg-green-100 text-green-700'
     },
     size: {
       sm: 'h-5 text-xs',
       md: 'h-6 text-sm',
       lg: 'h-8 text-lg'
-    }
+    },
+    iconLeft: {},
+    iconRight: {}
   },
   compoundVariants: [
     {

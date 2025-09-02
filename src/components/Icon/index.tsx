@@ -3,7 +3,11 @@ import { forwardRef } from 'react'
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
-import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
+import {
+  SlateSize,
+  SlateVariant,
+  Variants
+} from '../../utilities/types'
 import { IconProps } from './Icon.types'
 
 const variants = cva<
@@ -25,7 +29,10 @@ const variants = cva<
     variant: {
       primary: 'text-default',
       secondary: 'text-secondary',
-      subtle: 'text-inherit'
+      subtle: 'text-inherit',
+      error: 'text-error',
+      info: 'text-blue-700',
+      success: 'text-green-700'
     }
   }
 })

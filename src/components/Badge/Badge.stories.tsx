@@ -29,7 +29,7 @@ const meta: Meta<typeof Badge> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle']
+      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
     },
     size: {
       control: {
@@ -57,6 +57,9 @@ export const Variants: Story = {
       <Badge variant="primary">Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="subtle">Subtle</Badge>
+      <Badge variant="error">Error</Badge>
+      <Badge variant="info">Info</Badge>
+      <Badge variant="success">Success</Badge>
     </div>
   )
 }
@@ -94,6 +97,9 @@ export const StatusBadges: Story = {
       </Badge>
       <Badge variant="subtle" iconLeft={X}>
         Inactive
+      </Badge>
+      <Badge variant="error" iconLeft={AlertCircle}>
+        Error
       </Badge>
       <Badge variant="primary" iconLeft={Zap}>
         Premium
@@ -210,6 +216,30 @@ export const AllSizesAndVariants: Story = {
             With Icon
           </Badge>
           <Badge variant="subtle" size="lg" iconLeft={Zap}>
+            With Icon
+          </Badge>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-3 text-lg font-semibold">Error</h3>
+        <div className="flex flex-wrap items-center gap-4">
+          <Badge variant="error" size="sm">
+            Small
+          </Badge>
+          <Badge variant="error" size="md">
+            Medium
+          </Badge>
+          <Badge variant="error" size="lg">
+            Large
+          </Badge>
+          <Badge variant="error" size="sm" iconLeft={X}>
+            With Icon
+          </Badge>
+          <Badge variant="error" size="md" iconLeft={AlertCircle}>
+            With Icon
+          </Badge>
+          <Badge variant="error" size="lg" iconLeft={AlertCircle}>
             With Icon
           </Badge>
         </div>
