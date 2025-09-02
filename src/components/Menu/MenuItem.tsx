@@ -25,7 +25,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
     function getInternals() {
       switch (item.type) {
         case 'button': {
-          const { variant = 'default', className, ...rest } = item
+          const { variant = 'subtle', className, ...rest } = item
 
           return (
             <Button
@@ -66,7 +66,7 @@ export const MenuItemComponent = forwardRef<any, MenuItemComponentProps>(
         }
         case 'subgroup': {
           const {
-            variant = 'default',
+            variant = 'subtle',
             items,
             iconRight = ChevronRight,
             className,
