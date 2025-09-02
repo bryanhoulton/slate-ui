@@ -29,7 +29,15 @@ const meta: Meta<typeof Button> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: {
@@ -65,9 +73,10 @@ export const Variants: Story = {
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="subtle">Subtle</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="warning">Warning</Button>
       <Button variant="error">Error</Button>
       <Button variant="info">Info</Button>
-      <Button variant="success">Success</Button>
     </div>
   )
 }
@@ -198,7 +207,17 @@ export const ActionButtons: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(['primary', 'secondary', 'subtle', 'error'] as const).map((variant) => (
+      {(
+        [
+          'primary',
+          'secondary',
+          'subtle',
+          'success',
+          'warning',
+          'error',
+          'info'
+        ] as const
+      ).map((variant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">

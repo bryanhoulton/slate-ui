@@ -30,9 +30,10 @@ const variants = cva<
       primary: 'text-default',
       secondary: 'text-secondary',
       subtle: 'text-inherit',
+      success: 'text-success',
+      warning: 'text-warning',
       error: 'text-error',
-      info: 'text-blue-700',
-      success: 'text-green-700'
+      info: 'text-info'
     }
   }
 })

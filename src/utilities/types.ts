@@ -4,7 +4,14 @@ export interface Styleable<T extends Record<string, any>> {
 }
 
 export type SlateId = string | number
-export type SlateVariant = 'primary' | 'secondary' | 'subtle' | 'error' | 'info' | 'success'
+export type SlateVariant =
+  | 'primary'
+  | 'secondary'
+  | 'subtle'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info'
 export type SlateSize = 'sm' | 'md' | 'lg'
 export type SlateColor =
   | 'default'
@@ -12,7 +19,7 @@ export type SlateColor =
   | 'secondary'
   | 'success'
   | 'warning'
-  | 'danger'
+  | 'error'
   | 'info'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

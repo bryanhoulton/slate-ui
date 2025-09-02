@@ -14,7 +14,15 @@ const meta: Meta<typeof TextArea> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
 
     label: {
@@ -64,9 +72,24 @@ export const Variants: Story = {
         placeholder="Subtle variant textarea"
       />
       <TextArea
+        variant="success"
+        label="Success"
+        placeholder="Success variant textarea"
+      />
+      <TextArea
+        variant="warning"
+        label="Warning"
+        placeholder="Warning variant textarea"
+      />
+      <TextArea
         variant="error"
         label="Error"
         placeholder="Error variant textarea"
+      />
+      <TextArea
+        variant="info"
+        label="Info"
+        placeholder="Info variant textarea"
       />
     </div>
   )
@@ -214,7 +237,17 @@ export const ValidationExamples: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(['primary', 'secondary', 'subtle', 'error'] as const).map((variant) => (
+      {(
+        [
+          'primary',
+          'secondary',
+          'subtle',
+          'success',
+          'warning',
+          'error',
+          'info'
+        ] as const
+      ).map((variant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">

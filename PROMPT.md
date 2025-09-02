@@ -94,7 +94,7 @@ The library uses a semantic color system:
 - **secondary** - Brand secondary color
 - **success** - Success states
 - **warning** - Warning states
-- **danger/error** - Error states
+- **error** - Error states
 - **info** - Informational states
 
 ## Component Usage Patterns
@@ -223,7 +223,7 @@ function InteractiveExample() {
       description:
         'Are you sure you want to delete this item? This action cannot be undone.',
       confirmText: 'Delete',
-      variant: 'danger',
+      variant: 'error',
       onConfirm: () => {
         // Handle deletion
       }

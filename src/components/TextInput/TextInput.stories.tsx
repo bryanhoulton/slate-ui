@@ -31,7 +31,15 @@ const meta: Meta<typeof TextInput> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: {
@@ -81,7 +89,18 @@ export const Variants: Story = {
         placeholder="Secondary variant"
       />
       <TextInput variant="subtle" label="Subtle" placeholder="Subtle variant" />
+      <TextInput
+        variant="success"
+        label="Success"
+        placeholder="Success variant"
+      />
+      <TextInput
+        variant="warning"
+        label="Warning"
+        placeholder="Warning variant"
+      />
       <TextInput variant="error" label="Error" placeholder="Error variant" />
+      <TextInput variant="info" label="Info" placeholder="Info variant" />
     </div>
   )
 }
@@ -288,7 +307,17 @@ export const ValidationStates: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(['primary', 'secondary', 'subtle', 'error'] as const).map((variant) => (
+      {(
+        [
+          'primary',
+          'secondary',
+          'subtle',
+          'success',
+          'warning',
+          'error',
+          'info'
+        ] as const
+      ).map((variant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">

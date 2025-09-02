@@ -23,7 +23,15 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'subtle', 'error']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: { type: 'select' },
@@ -95,6 +103,10 @@ export const Variants: Story = {
       <PhoneInput {...args} variant="primary" label="Primary Variant" />
       <PhoneInput {...args} variant="secondary" label="Secondary Variant" />
       <PhoneInput {...args} variant="subtle" label="Subtle Variant" />
+      <PhoneInput {...args} variant="success" label="Success Variant" />
+      <PhoneInput {...args} variant="warning" label="Warning Variant" />
+      <PhoneInput {...args} variant="error" label="Error Variant" />
+      <PhoneInput {...args} variant="info" label="Info Variant" />
     </div>
   ),
   args: {

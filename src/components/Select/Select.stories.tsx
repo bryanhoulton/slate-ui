@@ -22,7 +22,15 @@ const meta: Meta<typeof Select> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: {
@@ -103,6 +111,26 @@ export const Variants: Story = {
         onChange={() => {}}
       />
       <Select
+        variant="success"
+        items={[
+          { id: 1, name: 'Success Option 1' },
+          { id: 2, name: 'Success Option 2' }
+        ]}
+        placeholder="Success variant"
+        value={null}
+        onChange={() => {}}
+      />
+      <Select
+        variant="warning"
+        items={[
+          { id: 1, name: 'Warning Option 1' },
+          { id: 2, name: 'Warning Option 2' }
+        ]}
+        placeholder="Warning variant"
+        value={null}
+        onChange={() => {}}
+      />
+      <Select
         variant="error"
         items={[
           { id: 1, name: 'Error Option 1' },
@@ -119,16 +147,6 @@ export const Variants: Story = {
           { id: 2, name: 'Info Option 2' }
         ]}
         placeholder="Info variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="success"
-        items={[
-          { id: 1, name: 'Success Option 1' },
-          { id: 2, name: 'Success Option 2' }
-        ]}
-        placeholder="Success variant"
         value={null}
         onChange={() => {}}
       />

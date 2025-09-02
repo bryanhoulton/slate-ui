@@ -19,7 +19,15 @@ const meta: Meta<typeof NumberInput> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: {
@@ -71,4 +79,34 @@ export const WithIcons: Story = {
     iconLeft: User,
     iconRight: Eye
   }
+}
+
+export const Variants: Story = {
+  render: () => (
+    <div className="space-y-4">
+      <NumberInput
+        variant="primary"
+        label="Primary"
+        placeholder="Enter number"
+      />
+      <NumberInput
+        variant="secondary"
+        label="Secondary"
+        placeholder="Enter number"
+      />
+      <NumberInput variant="subtle" label="Subtle" placeholder="Enter number" />
+      <NumberInput
+        variant="success"
+        label="Success"
+        placeholder="Enter number"
+      />
+      <NumberInput
+        variant="warning"
+        label="Warning"
+        placeholder="Enter number"
+      />
+      <NumberInput variant="error" label="Error" placeholder="Enter number" />
+      <NumberInput variant="info" label="Info" placeholder="Enter number" />
+    </div>
+  )
 }

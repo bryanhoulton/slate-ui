@@ -36,9 +36,10 @@ const variants = cva<
         secondary: 'text-anti-primary bg-primary',
         subtle:
           'text-default bg-transparent border-transparent border-transparent hover:shadow-none',
+        success: 'text-success-700 bg-success-100 border-transparent',
+        warning: 'text-warning-700 bg-warning-100 border-transparent',
         error: 'text-error-700 bg-error-100 border-transparent',
-        info: 'text-blue-700 bg-blue-100 border-transparent',
-        success: 'text-green-700 bg-green-100 border-transparent'
+        info: 'text-info-700 bg-info-100 border-transparent'
       }
     }
   }

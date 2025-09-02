@@ -29,9 +29,10 @@ export const textAreaVariants = cva<
         primary: 'ring-primary',
         secondary: 'ring-secondary',
         subtle: 'bg-transparent border-transparent hover:shadow-none',
+        success: 'ring-success',
+        warning: 'ring-warning',
         error: 'ring-error',
-        info: 'ring-blue-500',
-        success: 'ring-green-500'
+        info: 'ring-info'
       },
       error: {
         true: 'border-error-500'

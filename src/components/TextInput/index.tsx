@@ -34,9 +34,10 @@ export const textInputVariants = cva<
         primary: 'ring-primary',
         secondary: 'ring-secondary',
         subtle: 'bg-transparent border-transparent',
+        success: 'ring-success',
+        warning: 'ring-warning',
         error: 'ring-error',
-        info: 'ring-blue-500',
-        success: 'ring-green-500'
+        info: 'ring-info'
       },
       size: {
         sm: 'px-2 h-6',

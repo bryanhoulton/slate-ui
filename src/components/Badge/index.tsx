@@ -24,14 +24,15 @@ const variants = cva<
       primary: 'bg-primary text-anti-primary',
       secondary: 'bg-secondary text-anti-secondary border',
       subtle: '',
+      success: 'bg-success-100 text-success-700',
+      warning: 'bg-warning-100 text-warning-700',
       error: 'bg-error text-anti-error',
-      info: 'bg-blue-100 text-blue-700',
-      success: 'bg-green-100 text-green-700'
+      info: 'bg-info-100 text-info-700'
     },
     size: {
       sm: 'h-5 text-xs',
       md: 'h-6 text-sm',
-      lg: 'h-8 text-lg'
+      lg: 'h-8 text-lg px-3'
     },
     iconLeft: {},
     iconRight: {}

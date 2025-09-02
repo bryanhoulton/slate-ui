@@ -27,9 +27,12 @@ export const buttonVariants = cva<
         secondary: 'bg-secondary text-anti-secondary ring-secondary',
         subtle:
           'bg-transparent border-transparent hover:shadow-none disabled:bg-transparent',
+        success:
+          'bg-success-100 border-transparent text-success-700 ring-success',
+        warning:
+          'bg-warning-100 border-transparent text-warning-700 ring-warning',
         error: 'bg-error-100 border-transparent text-error-700 ring-error',
-        info: 'bg-blue-100 border-transparent text-blue-700 ring-blue-500',
-        success: 'bg-green-100 border-transparent text-green-700 ring-green-500'
+        info: 'bg-info-100 border-transparent text-info-700 ring-info'
       },
       size: {
         sm: 'px-2 min-w-6 h-6 text-sm',

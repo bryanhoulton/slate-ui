@@ -16,8 +16,16 @@
   --color-primary-900: #000000;
   --color-primary: var(--color-primary-500);
   --color-anti-primary: var(--color-white);
+  --color-secondary: var(--color-secondary-500);
+  --color-anti-secondary: var(--color-primary-300);
+  --color-success: var(--color-success-500);
+  --color-anti-success: var(--color-white);
+  --color-warning: var(--color-warning-500);
+  --color-anti-warning: var(--color-white);
   --color-error: var(--color-error-500);
   --color-anti-error: var(--color-white);
+  --color-info: var(--color-info-500);
+  --color-anti-info: var(--color-white);
   --color-muted: var(--color-primary-300);
   --color-muted-light: var(--color-primary-50);
 

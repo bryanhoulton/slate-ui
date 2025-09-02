@@ -1,5 +1,6 @@
 import {
   AlertCircle,
+  AlertTriangle,
   Bell,
   Check,
   CheckCircle,
@@ -29,7 +30,15 @@ const meta: Meta<typeof Badge> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: {
@@ -57,9 +66,10 @@ export const Variants: Story = {
       <Badge variant="primary">Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="subtle">Subtle</Badge>
+      <Badge variant="success">Success</Badge>
+      <Badge variant="warning">Warning</Badge>
       <Badge variant="error">Error</Badge>
       <Badge variant="info">Info</Badge>
-      <Badge variant="success">Success</Badge>
     </div>
   )
 }
@@ -222,6 +232,54 @@ export const AllSizesAndVariants: Story = {
       </div>
 
       <div>
+        <h3 className="mb-3 text-lg font-semibold">Success</h3>
+        <div className="flex flex-wrap items-center gap-4">
+          <Badge variant="success" size="sm">
+            Small
+          </Badge>
+          <Badge variant="success" size="md">
+            Medium
+          </Badge>
+          <Badge variant="success" size="lg">
+            Large
+          </Badge>
+          <Badge variant="success" size="sm" iconLeft={Check}>
+            With Icon
+          </Badge>
+          <Badge variant="success" size="md" iconLeft={Check}>
+            With Icon
+          </Badge>
+          <Badge variant="success" size="lg" iconLeft={Check}>
+            With Icon
+          </Badge>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-3 text-lg font-semibold">Warning</h3>
+        <div className="flex flex-wrap items-center gap-4">
+          <Badge variant="warning" size="sm">
+            Small
+          </Badge>
+          <Badge variant="warning" size="md">
+            Medium
+          </Badge>
+          <Badge variant="warning" size="lg">
+            Large
+          </Badge>
+          <Badge variant="warning" size="sm" iconLeft={AlertTriangle}>
+            With Icon
+          </Badge>
+          <Badge variant="warning" size="md" iconLeft={AlertTriangle}>
+            With Icon
+          </Badge>
+          <Badge variant="warning" size="lg" iconLeft={AlertTriangle}>
+            With Icon
+          </Badge>
+        </div>
+      </div>
+
+      <div>
         <h3 className="mb-3 text-lg font-semibold">Error</h3>
         <div className="flex flex-wrap items-center gap-4">
           <Badge variant="error" size="sm">
@@ -240,6 +298,30 @@ export const AllSizesAndVariants: Story = {
             With Icon
           </Badge>
           <Badge variant="error" size="lg" iconLeft={AlertCircle}>
+            With Icon
+          </Badge>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-3 text-lg font-semibold">Info</h3>
+        <div className="flex flex-wrap items-center gap-4">
+          <Badge variant="info" size="sm">
+            Small
+          </Badge>
+          <Badge variant="info" size="md">
+            Medium
+          </Badge>
+          <Badge variant="info" size="lg">
+            Large
+          </Badge>
+          <Badge variant="info" size="sm" iconLeft={Bell}>
+            With Icon
+          </Badge>
+          <Badge variant="info" size="md" iconLeft={Bell}>
+            With Icon
+          </Badge>
+          <Badge variant="info" size="lg" iconLeft={Bell}>
             With Icon
           </Badge>
         </div>

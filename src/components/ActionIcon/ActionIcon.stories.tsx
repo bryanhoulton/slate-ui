@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   Bookmark,
+  Check,
   Copy,
   Download,
   Edit,
@@ -43,7 +44,15 @@ const meta: Meta<typeof ActionIcon> = {
       control: {
         type: 'select'
       },
-      options: ['primary', 'secondary', 'subtle', 'error', 'info', 'success']
+      options: [
+        'primary',
+        'secondary',
+        'subtle',
+        'success',
+        'warning',
+        'error',
+        'info'
+      ]
     },
     size: {
       control: {
@@ -88,7 +97,10 @@ export const Variants: Story = {
       <ActionIcon variant="primary" icon={Plus} tooltip="Primary" />
       <ActionIcon variant="secondary" icon={Edit} tooltip="Secondary" />
       <ActionIcon variant="subtle" icon={Settings} tooltip="Subtle" />
+      <ActionIcon variant="success" icon={Check} tooltip="Success" />
+      <ActionIcon variant="warning" icon={AlertTriangle} tooltip="Warning" />
       <ActionIcon variant="error" icon={Trash2} tooltip="Error" />
+      <ActionIcon variant="info" icon={Plus} tooltip="Info" />
     </div>
   )
 }
@@ -221,7 +233,17 @@ export const InteractionIcons: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(['primary', 'secondary', 'subtle', 'error'] as const).map((variant) => (
+      {(
+        [
+          'primary',
+          'secondary',
+          'subtle',
+          'success',
+          'warning',
+          'error',
+          'info'
+        ] as const
+      ).map((variant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">
