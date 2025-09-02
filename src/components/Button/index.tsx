@@ -51,7 +51,7 @@ export const buttonVariants = cva<
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = 'primary',
+      variant = 'default',
       size = 'md',
       className,
       children,

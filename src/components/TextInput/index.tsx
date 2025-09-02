@@ -68,7 +68,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onChange,
       className,
       styles,
-      variant = 'primary',
+      variant = 'default',
       size = 'md',
       iconLeft,
       iconRight,

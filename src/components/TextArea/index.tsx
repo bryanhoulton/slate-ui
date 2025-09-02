@@ -52,7 +52,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onChange,
       className,
       styles,
-      variant = 'primary',
+      variant = 'default',
       ...props
     },
     ref

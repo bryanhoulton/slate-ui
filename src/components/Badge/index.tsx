@@ -55,7 +55,7 @@ const variants = cva<
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {
-      variant = 'primary',
+      variant = 'default',
       iconLeft,
       iconRight,
       size = 'md',

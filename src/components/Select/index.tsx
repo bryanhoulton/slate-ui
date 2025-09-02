@@ -49,7 +49,7 @@ const SlateComboboxInput = forwardRef<
 >(
   (
     {
-      variant = 'primary',
+      variant = 'default',
       className,
       onChange,
       displayValue,
@@ -91,7 +91,7 @@ export function Select<IdType extends SlateId>({
   disabled,
 
   // Theming.
-  variant = 'primary',
+  variant = 'default',
   size = 'md',
   placeholder = 'Select...',
 
