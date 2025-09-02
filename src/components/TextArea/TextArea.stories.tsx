@@ -3,7 +3,10 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  STORY_VARIANTS
+} from '../../utilities'
 import { TextArea } from './'
 
 const meta: Meta<typeof TextArea> = {
@@ -14,15 +17,7 @@ const meta: Meta<typeof TextArea> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
 
     label: {
@@ -67,9 +62,9 @@ export const Variants: Story = {
         placeholder="Secondary variant textarea"
       />
       <TextArea
-        variant="subtle"
-        label="Subtle"
-        placeholder="Subtle variant textarea"
+        variant="default"
+        label="Default"
+        placeholder="Default variant textarea"
       />
       <TextArea
         variant="success"
@@ -173,7 +168,7 @@ export const FormExamples: Story = {
             label="Additional Information"
             placeholder="Any other relevant details..."
             rows={3}
-            variant="subtle"
+            variant="default"
           />
         </div>
       </div>
@@ -241,7 +236,7 @@ export const AllVariants: Story = {
         [
           'primary',
           'secondary',
-          'subtle',
+          'default',
           'success',
           'warning',
           'error',

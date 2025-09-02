@@ -10,7 +10,12 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { Select } from './'
 
 const meta: Meta<typeof Select> = {
@@ -22,21 +27,13 @@ const meta: Meta<typeof Select> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     onChange: { table: { disable: true } },
     onSearchChange: { table: { disable: true } },
@@ -80,76 +77,25 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="space-y-4">
-      <Select
-        variant="primary"
-        items={[
-          { id: 1, name: 'Primary Option 1' },
-          { id: 2, name: 'Primary Option 2' }
-        ]}
-        placeholder="Primary variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="secondary"
-        items={[
-          { id: 1, name: 'Secondary Option 1' },
-          { id: 2, name: 'Secondary Option 2' }
-        ]}
-        placeholder="Secondary variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="subtle"
-        items={[
-          { id: 1, name: 'Subtle Option 1' },
-          { id: 2, name: 'Subtle Option 2' }
-        ]}
-        placeholder="Subtle variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="success"
-        items={[
-          { id: 1, name: 'Success Option 1' },
-          { id: 2, name: 'Success Option 2' }
-        ]}
-        placeholder="Success variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="warning"
-        items={[
-          { id: 1, name: 'Warning Option 1' },
-          { id: 2, name: 'Warning Option 2' }
-        ]}
-        placeholder="Warning variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="error"
-        items={[
-          { id: 1, name: 'Error Option 1' },
-          { id: 2, name: 'Error Option 2' }
-        ]}
-        placeholder="Error variant"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        variant="info"
-        items={[
-          { id: 1, name: 'Info Option 1' },
-          { id: 2, name: 'Info Option 2' }
-        ]}
-        placeholder="Info variant"
-        value={null}
-        onChange={() => {}}
-      />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <Select
+          key={variant}
+          variant={variant}
+          items={[
+            {
+              id: 1,
+              name: `${variant.charAt(0).toUpperCase() + variant.slice(1)} Option 1`
+            },
+            {
+              id: 2,
+              name: `${variant.charAt(0).toUpperCase() + variant.slice(1)} Option 2`
+            }
+          ]}
+          placeholder={`${variant.charAt(0).toUpperCase() + variant.slice(1)} variant`}
+          value={null}
+          onChange={() => {}}
+        />
+      ))}
     </div>
   )
 }
@@ -157,36 +103,25 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="space-y-4">
-      <Select
-        size="sm"
-        items={[
-          { id: 1, name: 'Small Option 1' },
-          { id: 2, name: 'Small Option 2' }
-        ]}
-        placeholder="Small size"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        size="md"
-        items={[
-          { id: 1, name: 'Medium Option 1' },
-          { id: 2, name: 'Medium Option 2' }
-        ]}
-        placeholder="Medium size"
-        value={null}
-        onChange={() => {}}
-      />
-      <Select
-        size="lg"
-        items={[
-          { id: 1, name: 'Large Option 1' },
-          { id: 2, name: 'Large Option 2' }
-        ]}
-        placeholder="Large size"
-        value={null}
-        onChange={() => {}}
-      />
+      {STORY_SIZES.map((size) => (
+        <Select
+          key={size}
+          size={size}
+          items={[
+            {
+              id: 1,
+              name: `${size.charAt(0).toUpperCase() + size.slice(1)} Option 1`
+            },
+            {
+              id: 2,
+              name: `${size.charAt(0).toUpperCase() + size.slice(1)} Option 2`
+            }
+          ]}
+          placeholder={`${size.charAt(0).toUpperCase() + size.slice(1)} size`}
+          value={null}
+          onChange={() => {}}
+        />
+      ))}
     </div>
   )
 }

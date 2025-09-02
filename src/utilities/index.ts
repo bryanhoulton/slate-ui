@@ -47,3 +47,4 @@ export function useSometimesControlled<T>({
 
 export * from './types'
 export * from './stories'
+export * from './story-variants'

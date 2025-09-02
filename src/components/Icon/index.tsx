@@ -27,9 +27,10 @@ const variants = cva<
       true: 'animate-spin'
     },
     variant: {
-      primary: 'text-default',
+      primary: 'text-primary',
       secondary: 'text-secondary',
-      subtle: 'text-inherit',
+      default: 'text-inherit',
+      subtle: 'text-muted',
       success: 'text-success',
       warning: 'text-warning',
       error: 'text-error',
@@ -44,7 +45,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
       icon: Icon,
       className,
       size = 'md',
-      variant = 'primary',
+      variant = 'default',
       spin = false,
       ...props
     },

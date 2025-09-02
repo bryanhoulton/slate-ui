@@ -32,10 +32,11 @@ const variants = cva<
         lg: 'w-12 h-12'
       },
       variant: {
-        primary: 'text-default bg-white',
-        secondary: 'text-anti-primary bg-primary',
+        primary: 'bg-primary text-anti-primary',
+        secondary: 'bg-secondary text-anti-secondary border',
+        default: 'bg-transparent hover:shadow-none',
         subtle:
-          'text-default bg-transparent border-transparent border-transparent hover:shadow-none',
+          'bg-transparent border-transparent hover:shadow-none hover:bg-muted-light',
         success: 'text-success-700 bg-success-100 border-transparent',
         warning: 'text-warning-700 bg-warning-100 border-transparent',
         error: 'text-error-700 bg-error-100 border-transparent',
@@ -49,7 +50,7 @@ export const ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>(
   (
     {
       icon,
-      variant = 'primary',
+      variant = 'default',
       size = 'md',
       className,
       tooltip,
@@ -65,7 +66,7 @@ export const ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>(
         disabled={disabled}
         {...props}
       >
-        <Icon icon={icon} size={size} variant="subtle" className={className} />
+        <Icon icon={icon} size={size} variant="default" className={className} />
       </button>
     </Tooltip>
   )

@@ -1,6 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  STORY_SIZES
+} from '../../utilities'
 import { Progress } from './'
 
 const meta: Meta<typeof Progress> = {
@@ -11,13 +17,13 @@ const meta: Meta<typeof Progress> = {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     }
   })
 }

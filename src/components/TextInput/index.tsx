@@ -33,7 +33,8 @@ export const textInputVariants = cva<
       variant: {
         primary: 'ring-primary',
         secondary: 'ring-secondary',
-        subtle: 'bg-transparent border-transparent',
+        default: '',
+        subtle: 'border-transparent',
         success: 'ring-success',
         warning: 'ring-warning',
         error: 'ring-error',

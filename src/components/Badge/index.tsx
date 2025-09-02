@@ -23,7 +23,8 @@ const variants = cva<
     variant: {
       primary: 'bg-primary text-anti-primary',
       secondary: 'bg-secondary text-anti-secondary border',
-      subtle: '',
+      default: 'border',
+      subtle: 'border-transparent',
       success: 'bg-success-100 text-success-700',
       warning: 'bg-warning-100 text-warning-700',
       error: 'bg-error text-anti-error',
@@ -83,7 +84,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         {iconLeft && (
           <Icon
             icon={iconLeft}
-            variant="subtle"
+            variant="default"
             className={size === 'sm' ? 'h-3 w-3' : 'h-4 w-4'}
           />
         )}
@@ -91,7 +92,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         {iconRight && (
           <Icon
             icon={iconRight}
-            variant="subtle"
+            variant="default"
             className={size === 'sm' ? 'h-3 w-3' : 'h-4 w-4'}
           />
         )}

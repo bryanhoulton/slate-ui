@@ -1,20 +1,20 @@
 import React, {
   forwardRef,
   useEffect,
-  useState,
-} from 'react';
+  useState
+} from 'react'
 
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react'
 
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from '@radix-ui/react-dialog'
 
 import {
   cn,
-  useSometimesControlled,
-} from '../../utilities';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { ConfirmProps } from './Confirm.types';
+  useSometimesControlled
+} from '../../utilities'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
+import { ConfirmProps } from './Confirm.types'
 
 export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
   (
@@ -85,7 +85,7 @@ export const Confirm = forwardRef<HTMLDivElement, ConfirmProps>(
               <div className="flex justify-end gap-2">
                 <Dialog.Close asChild>
                   <Button
-                    variant="subtle"
+                    variant="default"
                     styles={styles?.cancelButton}
                     disabled={loading}
                   >

@@ -8,7 +8,12 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { NumberInput } from './'
 
 const meta: Meta<typeof NumberInput> = {
@@ -19,21 +24,13 @@ const meta: Meta<typeof NumberInput> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     label: {
       control: {
@@ -84,29 +81,14 @@ export const WithIcons: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="space-y-4">
-      <NumberInput
-        variant="primary"
-        label="Primary"
-        placeholder="Enter number"
-      />
-      <NumberInput
-        variant="secondary"
-        label="Secondary"
-        placeholder="Enter number"
-      />
-      <NumberInput variant="subtle" label="Subtle" placeholder="Enter number" />
-      <NumberInput
-        variant="success"
-        label="Success"
-        placeholder="Enter number"
-      />
-      <NumberInput
-        variant="warning"
-        label="Warning"
-        placeholder="Enter number"
-      />
-      <NumberInput variant="error" label="Error" placeholder="Enter number" />
-      <NumberInput variant="info" label="Info" placeholder="Enter number" />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <NumberInput
+          key={variant}
+          variant={variant}
+          label={variant.charAt(0).toUpperCase() + variant.slice(1)}
+          placeholder="Enter number"
+        />
+      ))}
     </div>
   )
 }

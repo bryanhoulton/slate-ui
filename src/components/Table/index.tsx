@@ -23,7 +23,7 @@ export const tableVariants = cva(['table-auto divide-y'], {
 export const tableRowVariants = cva([''], {
   variants: {
     clickable: {
-      true: 'cursor-pointer hover:bg-subtle',
+      true: 'cursor-pointer hover:bg-default',
       false: ''
     }
   }
@@ -89,12 +89,12 @@ export function Table<R extends RowType>({
                   >
                     <div className="flex items-center gap-2">
                       {column.icon && (
-                        <Icon icon={column.icon} variant="subtle" />
+                        <Icon icon={column.icon} variant="default" />
                       )}
                       {column.value}
                       {column.tooltip && (
                         <Tooltip content={column.tooltip}>
-                          <Icon icon={Info} variant="subtle" />
+                          <Icon icon={Info} variant="default" />
                         </Tooltip>
                       )}
                     </div>

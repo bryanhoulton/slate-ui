@@ -10,6 +10,12 @@ import type {
   StoryObj
 } from '@storybook/react'
 
+import {
+  SlateSize,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { PhoneInput } from './'
 import { CountryCode } from './PhoneInput.types'
 
@@ -23,19 +29,11 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     autoFormat: {
       control: { type: 'boolean' }
@@ -100,13 +98,14 @@ export const Controlled: Story = {
 export const Variants: Story = {
   render: (args) => (
     <div className="space-y-4">
-      <PhoneInput {...args} variant="primary" label="Primary Variant" />
-      <PhoneInput {...args} variant="secondary" label="Secondary Variant" />
-      <PhoneInput {...args} variant="subtle" label="Subtle Variant" />
-      <PhoneInput {...args} variant="success" label="Success Variant" />
-      <PhoneInput {...args} variant="warning" label="Warning Variant" />
-      <PhoneInput {...args} variant="error" label="Error Variant" />
-      <PhoneInput {...args} variant="info" label="Info Variant" />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <PhoneInput
+          key={variant}
+          {...args}
+          variant={variant}
+          label={`${variant.charAt(0).toUpperCase() + variant.slice(1)} Variant`}
+        />
+      ))}
     </div>
   ),
   args: {
@@ -118,9 +117,14 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="space-y-4">
-      <PhoneInput {...args} size="sm" label="Small Size" />
-      <PhoneInput {...args} size="md" label="Medium Size" />
-      <PhoneInput {...args} size="lg" label="Large Size" />
+      {STORY_SIZES.map((size: SlateSize) => (
+        <PhoneInput
+          key={size}
+          {...args}
+          size={size}
+          label={`${size.charAt(0).toUpperCase() + size.slice(1)} Size`}
+        />
+      ))}
     </div>
   ),
   args: {

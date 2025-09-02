@@ -18,7 +18,13 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateSize,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { Button } from './'
 
 const meta: Meta<typeof Button> = {
@@ -29,21 +35,13 @@ const meta: Meta<typeof Button> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     disabled: {
       control: {
@@ -70,13 +68,11 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="subtle">Subtle</Button>
-      <Button variant="success">Success</Button>
-      <Button variant="warning">Warning</Button>
-      <Button variant="error">Error</Button>
-      <Button variant="info">Info</Button>
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <Button key={variant} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Button>
+      ))}
     </div>
   )
 }
@@ -84,9 +80,11 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
+      {STORY_SIZES.map((size: SlateSize) => (
+        <Button key={size} size={size}>
+          {size.charAt(0).toUpperCase() + size.slice(1)}
+        </Button>
+      ))}
     </div>
   )
 }
@@ -189,14 +187,27 @@ export const ActionButtons: Story = {
       </div>
 
       <div>
+        <h3 className="mb-3 text-lg font-semibold">Default Actions</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button variant="default">Skip</Button>
+          <Button variant="default" iconLeft={X}>
+            Dismiss
+          </Button>
+          <Button variant="default" iconRight={ArrowRight}>
+            Learn More
+          </Button>
+        </div>
+      </div>
+
+      <div>
         <h3 className="mb-3 text-lg font-semibold">Subtle Actions</h3>
         <div className="flex flex-wrap gap-4">
-          <Button variant="subtle">Skip</Button>
+          <Button variant="subtle">Close</Button>
           <Button variant="subtle" iconLeft={X}>
             Dismiss
           </Button>
           <Button variant="subtle" iconRight={ArrowRight}>
-            Learn More
+            View Details
           </Button>
         </div>
       </div>
@@ -207,56 +218,90 @@ export const ActionButtons: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(
-        [
-          'primary',
-          'secondary',
-          'subtle',
-          'success',
-          'warning',
-          'error',
-          'info'
-        ] as const
-      ).map((variant) => (
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-4">
-              <Button variant={variant} size="sm">
-                Small
-              </Button>
-              <Button variant={variant} size="md">
-                Medium
-              </Button>
-              <Button variant={variant} size="lg">
-                Large
-              </Button>
+              {STORY_SIZES.map((size: SlateSize) => (
+                <Button key={size} variant={variant} size={size}>
+                  {size.charAt(0).toUpperCase() + size.slice(1)}
+                </Button>
+              ))}
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <Button variant={variant} size="sm" iconLeft={Plus}>
-                Small
-              </Button>
-              <Button variant={variant} size="md" iconLeft={Plus}>
-                Medium
-              </Button>
-              <Button variant={variant} size="lg" iconLeft={Plus}>
-                Large
-              </Button>
+              {STORY_SIZES.map((size: SlateSize) => (
+                <Button
+                  key={`icon-${size}`}
+                  variant={variant}
+                  size={size}
+                  iconLeft={Plus}
+                >
+                  {size.charAt(0).toUpperCase() + size.slice(1)}
+                </Button>
+              ))}
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <Button variant={variant} size="sm" disabled>
+              <Button variant={variant} size={STORY_SIZES[0]} disabled>
                 Disabled
               </Button>
-              <Button variant={variant} size="md" loading>
+              <Button variant={variant} size={STORY_SIZES[1]} loading>
                 Loading
               </Button>
-              <Button variant={variant} size="lg" iconLeft={Plus} loading>
+              <Button
+                variant={variant}
+                size={STORY_SIZES[2]}
+                iconLeft={Plus}
+                loading
+              >
                 Loading
               </Button>
             </div>
           </div>
         </div>
       ))}
+    </div>
+  )
+}
+
+export const DefaultVsSubtle: Story = {
+  render: () => (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-3 text-lg font-semibold">
+          Default vs Subtle Comparison
+        </h3>
+        <div className="space-y-4">
+          <div>
+            <p className="mb-2 text-sm text-gray-600">
+              Default variant (has border):
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button variant="default">Default Button</Button>
+              <Button variant="default" iconLeft={Plus}>
+                Add Item
+              </Button>
+              <Button variant="default" disabled>
+                Disabled
+              </Button>
+            </div>
+          </div>
+          <div>
+            <p className="mb-2 text-sm text-gray-600">
+              Subtle variant (no border, no background):
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button variant="subtle">Subtle Button</Button>
+              <Button variant="subtle" iconLeft={Plus}>
+                Add Item
+              </Button>
+              <Button variant="subtle" disabled>
+                Disabled
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -271,7 +316,7 @@ export const FormButtons: Story = {
           <Button type="button" variant="secondary">
             Cancel
           </Button>
-          <Button type="reset" variant="subtle">
+          <Button type="reset" variant="default">
             Reset
           </Button>
         </div>

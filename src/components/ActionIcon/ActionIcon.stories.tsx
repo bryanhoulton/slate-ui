@@ -1,7 +1,6 @@
 import {
   AlertTriangle,
   Bookmark,
-  Check,
   Copy,
   Download,
   Edit,
@@ -33,7 +32,13 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateSize,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { ActionIcon } from './'
 
 const meta: Meta<typeof ActionIcon> = {
@@ -44,21 +49,13 @@ const meta: Meta<typeof ActionIcon> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     tooltip: {
       control: 'text'
@@ -94,13 +91,14 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <ActionIcon variant="primary" icon={Plus} tooltip="Primary" />
-      <ActionIcon variant="secondary" icon={Edit} tooltip="Secondary" />
-      <ActionIcon variant="subtle" icon={Settings} tooltip="Subtle" />
-      <ActionIcon variant="success" icon={Check} tooltip="Success" />
-      <ActionIcon variant="warning" icon={AlertTriangle} tooltip="Warning" />
-      <ActionIcon variant="error" icon={Trash2} tooltip="Error" />
-      <ActionIcon variant="info" icon={Plus} tooltip="Info" />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <ActionIcon
+          key={variant}
+          variant={variant}
+          icon={Plus}
+          tooltip={variant.charAt(0).toUpperCase() + variant.slice(1)}
+        />
+      ))}
     </div>
   )
 }
@@ -108,9 +106,14 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
-      <ActionIcon size="sm" icon={Plus} tooltip="Small" />
-      <ActionIcon size="md" icon={Plus} tooltip="Medium" />
-      <ActionIcon size="lg" icon={Plus} tooltip="Large" />
+      {STORY_SIZES.map((size: SlateSize) => (
+        <ActionIcon
+          key={size}
+          size={size}
+          icon={Plus}
+          tooltip={size.charAt(0).toUpperCase() + size.slice(1)}
+        />
+      ))}
     </div>
   )
 }
@@ -172,15 +175,15 @@ export const CommonActions: Story = {
       </div>
 
       <div>
-        <h3 className="mb-3 text-lg font-semibold">Subtle Actions</h3>
+        <h3 className="mb-3 text-lg font-semibold">Default Actions</h3>
         <div className="flex flex-wrap gap-4">
           <ActionIcon
-            variant="subtle"
+            variant="default"
             icon={MoreHorizontal}
             tooltip="More options"
           />
-          <ActionIcon variant="subtle" icon={Filter} tooltip="Filter" />
-          <ActionIcon variant="subtle" icon={RefreshCw} tooltip="Refresh" />
+          <ActionIcon variant="default" icon={Filter} tooltip="Filter" />
+          <ActionIcon variant="default" icon={RefreshCw} tooltip="Refresh" />
         </div>
       </div>
     </div>
@@ -193,10 +196,10 @@ export const InteractionIcons: Story = {
       <div>
         <h3 className="mb-3 text-lg font-semibold">Social Actions</h3>
         <div className="flex flex-wrap gap-4">
-          <ActionIcon variant="subtle" icon={Heart} tooltip="Like" />
-          <ActionIcon variant="subtle" icon={Star} tooltip="Favorite" />
-          <ActionIcon variant="subtle" icon={Bookmark} tooltip="Bookmark" />
-          <ActionIcon variant="subtle" icon={Share} tooltip="Share" />
+          <ActionIcon variant="default" icon={Heart} tooltip="Like" />
+          <ActionIcon variant="default" icon={Star} tooltip="Favorite" />
+          <ActionIcon variant="default" icon={Bookmark} tooltip="Bookmark" />
+          <ActionIcon variant="default" icon={Share} tooltip="Share" />
         </div>
       </div>
 
@@ -221,9 +224,9 @@ export const InteractionIcons: Story = {
       <div>
         <h3 className="mb-3 text-lg font-semibold">Window Controls</h3>
         <div className="flex flex-wrap gap-4">
-          <ActionIcon variant="subtle" icon={Maximize} tooltip="Maximize" />
-          <ActionIcon variant="subtle" icon={Minimize} tooltip="Minimize" />
-          <ActionIcon variant="subtle" icon={X} tooltip="Close" />
+          <ActionIcon variant="default" icon={Maximize} tooltip="Maximize" />
+          <ActionIcon variant="default" icon={Minimize} tooltip="Minimize" />
+          <ActionIcon variant="default" icon={X} tooltip="Close" />
         </div>
       </div>
     </div>
@@ -233,199 +236,53 @@ export const InteractionIcons: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(
-        [
-          'primary',
-          'secondary',
-          'subtle',
-          'success',
-          'warning',
-          'error',
-          'info'
-        ] as const
-      ).map((variant) => (
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-4">
-              <ActionIcon
-                variant={variant}
-                size="sm"
-                icon={Plus}
-                tooltip="Small"
-              />
-              <ActionIcon
-                variant={variant}
-                size="md"
-                icon={Plus}
-                tooltip="Medium"
-              />
-              <ActionIcon
-                variant={variant}
-                size="lg"
-                icon={Plus}
-                tooltip="Large"
-              />
+              {STORY_SIZES.map((size: SlateSize) => (
+                <ActionIcon
+                  key={`${variant}-${size}`}
+                  variant={variant}
+                  size={size}
+                  icon={Plus}
+                  tooltip={size.charAt(0).toUpperCase() + size.slice(1)}
+                />
+              ))}
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <ActionIcon
-                variant={variant}
-                size="sm"
-                icon={Edit}
-                tooltip="Small Edit"
-              />
-              <ActionIcon
-                variant={variant}
-                size="md"
-                icon={Settings}
-                tooltip="Medium Settings"
-              />
-              <ActionIcon
-                variant={variant}
-                size="lg"
-                icon={Search}
-                tooltip="Large Search"
-              />
+              {STORY_SIZES.map((size: SlateSize, index) => {
+                const icons = [Edit, Settings, Search]
+                return (
+                  <ActionIcon
+                    key={`${variant}-${size}-icon`}
+                    variant={variant}
+                    size={size}
+                    icon={icons[index] || Edit}
+                    tooltip={`${size.charAt(0).toUpperCase() + size.slice(1)} Icon`}
+                  />
+                )
+              })}
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <ActionIcon
-                variant={variant}
-                size="sm"
-                icon={Plus}
-                tooltip="Small Disabled"
-                disabled
-              />
-              <ActionIcon
-                variant={variant}
-                size="md"
-                icon={Edit}
-                tooltip="Medium Disabled"
-                disabled
-              />
-              <ActionIcon
-                variant={variant}
-                size="lg"
-                icon={Settings}
-                tooltip="Large Disabled"
-                disabled
-              />
+              {STORY_SIZES.map((size: SlateSize, index) => {
+                const icons = [Plus, Edit, Settings]
+                return (
+                  <ActionIcon
+                    key={`${variant}-${size}-disabled`}
+                    variant={variant}
+                    size={size}
+                    icon={icons[index] || Plus}
+                    tooltip={`${size.charAt(0).toUpperCase() + size.slice(1)} Disabled`}
+                    disabled
+                  />
+                )
+              })}
             </div>
           </div>
         </div>
       ))}
-    </div>
-  )
-}
-
-export const ToolbarExample: Story = {
-  render: () => (
-    <div className="space-y-6">
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Text Editor Toolbar</h3>
-        <div className="flex gap-1 p-2 bg-gray-50 rounded-lg border">
-          <ActionIcon variant="subtle" size="sm" icon={Plus} tooltip="Add" />
-          <ActionIcon variant="subtle" size="sm" icon={Edit} tooltip="Edit" />
-          <ActionIcon variant="subtle" size="sm" icon={Copy} tooltip="Copy" />
-          <div className="w-px bg-gray-300 mx-1" />
-          <ActionIcon
-            variant="subtle"
-            size="sm"
-            icon={Upload}
-            tooltip="Upload"
-          />
-          <ActionIcon
-            variant="subtle"
-            size="sm"
-            icon={Download}
-            tooltip="Download"
-          />
-          <div className="w-px bg-gray-300 mx-1" />
-          <ActionIcon
-            variant="error"
-            size="sm"
-            icon={Trash2}
-            tooltip="Delete"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Media Player Controls</h3>
-        <div className="flex gap-2 p-3 bg-black rounded-lg items-center justify-center">
-          <ActionIcon
-            variant="secondary"
-            size="sm"
-            icon={RefreshCw}
-            tooltip="Previous"
-          />
-          <ActionIcon size="lg" icon={Play} tooltip="Play" />
-          <ActionIcon
-            variant="secondary"
-            size="sm"
-            icon={RefreshCw}
-            tooltip="Next"
-          />
-          <div className="w-px bg-gray-600 mx-2" />
-          <ActionIcon
-            variant="subtle"
-            size="sm"
-            icon={Volume2}
-            tooltip="Volume"
-          />
-          <ActionIcon
-            variant="subtle"
-            size="sm"
-            icon={Maximize}
-            tooltip="Fullscreen"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Card Actions</h3>
-        <div className="p-4 border rounded-lg bg-white">
-          <div className="flex justify-between items-start mb-3">
-            <h4 className="font-medium">Card Title</h4>
-            <div className="flex gap-1">
-              <ActionIcon
-                variant="subtle"
-                size="sm"
-                icon={Heart}
-                tooltip="Like"
-              />
-              <ActionIcon
-                variant="subtle"
-                size="sm"
-                icon={Bookmark}
-                tooltip="Bookmark"
-              />
-              <ActionIcon
-                variant="subtle"
-                size="sm"
-                icon={MoreHorizontal}
-                tooltip="More"
-              />
-            </div>
-          </div>
-          <p className="text-gray-600 text-sm mb-3">
-            Card content goes here...
-          </p>
-          <div className="flex justify-end gap-2">
-            <ActionIcon
-              variant="secondary"
-              size="sm"
-              icon={Edit}
-              tooltip="Edit"
-            />
-            <ActionIcon
-              variant="error"
-              size="sm"
-              icon={Trash2}
-              tooltip="Delete"
-            />
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

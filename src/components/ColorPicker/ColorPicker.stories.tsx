@@ -3,7 +3,12 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { ColorPicker } from './'
 
 const meta: Meta<typeof ColorPicker> = {
@@ -14,21 +19,13 @@ const meta: Meta<typeof ColorPicker> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     }
   })
 }
@@ -48,13 +45,14 @@ export const Primary: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="space-y-4">
-      <ColorPicker variant="primary" label="Primary" className="w-96" />
-      <ColorPicker variant="secondary" label="Secondary" className="w-96" />
-      <ColorPicker variant="subtle" label="Subtle" className="w-96" />
-      <ColorPicker variant="success" label="Success" className="w-96" />
-      <ColorPicker variant="warning" label="Warning" className="w-96" />
-      <ColorPicker variant="error" label="Error" className="w-96" />
-      <ColorPicker variant="info" label="Info" className="w-96" />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <ColorPicker
+          key={variant}
+          variant={variant}
+          label={variant.charAt(0).toUpperCase() + variant.slice(1)}
+          className="w-96"
+        />
+      ))}
     </div>
   )
 }

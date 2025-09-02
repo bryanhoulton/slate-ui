@@ -25,8 +25,9 @@ export const buttonVariants = cva<
       variant: {
         primary: 'bg-primary ring-primary text-anti-primary',
         secondary: 'bg-secondary text-anti-secondary ring-secondary',
+        default: 'bg-transparent border hover:shadow-none',
         subtle:
-          'bg-transparent border-transparent hover:shadow-none disabled:bg-transparent',
+          'bg-transparent border-transparent hover:shadow-none hover:bg-muted-light',
         success:
           'bg-success-100 border-transparent text-success-700 ring-success',
         warning:
@@ -72,16 +73,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     >
       {loading && (
         <div className="absolute inset-0 visible flex items-center justify-center text-muted">
-          <Icon icon={LoaderCircle} variant="subtle" className="animate-spin" />
+          <Icon
+            icon={LoaderCircle}
+            variant="default"
+            className="animate-spin"
+          />
         </div>
       )}
 
       {iconLeft && (
-        <Icon icon={iconLeft} variant="subtle" style={styles?.icon} />
+        <Icon icon={iconLeft} variant="default" style={styles?.icon} />
       )}
       {children}
       {iconRight && (
-        <Icon icon={iconRight} variant="subtle" style={styles?.icon} />
+        <Icon icon={iconRight} variant="default" style={styles?.icon} />
       )}
     </button>
   )

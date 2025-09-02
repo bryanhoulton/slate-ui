@@ -16,7 +16,10 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  ACCORDION_TYPE_OPTIONS,
+  args
+} from '../../utilities'
 import { Accordion } from './'
 
 const meta: Meta<typeof Accordion> = {
@@ -27,7 +30,7 @@ const meta: Meta<typeof Accordion> = {
       control: {
         type: 'select'
       },
-      options: ['single', 'multiple']
+      options: ACCORDION_TYPE_OPTIONS
     },
     collapsible: {
       control: {
@@ -240,7 +243,7 @@ export const WithBadges: Story = {
         leftIcon: HelpCircle,
         badge: {
           children: '24/7',
-          variant: 'subtle',
+          variant: 'default',
           size: 'sm'
         },
         content:

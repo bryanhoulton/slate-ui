@@ -73,7 +73,7 @@ All components follow a consistent variant system:
 
 - **primary** - Main brand colors, high emphasis
 - **secondary** - Secondary brand colors, medium emphasis
-- **subtle** - Low emphasis, minimal styling
+- **default** - Low emphasis, minimal styling
 - **error** - Error states, light red background with dark red text
 - **info** - Informational states, light blue background with dark blue text
 - **success** - Success states, light green background with dark green text
@@ -236,7 +236,7 @@ function InteractiveExample() {
         <Button onClick={() => setModalOpen(true)}>Edit Item</Button>
       </Tooltip>
 
-      <Button variant="subtle" onClick={handleDelete}>
+      <Button variant="default" onClick={handleDelete}>
         Delete
       </Button>
 
@@ -246,7 +246,7 @@ function InteractiveExample() {
         </Modal.Header>
         <Modal.Content>{/* Modal content */}</Modal.Content>
         <Modal.Footer>
-          <Button variant="subtle" onClick={() => setModalOpen(false)}>
+          <Button variant="default" onClick={() => setModalOpen(false)}>
             Cancel
           </Button>
           <Button>Save Changes</Button>
@@ -309,7 +309,7 @@ Most components share these common props:
 
 ```tsx
 interface CommonProps {
-  variant?: 'primary' | 'secondary' | 'subtle' | 'error' | 'info' | 'success'
+  variant?: 'primary' | 'secondary' | 'default' | 'error' | 'info' | 'success'
   size?: 'sm' | 'md' | 'lg'
   className?: string
   disabled?: boolean

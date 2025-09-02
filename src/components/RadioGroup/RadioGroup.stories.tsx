@@ -1,8 +1,14 @@
 import { Plus } from 'lucide-react'
 
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type {
+  Meta,
+  StoryObj
+} from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  RADIO_ORIENTATION_OPTIONS
+} from '../../utilities'
 import { RadioGroup } from './'
 
 const meta: Meta<typeof RadioGroup> = {
@@ -16,7 +22,7 @@ const meta: Meta<typeof RadioGroup> = {
     value: { table: { disable: true } },
     search: { table: { disable: true } },
     disabled: { control: 'boolean' },
-    orientation: { control: 'radio', options: ['horizontal', 'vertical'] }
+    orientation: { control: 'radio', options: RADIO_ORIENTATION_OPTIONS }
   }),
   args: {
     orientation: 'vertical'

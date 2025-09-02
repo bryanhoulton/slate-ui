@@ -62,7 +62,7 @@ export function RadioGroup<T extends SlateId>({
                 icon={item.iconLeft}
                 styles={styles?.iconLeft}
                 className="w-4 h-4"
-                variant="subtle"
+                variant="default"
               />
             )}
             <div className="flex flex-col">
@@ -83,7 +83,7 @@ export function RadioGroup<T extends SlateId>({
                 icon={item.iconRight}
                 styles={styles?.iconRight}
                 className="w-4 h-4 ml-auto"
-                variant="subtle"
+                variant="default"
               />
             )}
           </div>

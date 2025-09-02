@@ -20,7 +20,13 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateSize,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { TextInput } from './'
 
 const meta: Meta<typeof TextInput> = {
@@ -31,21 +37,13 @@ const meta: Meta<typeof TextInput> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     },
     label: {
       control: {
@@ -78,29 +76,14 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="space-y-4">
-      <TextInput
-        variant="primary"
-        label="Primary"
-        placeholder="Primary variant"
-      />
-      <TextInput
-        variant="secondary"
-        label="Secondary"
-        placeholder="Secondary variant"
-      />
-      <TextInput variant="subtle" label="Subtle" placeholder="Subtle variant" />
-      <TextInput
-        variant="success"
-        label="Success"
-        placeholder="Success variant"
-      />
-      <TextInput
-        variant="warning"
-        label="Warning"
-        placeholder="Warning variant"
-      />
-      <TextInput variant="error" label="Error" placeholder="Error variant" />
-      <TextInput variant="info" label="Info" placeholder="Info variant" />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <TextInput
+          key={variant}
+          variant={variant}
+          label={variant.charAt(0).toUpperCase() + variant.slice(1)}
+          placeholder={`${variant.charAt(0).toUpperCase() + variant.slice(1)} variant`}
+        />
+      ))}
     </div>
   )
 }
@@ -108,9 +91,14 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="space-y-4">
-      <TextInput size="sm" label="Small" placeholder="Small size" />
-      <TextInput size="md" label="Medium" placeholder="Medium size" />
-      <TextInput size="lg" label="Large" placeholder="Large size" />
+      {STORY_SIZES.map((size: SlateSize) => (
+        <TextInput
+          key={size}
+          size={size}
+          label={size.charAt(0).toUpperCase() + size.slice(1)}
+          placeholder={`${size.charAt(0).toUpperCase() + size.slice(1)} size`}
+        />
+      ))}
     </div>
   )
 }
@@ -307,83 +295,54 @@ export const ValidationStates: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(
-        [
-          'primary',
-          'secondary',
-          'subtle',
-          'success',
-          'warning',
-          'error',
-          'info'
-        ] as const
-      ).map((variant) => (
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="space-y-3">
             <div className="grid grid-cols-3 gap-4">
-              <TextInput
-                variant={variant}
-                size="sm"
-                label="Small"
-                placeholder="Small"
-              />
-              <TextInput
-                variant={variant}
-                size="md"
-                label="Medium"
-                placeholder="Medium"
-              />
-              <TextInput
-                variant={variant}
-                size="lg"
-                label="Large"
-                placeholder="Large"
-              />
+              {STORY_SIZES.map((size: SlateSize) => (
+                <TextInput
+                  key={`${variant}-${size}`}
+                  variant={variant}
+                  size={size}
+                  label={size.charAt(0).toUpperCase() + size.slice(1)}
+                  placeholder={size.charAt(0).toUpperCase() + size.slice(1)}
+                />
+              ))}
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {STORY_SIZES.map((size: SlateSize) => (
+                <TextInput
+                  key={`${variant}-${size}-icon`}
+                  variant={variant}
+                  size={size}
+                  iconLeft={User}
+                  label="With Icon"
+                  placeholder={size.charAt(0).toUpperCase() + size.slice(1)}
+                />
+              ))}
             </div>
             <div className="grid grid-cols-3 gap-4">
               <TextInput
                 variant={variant}
-                size="sm"
-                iconLeft={User}
-                label="With Icon"
-                placeholder="Small"
-              />
-              <TextInput
-                variant={variant}
-                size="md"
-                iconLeft={User}
-                label="With Icon"
-                placeholder="Medium"
-              />
-              <TextInput
-                variant={variant}
-                size="lg"
-                iconLeft={User}
-                label="With Icon"
-                placeholder="Large"
-              />
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              <TextInput
-                variant={variant}
-                size="sm"
+                size={STORY_SIZES[0]}
                 disabled
                 label="Disabled"
-                placeholder="Small"
+                placeholder="Disabled"
               />
               <TextInput
                 variant={variant}
-                size="md"
+                size={STORY_SIZES[1]}
                 required
                 label="Required"
-                placeholder="Medium"
+                placeholder="Required"
               />
               <TextInput
                 variant={variant}
-                size="lg"
+                size={STORY_SIZES[2]}
                 value="With value"
                 label="With Value"
+                placeholder="With Value"
               />
             </div>
           </div>

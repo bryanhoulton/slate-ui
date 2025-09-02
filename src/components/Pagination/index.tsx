@@ -1,11 +1,11 @@
 import {
   cn,
-  useSometimesControlled,
-} from '../../utilities';
-import { Button } from '../Button';
-import { Select } from '../Select';
-import { SelectItem } from '../Select/Select.types';
-import { PaginationProps } from './Pagination.types';
+  useSometimesControlled
+} from '../../utilities'
+import { Button } from '../Button'
+import { Select } from '../Select'
+import { SelectItem } from '../Select/Select.types'
+import { PaginationProps } from './Pagination.types'
 
 export function Pagination({
   pageSize,
@@ -33,7 +33,7 @@ export function Pagination({
       className={cn('flex items-center justify-between px-3', className)}
       {...rest}
     >
-      <div className="text-subtle flex items-center gap-1.5 text-sm leading-none">
+      <div className="text-default flex items-center gap-1.5 text-sm leading-none">
         <span>Viewing</span>
 
         <Select
@@ -53,7 +53,7 @@ export function Pagination({
         <Button
           disabled={page === 0}
           onClick={() => onPageChange(page - 1)}
-          variant="subtle"
+          variant="default"
         >
           Previous
         </Button>

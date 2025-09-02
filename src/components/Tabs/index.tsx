@@ -34,9 +34,9 @@ export function Tabs({
             value={tab.id}
             style={styles?.tab}
           >
-            {tab.iconLeft && <Icon icon={tab.iconLeft} variant="subtle" />}
+            {tab.iconLeft && <Icon icon={tab.iconLeft} variant="default" />}
             <span>{tab.name}</span>
-            {tab.iconRight && <Icon icon={tab.iconRight} variant="subtle" />}
+            {tab.iconRight && <Icon icon={tab.iconRight} variant="default" />}
           </RTabs.Trigger>
         ))}
       </RTabs.List>

@@ -5,7 +5,13 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateSize,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { Icon } from './'
 
 const meta: Meta<typeof Icon> = {
@@ -21,21 +27,13 @@ const meta: Meta<typeof Icon> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     }
   })
 }
@@ -54,13 +52,9 @@ export const Primary: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4 items-center">
-      <Icon icon={Eye} variant="primary" />
-      <Icon icon={Eye} variant="secondary" />
-      <Icon icon={Eye} variant="subtle" />
-      <Icon icon={Eye} variant="success" />
-      <Icon icon={Eye} variant="warning" />
-      <Icon icon={Eye} variant="error" />
-      <Icon icon={Eye} variant="info" />
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <Icon key={variant} icon={Eye} variant={variant} />
+      ))}
     </div>
   )
 }
@@ -68,9 +62,9 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4 items-center">
-      <Icon icon={Eye} size="sm" />
-      <Icon icon={Eye} size="md" />
-      <Icon icon={Eye} size="lg" />
+      {STORY_SIZES.map((size: SlateSize) => (
+        <Icon key={size} icon={Eye} size={size} />
+      ))}
     </div>
   )
 }
@@ -78,23 +72,13 @@ export const Sizes: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      {(
-        [
-          'primary',
-          'secondary',
-          'subtle',
-          'success',
-          'warning',
-          'error',
-          'info'
-        ] as const
-      ).map((variant) => (
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
         <div key={variant}>
           <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
           <div className="flex flex-wrap items-center gap-4">
-            <Icon icon={Eye} variant={variant} size="sm" />
-            <Icon icon={Eye} variant={variant} size="md" />
-            <Icon icon={Eye} variant={variant} size="lg" />
+            {STORY_SIZES.map((size: SlateSize) => (
+              <Icon key={size} icon={Eye} variant={variant} size={size} />
+            ))}
           </div>
         </div>
       ))}

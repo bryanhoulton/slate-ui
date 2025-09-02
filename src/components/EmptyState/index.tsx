@@ -20,7 +20,7 @@ export function EmptyState({
     >
       <Icon
         icon={icon}
-        variant="subtle"
+        variant="default"
         strokeWidth={1.5}
         className="w-12 h-12"
         style={styles?.icon}

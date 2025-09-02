@@ -4,8 +4,11 @@ import {
   Bell,
   Check,
   CheckCircle,
+  Circle,
   Clock,
+  Dot,
   Heart,
+  Minus,
   Plus,
   Star,
   Trophy,
@@ -19,7 +22,13 @@ import type {
   StoryObj
 } from '@storybook/react-vite'
 
-import { args } from '../../utilities/stories'
+import {
+  args,
+  SlateSize,
+  SlateVariant,
+  STORY_SIZES,
+  STORY_VARIANTS
+} from '../../utilities'
 import { Badge } from './'
 
 const meta: Meta<typeof Badge> = {
@@ -30,21 +39,13 @@ const meta: Meta<typeof Badge> = {
       control: {
         type: 'select'
       },
-      options: [
-        'primary',
-        'secondary',
-        'subtle',
-        'success',
-        'warning',
-        'error',
-        'info'
-      ]
+      options: STORY_VARIANTS
     },
     size: {
       control: {
         type: 'select'
       },
-      options: ['sm', 'md', 'lg']
+      options: STORY_SIZES
     }
   })
 }
@@ -63,13 +64,11 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Badge variant="primary">Primary</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="subtle">Subtle</Badge>
-      <Badge variant="success">Success</Badge>
-      <Badge variant="warning">Warning</Badge>
-      <Badge variant="error">Error</Badge>
-      <Badge variant="info">Info</Badge>
+      {STORY_VARIANTS.map((variant: SlateVariant) => (
+        <Badge key={variant} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Badge>
+      ))}
     </div>
   )
 }
@@ -77,9 +76,11 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
-      <Badge size="sm">Small</Badge>
-      <Badge size="md">Medium</Badge>
-      <Badge size="lg">Large</Badge>
+      {STORY_SIZES.map((size: SlateSize) => (
+        <Badge key={size} size={size}>
+          {size.charAt(0).toUpperCase() + size.slice(1)}
+        </Badge>
+      ))}
     </div>
   )
 }
@@ -105,7 +106,7 @@ export const StatusBadges: Story = {
       <Badge variant="secondary" iconLeft={Clock}>
         Pending
       </Badge>
-      <Badge variant="subtle" iconLeft={X}>
+      <Badge variant="default" iconLeft={X}>
         Inactive
       </Badge>
       <Badge variant="error" iconLeft={AlertCircle}>
@@ -130,7 +131,7 @@ export const NotificationBadges: Story = {
       <Badge variant="primary" iconLeft={Heart} size="sm">
         99+
       </Badge>
-      <Badge variant="subtle" size="sm">
+      <Badge variant="default" size="sm">
         Updated
       </Badge>
     </div>
@@ -146,7 +147,7 @@ export const CategoryBadges: Story = {
       <Badge variant="secondary" iconLeft={User}>
         Team
       </Badge>
-      <Badge variant="subtle" iconLeft={Star}>
+      <Badge variant="default" iconLeft={Star}>
         Featured
       </Badge>
       <Badge variant="primary" iconLeft={Plus}>
@@ -159,173 +160,42 @@ export const CategoryBadges: Story = {
 export const AllSizesAndVariants: Story = {
   render: () => (
     <div className="space-y-6">
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Primary</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="primary" size="sm">
-            Small
-          </Badge>
-          <Badge variant="primary" size="md">
-            Medium
-          </Badge>
-          <Badge variant="primary" size="lg">
-            Large
-          </Badge>
-          <Badge variant="primary" size="sm" iconLeft={Star}>
-            With Icon
-          </Badge>
-          <Badge variant="primary" size="md" iconLeft={Check}>
-            With Icon
-          </Badge>
-          <Badge variant="primary" size="lg" iconLeft={Trophy}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
+      {STORY_VARIANTS.map((variant: SlateVariant) => {
+        const iconMap = {
+          primary: [Star, Check, Trophy],
+          secondary: [Bell, Clock, User],
+          default: [Heart, AlertCircle, Zap],
+          subtle: [Circle, Dot, Minus],
+          success: [Check, Check, Check],
+          warning: [AlertTriangle, AlertTriangle, AlertTriangle],
+          error: [X, AlertCircle, AlertCircle],
+          info: [Bell, Bell, Bell]
+        }
+        const icons = iconMap[variant] || [Star, Check, Trophy]
 
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Secondary</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="secondary" size="sm">
-            Small
-          </Badge>
-          <Badge variant="secondary" size="md">
-            Medium
-          </Badge>
-          <Badge variant="secondary" size="lg">
-            Large
-          </Badge>
-          <Badge variant="secondary" size="sm" iconLeft={Bell}>
-            With Icon
-          </Badge>
-          <Badge variant="secondary" size="md" iconLeft={Clock}>
-            With Icon
-          </Badge>
-          <Badge variant="secondary" size="lg" iconLeft={User}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Subtle</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="subtle" size="sm">
-            Small
-          </Badge>
-          <Badge variant="subtle" size="md">
-            Medium
-          </Badge>
-          <Badge variant="subtle" size="lg">
-            Large
-          </Badge>
-          <Badge variant="subtle" size="sm" iconLeft={Heart}>
-            With Icon
-          </Badge>
-          <Badge variant="subtle" size="md" iconLeft={AlertCircle}>
-            With Icon
-          </Badge>
-          <Badge variant="subtle" size="lg" iconLeft={Zap}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Success</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="success" size="sm">
-            Small
-          </Badge>
-          <Badge variant="success" size="md">
-            Medium
-          </Badge>
-          <Badge variant="success" size="lg">
-            Large
-          </Badge>
-          <Badge variant="success" size="sm" iconLeft={Check}>
-            With Icon
-          </Badge>
-          <Badge variant="success" size="md" iconLeft={Check}>
-            With Icon
-          </Badge>
-          <Badge variant="success" size="lg" iconLeft={Check}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Warning</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="warning" size="sm">
-            Small
-          </Badge>
-          <Badge variant="warning" size="md">
-            Medium
-          </Badge>
-          <Badge variant="warning" size="lg">
-            Large
-          </Badge>
-          <Badge variant="warning" size="sm" iconLeft={AlertTriangle}>
-            With Icon
-          </Badge>
-          <Badge variant="warning" size="md" iconLeft={AlertTriangle}>
-            With Icon
-          </Badge>
-          <Badge variant="warning" size="lg" iconLeft={AlertTriangle}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Error</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="error" size="sm">
-            Small
-          </Badge>
-          <Badge variant="error" size="md">
-            Medium
-          </Badge>
-          <Badge variant="error" size="lg">
-            Large
-          </Badge>
-          <Badge variant="error" size="sm" iconLeft={X}>
-            With Icon
-          </Badge>
-          <Badge variant="error" size="md" iconLeft={AlertCircle}>
-            With Icon
-          </Badge>
-          <Badge variant="error" size="lg" iconLeft={AlertCircle}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">Info</h3>
-        <div className="flex flex-wrap items-center gap-4">
-          <Badge variant="info" size="sm">
-            Small
-          </Badge>
-          <Badge variant="info" size="md">
-            Medium
-          </Badge>
-          <Badge variant="info" size="lg">
-            Large
-          </Badge>
-          <Badge variant="info" size="sm" iconLeft={Bell}>
-            With Icon
-          </Badge>
-          <Badge variant="info" size="md" iconLeft={Bell}>
-            With Icon
-          </Badge>
-          <Badge variant="info" size="lg" iconLeft={Bell}>
-            With Icon
-          </Badge>
-        </div>
-      </div>
+        return (
+          <div key={variant}>
+            <h3 className="mb-3 text-lg font-semibold capitalize">{variant}</h3>
+            <div className="flex flex-wrap items-center gap-4">
+              {STORY_SIZES.map((size: SlateSize) => (
+                <Badge key={`${variant}-${size}`} variant={variant} size={size}>
+                  {size.charAt(0).toUpperCase() + size.slice(1)}
+                </Badge>
+              ))}
+              {STORY_SIZES.map((size: SlateSize, index) => (
+                <Badge
+                  key={`${variant}-${size}-icon`}
+                  variant={variant}
+                  size={size}
+                  iconLeft={icons[index] || icons[0]}
+                >
+                  With Icon
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }
