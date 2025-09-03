@@ -2,10 +2,10 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
-  useState,
-} from 'react';
+  useState
+} from 'react'
 
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...classNames: Array<string | boolean | undefined>): string {
   return twMerge(classNames.filter(Boolean) as string[])
@@ -45,6 +45,16 @@ export function useSometimesControlled<T>({
   return [valueProp ?? value, onChange] as [T, Dispatch<SetStateAction<T>>]
 }
 
+export function bin<T>(data: T[], size: number): T[][] {
+  const bins = data.reduce((bins, item, index) => {
+    const binIndex = Math.floor(index / size)
+    bins[binIndex] = [...(bins[binIndex] || []), item]
+    return bins
+  }, [] as T[][])
+  return bins
+}
+
 export * from './types'
+export * from './chart-types'
 export * from './stories'
 export * from './story-variants'

@@ -15,14 +15,6 @@ export type SlateVariant =
   | 'info'
 
 export type SlateSize = 'sm' | 'md' | 'lg'
-export type SlateColor =
-  | 'default'
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Variants<T extends Record<string, any>> = {
