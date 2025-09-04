@@ -6,7 +6,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
 import typescript from '@rollup/plugin-typescript'
 
-const packageJson = require('./package.json')
+import packageJson from './package.json'
 
 export default [
   {
@@ -33,7 +33,7 @@ export default [
     external: ['react', 'react-dom']
   },
   {
-    input: 'dist/cjs/index.d.ts',
+    input: 'dist/cjs/src/index.d.ts',
     output: [{ file: 'dist/types.d.ts', format: 'es' }],
     plugins: [dts.default()]
   }
