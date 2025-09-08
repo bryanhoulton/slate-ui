@@ -195,6 +195,7 @@ export function Select<IdType extends SlateId>({
                 value?.id === item.id && 'bg-muted-light'
               )}
               as="button"
+              type="button"
               style={styles?.option}
             >
               <div className="flex items-center gap-2">

@@ -62,6 +62,7 @@ export const ActionIcon = forwardRef<HTMLButtonElement, ActionIconProps>(
     <Tooltip content={tooltip} disabled={disabled}>
       <button
         ref={ref}
+        type="button"
         className={cn(variants({ size, variant }), className)}
         disabled={disabled}
         {...props}

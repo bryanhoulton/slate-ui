@@ -2,7 +2,10 @@ import { HexColorPicker } from 'react-colorful'
 
 import * as Popover from '@radix-ui/react-popover'
 
-import { cn, useSometimesControlled } from '../../utilities'
+import {
+  cn,
+  useSometimesControlled
+} from '../../utilities'
 import { TextInput } from '../TextInput'
 import { ColorPickerProps } from './ColorPicker.types'
 
@@ -33,6 +36,7 @@ export function ColorPicker({
       <Popover.Root modal>
         <Popover.Trigger className="h-8" asChild>
           <button
+            type="button"
             className="w-8 h-8 rounded-lg border"
             style={{ backgroundColor: value }}
           />
