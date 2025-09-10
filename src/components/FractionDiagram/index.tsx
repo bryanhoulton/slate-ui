@@ -3,45 +3,23 @@ import { useMemo } from 'react'
 import { cn } from '../../utilities'
 import {
   FractionData,
-  FractionDiagramProps,
-  LegacyFractionDiagramProps
+  FractionDiagramProps
 } from './FractionDiagram.types'
 
-// Type guard to check if props are legacy format
-function isLegacyProps(
-  props: FractionDiagramProps | LegacyFractionDiagramProps
-): props is LegacyFractionDiagramProps {
-  return 'numerator' in props && 'denominator' in props
-}
-
-export function FractionDiagram(
-  props: FractionDiagramProps | LegacyFractionDiagramProps
-) {
-  // Handle both new and legacy prop formats
-  const {
-    fractions: propsFractions,
-    type = 'grid',
-    size = 200,
-    showLabel = true,
-    fillColor = 'var(--color-primary)',
-    emptyColor = 'var(--color-neutral-200)',
-    gridColumns,
-    gridGap = 2,
-    spacing = 16,
-    className,
-    styles,
-    ...restProps
-  } = isLegacyProps(props)
-    ? {
-        ...props,
-        fractions: {
-          numerator: props.numerator,
-          denominator: props.denominator,
-          label: props.label
-        }
-      }
-    : props
-
+export function FractionDiagram({
+  fractions: propsFractions,
+  type = 'grid',
+  size = 200,
+  showLabel = true,
+  fillColor = 'var(--color-primary)',
+  emptyColor = 'var(--color-neutral-200)',
+  gridColumns,
+  gridGap = 2,
+  spacing = 16,
+  className,
+  styles,
+  ...restProps
+}: FractionDiagramProps) {
   // Normalize fractions to always be an array
   const fractions = Array.isArray(propsFractions)
     ? propsFractions

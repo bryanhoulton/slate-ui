@@ -16,12 +16,6 @@ const meta: Meta<typeof FractionDiagram> = {
       control: { type: 'select' },
       options: ['grid', 'pie']
     },
-    numerator: {
-      control: { type: 'number', min: 0 }
-    },
-    denominator: {
-      control: { type: 'number', min: 1 }
-    },
     size: {
       control: { type: 'range', min: 100, max: 400, step: 10 }
     },
@@ -39,6 +33,9 @@ const meta: Meta<typeof FractionDiagram> = {
     },
     gridGap: {
       control: { type: 'range', min: 0, max: 10, step: 1 }
+    },
+    spacing: {
+      control: { type: 'range', min: 0, max: 50, step: 2 }
     }
   }
 }
@@ -48,24 +45,21 @@ type Story = StoryObj<typeof FractionDiagram>
 
 export const GridDefault: Story = {
   args: {
-    numerator: 3,
-    denominator: 4,
+    fractions: { numerator: 3, denominator: 4 },
     type: 'grid'
   }
 }
 
 export const PieDefault: Story = {
   args: {
-    numerator: 3,
-    denominator: 4,
+    fractions: { numerator: 3, denominator: 4 },
     type: 'pie'
   }
 }
 
 export const GridSimple: Story = {
   args: {
-    numerator: 1,
-    denominator: 2,
+    fractions: { numerator: 1, denominator: 2 },
     type: 'grid',
     size: 150
   }
@@ -73,8 +67,7 @@ export const GridSimple: Story = {
 
 export const GridThirds: Story = {
   args: {
-    numerator: 2,
-    denominator: 3,
+    fractions: { numerator: 2, denominator: 3 },
     type: 'grid',
     size: 180
   }
@@ -82,8 +75,7 @@ export const GridThirds: Story = {
 
 export const GridComplex: Story = {
   args: {
-    numerator: 7,
-    denominator: 12,
+    fractions: { numerator: 7, denominator: 12 },
     type: 'grid',
     size: 240,
     gridColumns: 4
@@ -92,8 +84,7 @@ export const GridComplex: Story = {
 
 export const PieHalf: Story = {
   args: {
-    numerator: 1,
-    denominator: 2,
+    fractions: { numerator: 1, denominator: 2 },
     type: 'pie',
     size: 200
   }
@@ -101,8 +92,7 @@ export const PieHalf: Story = {
 
 export const PieThreeQuarters: Story = {
   args: {
-    numerator: 3,
-    denominator: 4,
+    fractions: { numerator: 3, denominator: 4 },
     type: 'pie',
     size: 200
   }
@@ -110,8 +100,7 @@ export const PieThreeQuarters: Story = {
 
 export const PieSevenEighths: Story = {
   args: {
-    numerator: 7,
-    denominator: 8,
+    fractions: { numerator: 7, denominator: 8 },
     type: 'pie',
     size: 200
   }
@@ -119,8 +108,7 @@ export const PieSevenEighths: Story = {
 
 export const CustomColors: Story = {
   args: {
-    numerator: 5,
-    denominator: 8,
+    fractions: { numerator: 5, denominator: 8 },
     type: 'grid',
     size: 200,
     fillColor: '#10b981',
@@ -130,19 +118,16 @@ export const CustomColors: Story = {
 
 export const CustomLabel: Story = {
   args: {
-    numerator: 3,
-    denominator: 5,
+    fractions: { numerator: 3, denominator: 5, label: 'Three Fifths' },
     type: 'pie',
     size: 180,
-    label: 'Three Fifths',
     fillColor: '#8b5cf6'
   }
 }
 
 export const NoLabel: Story = {
   args: {
-    numerator: 2,
-    denominator: 3,
+    fractions: { numerator: 2, denominator: 3 },
     type: 'grid',
     size: 160,
     showLabel: false
@@ -151,8 +136,7 @@ export const NoLabel: Story = {
 
 export const LargeGrid: Story = {
   args: {
-    numerator: 15,
-    denominator: 20,
+    fractions: { numerator: 15, denominator: 20 },
     type: 'grid',
     size: 300,
     gridColumns: 5,
@@ -163,12 +147,36 @@ export const LargeGrid: Story = {
 export const SmallDiagrams: Story = {
   render: () => (
     <div className="flex space-x-6">
-      <FractionDiagram numerator={1} denominator={4} type="grid" size={120} />
-      <FractionDiagram numerator={1} denominator={4} type="pie" size={120} />
-      <FractionDiagram numerator={2} denominator={4} type="grid" size={120} />
-      <FractionDiagram numerator={2} denominator={4} type="pie" size={120} />
-      <FractionDiagram numerator={3} denominator={4} type="grid" size={120} />
-      <FractionDiagram numerator={3} denominator={4} type="pie" size={120} />
+      <FractionDiagram
+        fractions={{ numerator: 1, denominator: 4 }}
+        type="grid"
+        size={120}
+      />
+      <FractionDiagram
+        fractions={{ numerator: 1, denominator: 4 }}
+        type="pie"
+        size={120}
+      />
+      <FractionDiagram
+        fractions={{ numerator: 2, denominator: 4 }}
+        type="grid"
+        size={120}
+      />
+      <FractionDiagram
+        fractions={{ numerator: 2, denominator: 4 }}
+        type="pie"
+        size={120}
+      />
+      <FractionDiagram
+        fractions={{ numerator: 3, denominator: 4 }}
+        type="grid"
+        size={120}
+      />
+      <FractionDiagram
+        fractions={{ numerator: 3, denominator: 4 }}
+        type="pie"
+        size={120}
+      />
     </div>
   )
 }
@@ -270,8 +278,7 @@ export const ImproperFractionsPie: Story = {
 
 export const SingleImproperFraction: Story = {
   args: {
-    numerator: 7,
-    denominator: 3,
+    fractions: { numerator: 7, denominator: 3 },
     type: 'grid',
     size: 120
   }

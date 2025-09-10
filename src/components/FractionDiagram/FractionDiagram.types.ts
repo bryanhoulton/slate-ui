@@ -50,14 +50,3 @@ export interface FractionDiagramProps
   /** Horizontal spacing between multiple diagrams in pixels */
   spacing?: number
 }
-
-// Legacy props for backward compatibility
-export interface LegacyFractionDiagramProps
-  extends Omit<FractionDiagramProps, 'fractions'> {
-  /** The numerator of the fraction */
-  numerator: number
-  /** The denominator of the fraction */
-  denominator: number
-  /** Custom label text (defaults to "numerator/denominator") */
-  label?: string
-}
