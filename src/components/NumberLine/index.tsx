@@ -8,8 +8,35 @@ import {
   NumberLineSegment
 } from './NumberLine.types'
 
-const DEFAULT_LINE_COLOR = 'bg-gray-800'
-const DEFAULT_MARK_COLOR = 'bg-blue-500'
+const DEFAULT_LINE_COLOR = '#1f2937' // gray-800
+const DEFAULT_MARK_COLOR = '#3b82f6' // blue-500
+
+const COLOR_MAP: Record<string, string> = {
+  red: '#ef4444',
+  green: '#22c55e',
+  blue: '#3b82f6',
+  yellow: '#eab308',
+  purple: '#a855f7',
+  pink: '#ec4899',
+  indigo: '#6366f1',
+  cyan: '#06b6d4',
+  orange: '#f97316',
+  gray: '#6b7280',
+  black: '#000000',
+  white: '#ffffff'
+}
+
+function getCSSColor(color?: string): string {
+  if (!color) return DEFAULT_MARK_COLOR
+  if (
+    color.startsWith('#') ||
+    color.startsWith('rgb') ||
+    color.startsWith('hsl')
+  ) {
+    return color
+  }
+  return COLOR_MAP[color.toLowerCase()] || DEFAULT_MARK_COLOR
+}
 
 function getMarkSize(size: 'sm' | 'md' | 'lg' = 'md'): string {
   switch (size) {
@@ -42,7 +69,7 @@ export function NumberLine({
   ...props
 }: NumberLineProps) {
   const range = max - min
-  const lineColorClass = DEFAULT_LINE_COLOR
+  const lineColor = DEFAULT_LINE_COLOR
 
   // Generate tick positions
   const generateTicks = (): number[] => {
@@ -68,20 +95,19 @@ export function NumberLine({
   const renderSegment = (segment: NumberLineSegment, index: number) => {
     const startPosition = valueToPercent(segment.start)
     const endPosition = valueToPercent(segment.end)
-    const colorClass = segment.color
-      ? `bg-${segment.color}-500`
-      : DEFAULT_MARK_COLOR
+    const color = getCSSColor(segment.color)
 
     return (
       <div key={`segment-${index}`} className="absolute inset-0">
         {/* Segment line */}
         <div
-          className={cn('absolute h-1', colorClass)}
+          className="absolute h-1"
           style={{
             left: `${startPosition}%`,
             width: `${endPosition - startPosition}%`,
             top: '50%',
-            transform: 'translateY(-50%)'
+            transform: 'translateY(-50%)',
+            backgroundColor: color
           }}
         />
 
@@ -95,12 +121,11 @@ export function NumberLine({
           }}
         >
           <div
-            className={cn(
-              'w-3 h-3 rounded-full border-2',
-              segment.startType === 'open'
-                ? `border-${segment.color || 'blue'}-500 bg-white`
-                : `border-white ${colorClass}`
-            )}
+            className="w-3 h-3 rounded-full border-2"
+            style={{
+              borderColor: color,
+              backgroundColor: segment.startType === 'open' ? 'white' : color
+            }}
           />
         </div>
 
@@ -114,12 +139,11 @@ export function NumberLine({
           }}
         >
           <div
-            className={cn(
-              'w-3 h-3 rounded-full border-2',
-              segment.endType === 'open'
-                ? `border-${segment.color || 'blue'}-500 bg-white`
-                : `border-white ${colorClass}`
-            )}
+            className="w-3 h-3 rounded-full border-2"
+            style={{
+              borderColor: color,
+              backgroundColor: segment.endType === 'open' ? 'white' : color
+            }}
           />
         </div>
 
@@ -145,19 +169,20 @@ export function NumberLine({
   // Render a ray on the number line
   const renderRay = (ray: NumberLineRay, index: number) => {
     const position = valueToPercent(ray.value)
-    const colorClass = ray.color ? `bg-${ray.color}-500` : DEFAULT_MARK_COLOR
+    const color = getCSSColor(ray.color)
 
     return (
       <div key={`ray-${index}`} className="absolute inset-0">
         {/* Ray line */}
         <div
-          className={cn('absolute h-1', colorClass)}
+          className="absolute h-1"
           style={{
             left: ray.direction === 'right' ? `${position}%` : '0%',
             width:
               ray.direction === 'right' ? `${100 - position}%` : `${position}%`,
             top: '50%',
-            transform: 'translateY(-50%)'
+            transform: 'translateY(-50%)',
+            backgroundColor: color
           }}
         />
 
@@ -171,12 +196,11 @@ export function NumberLine({
           }}
         >
           <div
-            className={cn(
-              'w-3 h-3 rounded-full border-2',
-              ray.type === 'open'
-                ? `border-${ray.color || 'blue'}-500 bg-white`
-                : `border-white ${colorClass}`
-            )}
+            className="w-3 h-3 rounded-full border-2"
+            style={{
+              borderColor: color,
+              backgroundColor: ray.type === 'open' ? 'white' : color
+            }}
           />
         </div>
 
@@ -190,8 +214,9 @@ export function NumberLine({
           }}
         >
           <div
-            className={cn('w-3 h-3', colorClass)}
+            className="w-3 h-3"
             style={{
+              backgroundColor: color,
               clipPath:
                 ray.direction === 'right'
                   ? 'polygon(0 0, 0 100%, 100% 50%)'
@@ -222,7 +247,7 @@ export function NumberLine({
   // Render a mark on the number line
   const renderMark = (mark: NumberLineMark, index: number) => {
     const position = valueToPercent(mark.value)
-    const colorClass = mark.color ? `bg-${mark.color}-500` : DEFAULT_MARK_COLOR
+    const color = getCSSColor(mark.color)
     const sizeClass = getMarkSize(mark.size)
 
     // Default dot variant
@@ -238,11 +263,11 @@ export function NumberLine({
         }}
       >
         <div
-          className={cn(
-            'rounded-full border-2 border-white',
-            sizeClass,
-            colorClass
-          )}
+          className={cn('rounded-full border-2', sizeClass)}
+          style={{
+            backgroundColor: color,
+            borderColor: 'white'
+          }}
         />
         {mark.label && showLabels && (
           <span
@@ -270,10 +295,11 @@ export function NumberLine({
       >
         {/* Main line */}
         <div
-          className={cn('relative h-0.5 w-full', lineColorClass)}
+          className="relative h-0.5 w-full"
           style={{
             marginLeft: showArrows ? '24px' : '8px',
             marginRight: showArrows ? '24px' : '8px',
+            backgroundColor: lineColor,
             ...styles?.line
           }}
         >
@@ -292,10 +318,11 @@ export function NumberLine({
                   }}
                 >
                   <div
-                    className={cn('w-px h-4', lineColorClass)}
+                    className="w-px h-4"
                     style={{
                       position: 'absolute',
                       top: '-7px',
+                      backgroundColor: lineColor,
                       ...styles?.tick
                     }}
                   />
@@ -328,11 +355,9 @@ export function NumberLine({
         {/* Left arrow */}
         {showArrows && (
           <div
-            className={cn(
-              'absolute left-1 w-4 h-4 flex items-center justify-center',
-              lineColorClass
-            )}
+            className="absolute left-1 w-4 h-4 flex items-center justify-center"
             style={{
+              backgroundColor: lineColor,
               clipPath: 'polygon(0 50%, 100% 0, 100% 100%)'
             }}
           />
@@ -341,11 +366,9 @@ export function NumberLine({
         {/* Right arrow */}
         {showArrows && (
           <div
-            className={cn(
-              'absolute right-1 w-4 h-4 flex items-center justify-center',
-              lineColorClass
-            )}
+            className="absolute right-1 w-4 h-4 flex items-center justify-center"
             style={{
+              backgroundColor: lineColor,
               clipPath: 'polygon(0 0, 0 100%, 100% 50%)'
             }}
           />

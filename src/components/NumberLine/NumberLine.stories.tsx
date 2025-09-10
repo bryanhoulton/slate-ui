@@ -264,7 +264,7 @@ export const Combined: Story = {
         min={-5}
         max={10}
         title="Mixed Elements"
-        marks={[{ value: 0, label: 'Origin', color: 'gray', size: 'lg' }]}
+        marks={[{ value: 0, label: 'Origin', color: 'blue', size: 'lg' }]}
         segments={[
           {
             start: 2,
