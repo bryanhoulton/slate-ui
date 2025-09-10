@@ -50,6 +50,27 @@ function getMarkSize(size: 'sm' | 'md' | 'lg' = 'md'): string {
   }
 }
 
+function getOptimalDecimalPlaces(values: number[]): number {
+  if (values.length === 0) return 0
+
+  // Find the maximum number of decimal places needed
+  let maxDecimals = 0
+
+  for (const value of values) {
+    // Convert to string and check decimal places
+    const str = value.toString()
+    const decimalIndex = str.indexOf('.')
+
+    if (decimalIndex !== -1) {
+      const decimals = str.length - decimalIndex - 1
+      maxDecimals = Math.max(maxDecimals, decimals)
+    }
+  }
+
+  // Cap at 4 decimal places for readability
+  return Math.min(maxDecimals, 4)
+}
+
 export function NumberLine({
   min,
   max,
@@ -85,6 +106,9 @@ export function NumberLine({
   }
 
   const ticks = generateTicks()
+
+  // Calculate optimal decimal places for tick formatting
+  const decimalPlaces = getOptimalDecimalPlaces(ticks)
 
   // Convert value to percentage position
   const valueToPercent = (value: number): number => {
@@ -335,7 +359,7 @@ export function NumberLine({
                         ...styles?.label
                       }}
                     >
-                      {tick.toFixed(2)}
+                      {tick.toFixed(decimalPlaces)}
                     </span>
                   )}
                 </div>
