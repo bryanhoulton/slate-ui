@@ -335,7 +335,7 @@ export function NumberLine({
                         ...styles?.label
                       }}
                     >
-                      {tick}
+                      {tick.toFixed(2)}
                     </span>
                   )}
                 </div>
