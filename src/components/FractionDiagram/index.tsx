@@ -29,10 +29,10 @@ export function FractionDiagram({
     const safeDenominator = Math.max(1, fraction.denominator)
     const safeNumerator = Math.max(0, fraction.numerator)
 
-    // Handle improper fractions
+    // Handle improper fractions and whole numbers
     const wholeNumber = Math.floor(safeNumerator / safeDenominator)
     const remainder = safeNumerator % safeDenominator
-    const isImproper = safeNumerator > safeDenominator
+    const isImproper = safeNumerator >= safeDenominator
 
     const fractionLabel =
       fraction.label || `${safeNumerator}/${safeDenominator}`
@@ -99,6 +99,33 @@ export function FractionDiagram({
       const centerX = size / 2
       const centerY = size / 2
       const radius = size / 2 - 20
+
+      // Special case for denominator of 1 (whole circle)
+      if (safeDenominator === 1) {
+        return (
+          <div
+            className="relative flex items-center justify-center"
+            style={{
+              width: size,
+              height: size,
+              ...styles?.pie
+            }}
+          >
+            <svg width={size} height={size}>
+              <circle
+                cx={centerX}
+                cy={centerY}
+                r={radius}
+                fill={fillAmount > 0 ? diagramFillColor : diagramEmptyColor}
+                stroke="white"
+                strokeWidth="2"
+                className="transition-colors duration-200"
+              />
+            </svg>
+          </div>
+        )
+      }
+
       const anglePerSlice = (2 * Math.PI) / safeDenominator
 
       const createSlicePath = (sliceIndex: number) => {

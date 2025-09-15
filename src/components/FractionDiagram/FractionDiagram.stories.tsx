@@ -313,6 +313,40 @@ export const MixedProperAndImproper: Story = {
   }
 }
 
+export const WholeFractions: Story = {
+  render: () => (
+    <div className="space-y-6">
+      <div className="text-center">
+        <h3 className="text-lg font-semibold mb-4">Whole Number Fractions (1/1, 2/2, etc.)</h3>
+        <div className="space-y-4">
+          <FractionDiagram
+            fractions={[
+              { numerator: 1, denominator: 1, label: '1/1' },
+              { numerator: 2, denominator: 2, label: '2/2' },
+              { numerator: 3, denominator: 3, label: '3/3' },
+              { numerator: 4, denominator: 4, label: '4/4' }
+            ]}
+            type="grid"
+            size={120}
+            spacing={20}
+          />
+          <FractionDiagram
+            fractions={[
+              { numerator: 1, denominator: 1, label: '1/1' },
+              { numerator: 2, denominator: 2, label: '2/2' },
+              { numerator: 3, denominator: 3, label: '3/3' },
+              { numerator: 4, denominator: 4, label: '4/4' }
+            ]}
+            type="pie"
+            size={120}
+            spacing={20}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export const ComparingFractions: Story = {
   render: () => (
     <div className="space-y-6">
