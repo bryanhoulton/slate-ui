@@ -27,9 +27,8 @@ export const verificationCodeInputVariants = cva<
 >(
   [
     'rounded-lg border text-center font-mono font-semibold',
-    'focus:outline-none focus:ring-2 transition',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-    'bg-white dark:bg-gray-800'
+    'focus:outline-none focus:ring-2 transition bg-white',
+    'disabled:opacity-50 disabled:cursor-not-allowed'
   ],
   {
     variants: {
