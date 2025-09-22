@@ -11,11 +11,7 @@ import {
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../../utilities'
-import {
-  SlateSize,
-  SlateVariant,
-  Variants
-} from '../../utilities/types'
+import { SlateSize, SlateVariant, Variants } from '../../utilities/types'
 import { VerificationCodeInputProps } from './VerificationCodeInput.types'
 
 export const verificationCodeInputVariants = cva<
@@ -103,9 +99,33 @@ export const VerificationCodeInput = forwardRef<
     }, [valueProp])
 
     const handleChange = (index: number, newValue: string) => {
-      // Only allow single digits
-      const digit = newValue.replace(/\D/g, '').slice(-1)
+      // Extract only digits from the input
+      const cleanValue = newValue.replace(/\D/g, '')
 
+      // Check if this is a full code paste (more than 1 digit)
+      if (cleanValue.length > 1) {
+        // Handle full code input (from autofill or paste)
+        const fullCode = cleanValue.slice(0, length)
+
+        if (valueProp === undefined) {
+          setInternalValue(fullCode)
+        }
+
+        onChange?.(fullCode)
+
+        // Focus the next empty input or the last input
+        const nextEmptyIndex = Math.min(fullCode.length, length - 1)
+        inputRefs.current[nextEmptyIndex]?.focus()
+
+        if (fullCode.length === length) {
+          onComplete?.(fullCode)
+        }
+
+        return
+      }
+
+      // Handle single digit input
+      const digit = cleanValue.slice(-1)
       const newDigits = [...digits]
       newDigits[index] = digit
 
@@ -155,18 +175,20 @@ export const VerificationCodeInput = forwardRef<
         .replace(/\D/g, '')
         .slice(0, length)
 
-      if (valueProp === undefined) {
-        setInternalValue(pastedData)
-      }
+      if (pastedData.length > 0) {
+        if (valueProp === undefined) {
+          setInternalValue(pastedData)
+        }
 
-      onChange?.(pastedData)
+        onChange?.(pastedData)
 
-      // Focus the next empty input or the last input
-      const nextEmptyIndex = Math.min(pastedData.length, length - 1)
-      inputRefs.current[nextEmptyIndex]?.focus()
+        // Focus the next empty input or the last input
+        const nextEmptyIndex = Math.min(pastedData.length, length - 1)
+        inputRefs.current[nextEmptyIndex]?.focus()
 
-      if (pastedData.length === length) {
-        onComplete?.(pastedData)
+        if (pastedData.length === length) {
+          onComplete?.(pastedData)
+        }
       }
     }
 
@@ -186,7 +208,8 @@ export const VerificationCodeInput = forwardRef<
             type="text"
             inputMode="numeric"
             pattern="\d*"
-            maxLength={1}
+            maxLength={length} // Allow full code length to handle autofill
+            autoComplete={index === 0 ? 'one-time-code' : 'off'} // Enable autofill on first input
             value={masked && digits[index] ? '•' : digits[index]}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               handleChange(index, event.target.value)
