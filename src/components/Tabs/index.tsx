@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
 import * as RTabs from '@radix-ui/react-tabs'
 
 import { cn } from '../../utilities'
 import { Icon } from '../Icon'
+import { useSlateConfig } from '../SlateProvider'
 import { TabsProps } from './Tabs.types'
 
 export function Tabs({
@@ -11,10 +13,34 @@ export function Tabs({
   className,
   ...props
 }: TabsProps) {
+  const config = useSlateConfig()
+  const [activeTab, setActiveTab] = useState(defaultTab)
+
+  useEffect(() => {
+    if (config.tabsPushBrowserState && typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const tabParam = params.get('tab')
+      if (tabParam && tabs.some((tab) => tab.id === tabParam)) {
+        setActiveTab(tabParam)
+      }
+    }
+  }, [config.tabsPushBrowserState, tabs])
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
+
+    if (config.tabsPushBrowserState && typeof window !== 'undefined') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('tab', value)
+      window.history.pushState({}, '', url.toString())
+    }
+  }
+
   return (
     <RTabs.Root
       className={cn('flex flex-col', className)}
-      defaultValue={defaultTab}
+      value={activeTab}
+      onValueChange={handleTabChange}
       style={styles?.root}
       {...props}
     >

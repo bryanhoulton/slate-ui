@@ -15,7 +15,21 @@ const ConfirmContext = createContext<ConfirmContextValue>({
 
 export const useConfirm = () => useContext(ConfirmContext)
 
-export const SlateProvider = ({ children }: PropsWithChildren) => {
+export type SlateConfig = {
+  tabsPushBrowserState?: boolean
+}
+
+type SlateConfigContextValue = SlateConfig
+
+const SlateConfigContext = createContext<SlateConfigContextValue>({})
+
+export const useSlateConfig = () => useContext(SlateConfigContext)
+
+export type SlateProviderProps = PropsWithChildren<{
+  config?: SlateConfig
+}>
+
+export const SlateProvider = ({ children, config = {} }: SlateProviderProps) => {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [confirmProps, setConfirmProps] = useState<ConfirmCallbackProps>({
     title: 'Are you sure?',
@@ -29,22 +43,24 @@ export const SlateProvider = ({ children }: PropsWithChildren) => {
         onOpenChange={setConfirmOpen}
         {...confirmProps}
       />
-      <ConfirmContext.Provider
-        value={{
-          confirm: (args) => {
-            setConfirmProps({
-              ...args,
-              onConfirm: () => {
-                args.onConfirm?.()
-                setConfirmOpen(false)
-              }
-            })
-            setConfirmOpen(true)
-          }
-        }}
-      >
-        {children}
-      </ConfirmContext.Provider>
+      <SlateConfigContext.Provider value={config}>
+        <ConfirmContext.Provider
+          value={{
+            confirm: (args) => {
+              setConfirmProps({
+                ...args,
+                onConfirm: () => {
+                  args.onConfirm?.()
+                  setConfirmOpen(false)
+                }
+              })
+              setConfirmOpen(true)
+            }
+          }}
+        >
+          {children}
+        </ConfirmContext.Provider>
+      </SlateConfigContext.Provider>
     </TooltipProvider>
   )
 }
