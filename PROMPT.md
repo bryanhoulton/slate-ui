@@ -25,9 +25,10 @@ yarn add slate-ui
 
 Make sure your project includes these peer dependencies:
 
-- `react ^19.0.0`
-- `react-dom ^19.0.0`
-- `tailwindcss ^3.4.3`
+- `react >=19.0.0`
+- `react-dom >=19.0.0`
+
+Note: Slate UI uses Tailwind CSS v4 internally.
 
 ## Setup
 
@@ -71,12 +72,14 @@ function App() {
 
 All components follow a consistent variant system:
 
+- **default** - Low emphasis, minimal styling
 - **primary** - Main brand colors, high emphasis
 - **secondary** - Secondary brand colors, medium emphasis
-- **default** - Low emphasis, minimal styling
-- **error** - Error states, light red background with dark red text
-- **info** - Informational states, light blue background with dark blue text
-- **success** - Success states, light green background with dark green text
+- **subtle** - Very low emphasis, transparent background
+- **success** - Success states, green colors
+- **warning** - Warning states, amber/yellow colors
+- **error** - Error states, red colors
+- **info** - Informational states, blue colors
 
 ### Sizes
 
@@ -179,30 +182,35 @@ function FormExample() {
 
 ```tsx
 import { Card, Badge, EmptyState } from 'slate-ui'
+import { Inbox } from 'lucide-react'
 
 function DashboardCard() {
   const data = []
 
   return (
-    <Card>
-      <Card.Header>
-        <div className="flex justify-between items-center">
-          <h3>Recent Activity</h3>
-          <Badge variant="secondary">5 new</Badge>
-        </div>
-      </Card.Header>
-
-      <Card.Content>
-        {data.length === 0 ? (
+    <Card
+      preview={
+        data.length === 0 ? (
           <EmptyState
+            icon={Inbox}
             title="No activity yet"
-            description="When you start using the app, activity will appear here"
-            action={<Button>Get Started</Button>}
+            button={{ children: 'Get Started', onClick: () => {} }}
           />
         ) : (
-          // Render data
-        )}
-      </Card.Content>
+          // Render preview content
+        )
+      }
+      menu={{
+        items: [
+          { id: 'edit', type: 'button', label: 'Edit', onClick: () => {} },
+          { id: 'delete', type: 'button', label: 'Delete', onClick: () => {} }
+        ]
+      }}
+    >
+      <div className="flex justify-between items-center">
+        <h3>Recent Activity</h3>
+        <Badge variant="secondary">5 new</Badge>
+      </div>
     </Card>
   )
 }
@@ -211,11 +219,11 @@ function DashboardCard() {
 ### Interactive Components
 
 ```tsx
-import { Modal, useConfirm, Tooltip } from 'slate-ui'
+import { Modal, useConfirm, Tooltip, Button } from 'slate-ui'
 
 function InteractiveExample() {
   const [modalOpen, setModalOpen] = useState(false)
-  const confirm = useConfirm()
+  const { confirm } = useConfirm()
 
   const handleDelete = () => {
     confirm({
@@ -223,7 +231,7 @@ function InteractiveExample() {
       description:
         'Are you sure you want to delete this item? This action cannot be undone.',
       confirmText: 'Delete',
-      variant: 'error',
+      cancelText: 'Cancel',
       onConfirm: () => {
         // Handle deletion
       }
@@ -240,17 +248,17 @@ function InteractiveExample() {
         Delete
       </Button>
 
-      <Modal open={modalOpen} onOpenChange={setModalOpen}>
-        <Modal.Header>
-          <Modal.Title>Edit Item</Modal.Title>
-        </Modal.Header>
-        <Modal.Content>{/* Modal content */}</Modal.Content>
-        <Modal.Footer>
-          <Button variant="default" onClick={() => setModalOpen(false)}>
-            Cancel
-          </Button>
-          <Button>Save Changes</Button>
-        </Modal.Footer>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <div className="p-4">
+          <h2 className="text-lg font-semibold mb-4">Edit Item</h2>
+          {/* Modal content */}
+          <div className="flex justify-end gap-2 mt-4">
+            <Button variant="default" onClick={() => setModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button>Save Changes</Button>
+          </div>
+        </div>
       </Modal>
     </div>
   )
@@ -272,16 +280,39 @@ function InteractiveExample() {
 - `Slider` - Range slider input
 - `ColorPicker` - Color selection input
 - `FileUpload` - File upload component
+- `PhoneInput` - Phone number input with formatting
+- `DatePicker` - Date selection input
+- `EditableText` - Inline editable text field
+- `VerificationCodeInput` - Code/OTP input field
 
 ### Display Components
 
 - `Badge` - Status indicators and labels
-- `Card` - Container with header, content, and footer
+- `Card` - Container with preview area and optional menu
+- `ImageCard` - Card optimized for image display
 - `Icon` - Wrapper for Lucide React icons
 - `Label` - Form labels
 - `Progress` - Progress indicator
-- `EmptyState` - Empty state placeholder
+- `EmptyState` - Empty state placeholder with icon and optional action
 - `Table` - Data table with sorting and pagination
+- `Accordion` - Collapsible content sections
+
+### Chart Components
+
+- `BarChart` - Bar chart visualization
+- `LineChart` - Line chart visualization
+- `PieChart` - Pie chart visualization
+- `ScatterPlot` - Scatter plot visualization
+- `RadarChart` - Radar/spider chart visualization
+- `BoxPlot` - Box plot visualization
+- `DotPlot` - Dot plot visualization
+
+### Educational Components
+
+- `Geometry` - Geometric shape rendering
+- `NumberLine` - Number line visualization
+- `FractionDiagram` - Fraction visualization
+- `FactorTree` - Factor tree visualization
 
 ### Navigation Components
 
@@ -294,11 +325,11 @@ function InteractiveExample() {
 - `Modal` - Modal dialog
 - `Popover` - Popover overlay
 - `Tooltip` - Hover tooltips
-- `Confirm` - Confirmation dialog (via `useConfirm` hook)
+- `Confirm` - Confirmation dialog (also via `useConfirm` hook from SlateProvider)
 
 ### Utility Components
 
-- `SlateProvider` - Global provider for library functionality
+- `SlateProvider` - Global provider for library functionality (provides `useConfirm` hook)
 - `ActionIcon` - Small icon button
 
 ## Component API Patterns
@@ -309,7 +340,7 @@ Most components share these common props:
 
 ```tsx
 interface CommonProps {
-  variant?: 'primary' | 'secondary' | 'default' | 'error' | 'info' | 'success'
+  variant?: 'default' | 'primary' | 'secondary' | 'subtle' | 'success' | 'warning' | 'error' | 'info'
   size?: 'sm' | 'md' | 'lg'
   className?: string
   disabled?: boolean
@@ -353,34 +384,51 @@ Components support detailed styling through the `styles` prop:
 
 ### CSS Custom Properties
 
-Slate UI uses CSS custom properties for theming. Override these in your CSS:
+Slate UI uses Tailwind CSS v4's `@theme` directive for theming. Override these in your CSS:
 
 ```css
-:root {
+@theme {
   /* Primary colors */
-  --primary-500: #3b82f6;
-  --anti-primary: #ffffff;
+  --color-primary-500: #000000;
+  --color-anti-primary: #ffffff;
 
   /* Secondary colors */
-  --secondary-500: #8b5cf6;
-  --anti-secondary: #ffffff;
+  --color-secondary-500: #8b5cf6;
+  --color-anti-secondary: #555555;
 
-  /* Gray scale */
-  --gray-100: #f3f4f6;
-  --gray-500: #6b7280;
-  --gray-900: #111827;
+  /* Success colors */
+  --color-success-500: #22c55e;
+  --color-anti-success: #ffffff;
+
+  /* Warning colors */
+  --color-warning-500: #f59e0b;
+  --color-anti-warning: #ffffff;
+
+  /* Error colors */
+  --color-error-500: #ef4444;
+  --color-anti-error: #ffffff;
+
+  /* Info colors */
+  --color-info-500: #0ea5e9;
+  --color-anti-info: #ffffff;
+
+  /* Muted colors */
+  --color-muted: var(--color-primary-300);
+  --color-muted-light: var(--color-primary-50);
 }
 ```
 
 ### Dark Mode
 
-Add dark mode by targeting the `.dark` class:
+Override theme variables for dark mode:
 
 ```css
 .dark {
-  --primary-500: #60a5fa;
-  --gray-100: #1f2937;
-  --gray-900: #f9fafb;
+  @theme {
+    --color-primary-500: #60a5fa;
+    --color-primary-100: #1f2937;
+    --color-primary-900: #f9fafb;
+  }
 }
 ```
 
@@ -471,10 +519,638 @@ const handleSelectChange = (value: any, item: any) => {
 
 ### Types
 
-- `SlateSize` - Size variant type
+- `SlateSize` - Size variant type (`'sm' | 'md' | 'lg'`)
 - `SlateVariant` - Style variant type
-- `SlateColor` - Color variant type
-- `SlateId` - ID type (string | number)
+- `SlateId` - ID type (`string | number`)
+- `SlateSide` - Side type (`'left' | 'right'`)
+- `Styleable<T>` - Interface for components with `styles` prop
+
+## Complex Component Examples
+
+### Tabs
+
+```tsx
+import { Tabs } from 'slate-ui'
+import { User, Settings, Bell } from 'lucide-react'
+
+function TabsExample() {
+  return (
+    <Tabs
+      defaultTab="profile"
+      tabs={[
+        {
+          id: 'profile',
+          name: 'Profile',
+          iconLeft: User,
+          content: <div>Profile content goes here</div>
+        },
+        {
+          id: 'settings',
+          name: 'Settings',
+          iconLeft: Settings,
+          content: <div>Settings content goes here</div>
+        },
+        {
+          id: 'notifications',
+          name: 'Notifications',
+          iconLeft: Bell,
+          padding: false, // Disable default padding
+          content: <div className="p-2">Custom padded content</div>
+        }
+      ]}
+    />
+  )
+}
+```
+
+### Table
+
+```tsx
+import { Table } from 'slate-ui'
+import { Inbox } from 'lucide-react'
+
+type User = { id: number; name: string; email: string; role: string }
+
+function TableExample() {
+  const users: User[] = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' }
+  ]
+
+  return (
+    <Table<User>
+      columns={[
+        { id: 'name', value: 'Name', cell: ({ row }) => row.name },
+        { id: 'email', value: 'Email', cell: ({ row }) => row.email },
+        { id: 'role', value: 'Role', cell: ({ row }) => row.role }
+      ]}
+      rows={users}
+      onRowClick={(row) => console.log('Clicked:', row)}
+      paginate
+      pageSize={10}
+      emptyState={{
+        icon: Inbox,
+        title: 'No users found',
+        button: { children: 'Add User', onClick: () => {} }
+      }}
+    />
+  )
+}
+```
+
+### Accordion
+
+```tsx
+import { Accordion } from 'slate-ui'
+import { HelpCircle } from 'lucide-react'
+
+function AccordionExample() {
+  const [openItems, setOpenItems] = useState<string[]>([])
+
+  return (
+    <Accordion
+      type="multiple"
+      value={openItems}
+      onChange={(value) => setOpenItems(value as string[])}
+      items={[
+        {
+          id: 'faq-1',
+          title: 'How do I get started?',
+          leftIcon: HelpCircle,
+          badge: { children: 'Popular', variant: 'info' },
+          content: <p>Follow our quickstart guide to get up and running.</p>
+        },
+        {
+          id: 'faq-2',
+          title: 'What payment methods do you accept?',
+          content: <p>We accept all major credit cards and PayPal.</p>
+        },
+        {
+          id: 'faq-3',
+          title: 'Can I cancel anytime?',
+          content: <p>Yes, you can cancel your subscription at any time.</p>,
+          disabled: true
+        }
+      ]}
+    />
+  )
+}
+```
+
+### Menu
+
+```tsx
+import { Menu, Button } from 'slate-ui'
+import { MoreVertical, Edit, Trash, Copy, Settings } from 'lucide-react'
+
+function MenuExample() {
+  const [notifications, setNotifications] = useState(true)
+
+  return (
+    <Menu
+      items={[
+        {
+          id: 'edit',
+          type: 'button',
+          label: 'Edit',
+          iconLeft: Edit,
+          onClick: () => console.log('Edit clicked')
+        },
+        {
+          id: 'duplicate',
+          type: 'button',
+          label: 'Duplicate',
+          iconLeft: Copy,
+          onClick: () => console.log('Duplicate clicked')
+        },
+        {
+          id: 'notifications',
+          type: 'switch',
+          label: 'Notifications',
+          checked: notifications,
+          onCheckedChange: setNotifications
+        },
+        {
+          id: 'delete',
+          type: 'button',
+          label: 'Delete',
+          iconLeft: Trash,
+          variant: 'error',
+          confirm: {
+            title: 'Delete item?',
+            description: 'This action cannot be undone.',
+            onConfirm: () => console.log('Deleted')
+          }
+        }
+      ]}
+      align="end"
+    >
+      <Button iconLeft={MoreVertical} variant="subtle" />
+    </Menu>
+  )
+}
+```
+
+### RadioGroup
+
+```tsx
+import { RadioGroup } from 'slate-ui'
+import { CreditCard, Building, Wallet } from 'lucide-react'
+
+function RadioGroupExample() {
+  const [paymentMethod, setPaymentMethod] = useState<string | null>(null)
+
+  return (
+    <RadioGroup
+      value={paymentMethod}
+      onChange={setPaymentMethod}
+      orientation="vertical"
+      items={[
+        {
+          id: 'card',
+          name: 'Credit Card',
+          description: 'Pay with Visa, Mastercard, or Amex',
+          iconLeft: CreditCard
+        },
+        {
+          id: 'bank',
+          name: 'Bank Transfer',
+          description: 'Direct bank transfer',
+          iconLeft: Building
+        },
+        {
+          id: 'wallet',
+          name: 'Digital Wallet',
+          description: 'Apple Pay, Google Pay',
+          iconLeft: Wallet
+        }
+      ]}
+    />
+  )
+}
+```
+
+### Slider
+
+```tsx
+import { Slider } from 'slate-ui'
+
+function SliderExample() {
+  const [volume, setVolume] = useState([50])
+  const [priceRange, setPriceRange] = useState([20, 80])
+
+  return (
+    <div className="space-y-6">
+      {/* Single value slider */}
+      <Slider
+        label="Volume"
+        value={volume}
+        onValueChange={setVolume}
+        min={0}
+        max={100}
+        step={1}
+      />
+
+      {/* Range slider */}
+      <Slider
+        label="Price Range"
+        value={priceRange}
+        onValueChange={setPriceRange}
+        min={0}
+        max={100}
+        step={5}
+      />
+    </div>
+  )
+}
+```
+
+### Progress
+
+```tsx
+import { Progress } from 'slate-ui'
+
+function ProgressExample() {
+  return (
+    <div className="space-y-4">
+      {/* Basic progress */}
+      <Progress value={65} />
+
+      {/* With sections */}
+      <Progress value={75} sections={4} size="md" gap="sm" />
+
+      {/* Different sizes */}
+      <Progress value={40} size="sm" />
+      <Progress value={60} size="lg" />
+    </div>
+  )
+}
+```
+
+### DatePicker
+
+```tsx
+import { DatePicker } from 'slate-ui'
+
+function DatePickerExample() {
+  const [date, setDate] = useState<Date | null>(null)
+
+  return (
+    <DatePicker
+      value={date}
+      onChange={setDate}
+      minDate={new Date()}
+      maxDate={new Date(2025, 11, 31)}
+    />
+  )
+}
+```
+
+### FileUpload
+
+```tsx
+import { FileUpload } from 'slate-ui'
+import { Upload } from 'lucide-react'
+
+function FileUploadExample() {
+  const [uploading, setUploading] = useState(false)
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (!files) return
+
+    setUploading(true)
+    // Handle upload...
+    setUploading(false)
+  }
+
+  return (
+    <FileUpload
+      title="Upload files"
+      subText="Drag and drop or click to browse"
+      icon={Upload}
+      uploading={uploading}
+      onChange={handleChange}
+      accept="image/*,.pdf"
+      multiple
+    />
+  )
+}
+```
+
+### Popover
+
+```tsx
+import { Popover, Button } from 'slate-ui'
+import { Info } from 'lucide-react'
+
+function PopoverExample() {
+  return (
+    <Popover
+      content={
+        <div className="p-3 max-w-xs">
+          <h4 className="font-semibold mb-2">More Information</h4>
+          <p className="text-sm text-gray-600">
+            This is additional context that appears in a popover.
+          </p>
+        </div>
+      }
+      side="bottom"
+    >
+      <Button iconLeft={Info} variant="subtle">
+        Learn More
+      </Button>
+    </Popover>
+  )
+}
+```
+
+### Modal
+
+```tsx
+import { useState } from 'react'
+import { Modal, Button, TextInput, Select } from 'slate-ui'
+import { X } from 'lucide-react'
+
+function ModalExample() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [formData, setFormData] = useState({ name: '', role: null as string | null })
+
+  const roles = [
+    { id: 'admin', name: 'Admin' },
+    { id: 'editor', name: 'Editor' },
+    { id: 'viewer', name: 'Viewer' }
+  ]
+
+  const handleSubmit = () => {
+    console.log('Submitted:', formData)
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
+
+      <Modal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        closeOnClickOutside={true}
+        closeOnEscape={true}
+        className="w-[500px]"
+        styles={{
+          overlay: { backdropFilter: 'blur(4px)' },
+          content: { borderRadius: '12px' }
+        }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b">
+          <h2 className="text-lg font-semibold">Add Team Member</h2>
+          <Button
+            variant="subtle"
+            size="sm"
+            iconLeft={X}
+            onClick={() => setIsOpen(false)}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="p-4 space-y-4">
+          <TextInput
+            label="Name"
+            placeholder="Enter name"
+            value={formData.name}
+            onChange={(value) => setFormData((prev) => ({ ...prev, name: value }))}
+          />
+
+          <Select
+            label="Role"
+            placeholder="Select a role"
+            items={roles}
+            value={formData.role}
+            onChange={(value) => setFormData((prev) => ({ ...prev, role: value }))}
+          />
+        </div>
+
+        {/* Footer */}
+        <div className="flex justify-end gap-2 p-4 border-t bg-gray-50">
+          <Button variant="default" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Add Member
+          </Button>
+        </div>
+      </Modal>
+    </>
+  )
+}
+```
+
+#### Modal with Scrollable Content
+
+```tsx
+import { Modal, Button } from 'slate-ui'
+
+function ScrollableModalExample() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      {/* Fixed header */}
+      <div className="p-4 border-b sticky top-0 bg-white">
+        <h2 className="text-lg font-semibold">Terms and Conditions</h2>
+      </div>
+
+      {/* Scrollable content */}
+      <div className="p-4 overflow-y-auto max-h-[60vh]">
+        <p className="text-sm text-gray-600">
+          {/* Long content here */}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+        </p>
+      </div>
+
+      {/* Fixed footer */}
+      <div className="p-4 border-t sticky bottom-0 bg-white">
+        <Button variant="primary" className="w-full" onClick={() => setIsOpen(false)}>
+          I Accept
+        </Button>
+      </div>
+    </Modal>
+  )
+}
+```
+
+#### Modal with Form Validation
+
+```tsx
+import { useState } from 'react'
+import { Modal, Button, TextInput } from 'slate-ui'
+
+function FormModalExample() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | undefined>()
+
+  const handleSubmit = async () => {
+    if (!email.includes('@')) {
+      setError('Please enter a valid email')
+      return
+    }
+
+    setLoading(true)
+    setError(undefined)
+
+    try {
+      // API call here
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      setIsOpen(false)
+      setEmail('')
+    } catch {
+      setError('Failed to submit. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Modal
+      open={isOpen}
+      onClose={() => !loading && setIsOpen(false)}
+      closeOnClickOutside={!loading}
+      closeOnEscape={!loading}
+    >
+      <div className="p-4">
+        <h2 className="text-lg font-semibold mb-4">Subscribe to Newsletter</h2>
+
+        <TextInput
+          label="Email"
+          type="email"
+          placeholder="you@example.com"
+          value={email}
+          onChange={setEmail}
+          error={error}
+          disabled={loading}
+        />
+
+        <div className="flex justify-end gap-2 mt-4">
+          <Button variant="default" onClick={() => setIsOpen(false)} disabled={loading}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleSubmit} loading={loading}>
+            Subscribe
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  )
+}
+```
+
+### Button Variants
+
+```tsx
+import { Button } from 'slate-ui'
+import { Plus, Download, Trash, Check, AlertTriangle, Info } from 'lucide-react'
+
+function ButtonVariantsExample() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {/* Default - outlined, low emphasis */}
+      <Button variant="default">Default</Button>
+
+      {/* Primary - solid brand color */}
+      <Button variant="primary" iconLeft={Plus}>
+        Primary
+      </Button>
+
+      {/* Secondary - alternative brand color */}
+      <Button variant="secondary">Secondary</Button>
+
+      {/* Subtle - minimal, transparent */}
+      <Button variant="subtle">Subtle</Button>
+
+      {/* Success - green, positive actions */}
+      <Button variant="success" iconLeft={Check}>
+        Success
+      </Button>
+
+      {/* Warning - amber, caution */}
+      <Button variant="warning" iconLeft={AlertTriangle}>
+        Warning
+      </Button>
+
+      {/* Error - red, destructive actions */}
+      <Button variant="error" iconLeft={Trash}>
+        Delete
+      </Button>
+
+      {/* Info - blue, informational */}
+      <Button variant="info" iconLeft={Info}>
+        Info
+      </Button>
+
+      {/* Sizes */}
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+
+      {/* Loading state */}
+      <Button loading>Loading...</Button>
+
+      {/* Icon positions */}
+      <Button iconLeft={Download}>Download</Button>
+      <Button iconRight={Download}>Download</Button>
+    </div>
+  )
+}
+```
+
+### Select with Search
+
+```tsx
+import { Select } from 'slate-ui'
+import { Globe } from 'lucide-react'
+
+type Country = { id: string; name: string }
+
+function SelectExample() {
+  const [country, setCountry] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
+
+  const countries: Country[] = [
+    { id: 'us', name: 'United States' },
+    { id: 'ca', name: 'Canada' },
+    { id: 'uk', name: 'United Kingdom' },
+    { id: 'de', name: 'Germany' },
+    { id: 'fr', name: 'France' }
+  ]
+
+  // Filter items based on search (for server-side search)
+  const filteredCountries = countries.filter((c) =>
+    c.name.toLowerCase().includes(search.toLowerCase())
+  )
+
+  return (
+    <Select
+      label="Country"
+      placeholder="Select a country"
+      items={filteredCountries}
+      value={country}
+      onChange={(value, item) => {
+        setCountry(value)
+        console.log('Selected:', item)
+      }}
+      searchable
+      search={search}
+      onSearchChange={setSearch}
+      clearable
+      iconLeft={Globe}
+      error={!country ? 'Country is required' : undefined}
+    />
+  )
+}
+```
 
 ## Examples
 
@@ -488,7 +1164,6 @@ import {
   Select,
   TextArea,
   Checkbox,
-  Card,
   SlateProvider
 } from 'slate-ui'
 
@@ -496,7 +1171,7 @@ function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: null,
+    subject: null as string | null,
     message: '',
     newsletter: false
   })
@@ -509,19 +1184,16 @@ function ContactForm() {
 
   return (
     <SlateProvider>
-      <Card className="max-w-md mx-auto">
-        <Card.Header>
-          <Card.Title>Contact Us</Card.Title>
-        </Card.Header>
+      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
 
-        <Card.Content className="space-y-4">
+        <div className="space-y-4">
           <TextInput
             label="Name"
             value={formData.name}
             onChange={(value) =>
               setFormData((prev) => ({ ...prev, name: value }))
             }
-            required
           />
 
           <TextInput
@@ -531,7 +1203,6 @@ function ContactForm() {
             onChange={(value) =>
               setFormData((prev) => ({ ...prev, email: value }))
             }
-            required
           />
 
           <Select
@@ -551,7 +1222,6 @@ function ContactForm() {
               setFormData((prev) => ({ ...prev, message: value }))
             }
             placeholder="How can we help?"
-            rows={4}
           />
 
           <Checkbox
@@ -561,12 +1231,10 @@ function ContactForm() {
             }
             label="Subscribe to our newsletter"
           />
-        </Card.Content>
+        </div>
 
-        <Card.Footer>
-          <Button className="w-full">Send Message</Button>
-        </Card.Footer>
-      </Card>
+        <Button className="w-full mt-6">Send Message</Button>
+      </div>
     </SlateProvider>
   )
 }
