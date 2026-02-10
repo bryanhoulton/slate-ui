@@ -20,11 +20,17 @@ export function Tabs({
     if (config.tabsPushBrowserState && typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search)
       const tabParam = params.get('tab')
+
       if (tabParam && tabs.some((tab) => tab.id === tabParam)) {
         setActiveTab(tabParam)
+      } else if (!tabParam && defaultTab) {
+        // If no tab in URL but we have a defaultTab, push it to the URL
+        const url = new URL(window.location.href)
+        url.searchParams.set('tab', defaultTab)
+        window.history.replaceState({}, '', url.toString())
       }
     }
-  }, [config.tabsPushBrowserState, tabs])
+  }, [config.tabsPushBrowserState, tabs, defaultTab])
 
   const handleTabChange = (value: string) => {
     setActiveTab(value)
