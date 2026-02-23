@@ -41,4 +41,5 @@ export interface TableProps<R extends RowType>
   showPagination?: boolean
   disableScroll?: boolean
   totalRows?: number
+  fill?: boolean
 }

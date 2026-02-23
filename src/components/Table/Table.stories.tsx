@@ -133,6 +133,44 @@ export const Primary: Story = {
   }
 }
 
+const manyRows = Array.from({ length: 30 }, (_, i) => ({
+  id: String(i + 1),
+  name: `Person ${i + 1}`,
+  age: 20 + i
+}))
+
+const fillColumns = [
+  { id: 'name', value: 'Name', icon: User, cell: ({ row }: { row: { name: string; age: number; id: string } }) => row.name },
+  { id: 'age', value: 'Age', icon: Calendar, cell: ({ row }: { row: { name: string; age: number; id: string } }) => row.age }
+]
+
+export const Fill: Story = {
+  render: () => (
+    <TooltipProvider>
+      <div className="flex flex-col" style={{ height: 300 }}>
+        <Table fill columns={fillColumns} rows={manyRows} />
+      </div>
+    </TooltipProvider>
+  )
+}
+
+export const FillWithPagination: Story = {
+  render: () => (
+    <TooltipProvider>
+      <div className="flex flex-col" style={{ height: 300 }}>
+        <Table
+          fill
+          columns={fillColumns}
+          rows={manyRows}
+          paginate
+          showPagination
+          pageSize={8}
+        />
+      </div>
+    </TooltipProvider>
+  )
+}
+
 export const Empty: Story = {
   args: {
     rows: [],

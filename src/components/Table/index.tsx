@@ -16,7 +16,7 @@ import {
   TableProps
 } from './Table.types'
 
-export const tableVariants = cva(['table-auto divide-y'], {
+export const tableVariants = cva(['table-auto divide-y w-full'], {
   variants: {}
 })
 
@@ -46,6 +46,7 @@ export function Table<R extends RowType>({
   paginate = false,
   showPagination = false,
   disableScroll = false,
+  fill = false,
   page: pageProp,
   rows,
   loading,
@@ -75,15 +76,22 @@ export function Table<R extends RowType>({
   }
 
   return (
-    <div className={cn('flex flex-col gap-4', className)}>
+    <div
+      className={cn(
+        'flex flex-col gap-4',
+        fill && 'flex-grow overflow-hidden',
+        className
+      )}
+    >
+      <div className={cn(fill && 'flex-grow overflow-auto min-h-0')}>
       <table className={tableVariants({})} style={styles?.table} {...props}>
-        <thead ref={tableHeadRef}>
+        <thead ref={tableHeadRef} className={cn(fill && 'sticky top-0 z-10 bg-white')}>
           <tr className={tableRowVariants({ clickable: false })}>
             {columns.map(
               (column) =>
                 !column.hidden && (
                   <th
-                    className={tableCellVariants({ isHeader: true })}
+                    className={cn(tableCellVariants({ isHeader: true }), fill && 'border-b')}
                     align="left"
                     key={column.id}
                   >
@@ -152,6 +160,7 @@ export function Table<R extends RowType>({
           )}
         </tbody>
       </table>
+      </div>
 
       {rowsToShow.length != 0 && showPagination && (
         <Pagination
