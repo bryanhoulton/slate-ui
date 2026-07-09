@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import * as RTabs from '@radix-ui/react-tabs'
 
 import { cn } from '../../utilities'
+import { Badge } from '../Badge'
 import { Icon } from '../Icon'
 import { useSlateConfig } from '../SlateProvider'
 import { TabsProps } from './Tabs.types'
@@ -68,6 +69,7 @@ export function Tabs({
           >
             {tab.iconLeft && <Icon icon={tab.iconLeft} variant="default" />}
             <span>{tab.name}</span>
+            {tab.badge && <Badge size="sm" {...tab.badge} />}
             {tab.iconRight && <Icon icon={tab.iconRight} variant="default" />}
           </RTabs.Trigger>
         ))}

@@ -8,6 +8,7 @@ import { LucideIcon } from 'lucide-react';
 import { TabsProps as RTabsProps } from '@radix-ui/react-tabs';
 
 import { Styleable } from '../../utilities/types';
+import { BadgeProps } from '../Badge/Badge.types';
 
 export type TabsStyles = {
   tab: CSSProperties
@@ -22,6 +23,7 @@ export type Tab = {
   content: ReactNode
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
+  badge?: BadgeProps
   padding?: boolean
 }
 export interface TabsProps
