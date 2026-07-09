@@ -82,6 +82,12 @@ const labelOnProgressVariants = cva<Variants<{ variant: SlateVariant }>>(
 
 const LABEL_CLASSES =
   'absolute left-0 top-1/2 -translate-y-1/2 truncate px-2 text-xs font-medium leading-none'
+/**
+ * Labels placed beside a shape get a white chip so dependency arrows passing
+ * at row center run behind them instead of striking through the text.
+ */
+const SIDE_LABEL_CLASSES =
+  'absolute left-full whitespace-nowrap rounded bg-white/90 px-1 py-0.5 text-xs leading-none'
 const MIN_WIDTH_FOR_INSIDE_LABEL = 48
 
 const solidVariants = cva<Variants<{ variant: SlateVariant }>>([''], {
@@ -198,8 +204,8 @@ export function GanttBar({
         />
         {label && (
           <span
-            className="absolute left-full whitespace-nowrap text-xs text-muted"
-            style={{ marginLeft: 2 }}
+            className={cn(SIDE_LABEL_CLASSES, 'text-muted')}
+            style={{ marginLeft: 6 }}
           >
             {label}
           </span>
@@ -254,7 +260,10 @@ export function GanttBar({
         />
         {label && (
           <span
-            className="absolute left-full top-0 whitespace-nowrap text-xs font-medium text-primary-900"
+            className={cn(
+              SIDE_LABEL_CLASSES,
+              '-top-0.5 font-medium text-primary-900'
+            )}
             style={{ marginLeft: 8 }}
           >
             {label}
@@ -374,7 +383,10 @@ export function GanttBar({
       {/* Too narrow for an inside label: fall back to the right side. */}
       {label && !labelInside && (
         <span
-          className="absolute left-full top-1/2 -translate-y-1/2 whitespace-nowrap text-xs text-muted"
+          className={cn(
+            SIDE_LABEL_CLASSES,
+            'top-1/2 -translate-y-1/2 text-muted'
+          )}
           style={{ marginLeft: 8 }}
         >
           {label}
