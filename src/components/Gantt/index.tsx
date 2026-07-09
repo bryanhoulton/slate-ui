@@ -388,10 +388,7 @@ export function Gantt({
 
   return (
     <div
-      className={cn(
-        'flex w-full flex-col overflow-hidden rounded-lg border bg-white',
-        className
-      )}
+      className={cn('flex w-full flex-col overflow-hidden bg-white', className)}
       style={styles?.root}
       {...props}
     >
@@ -709,9 +706,15 @@ export function Gantt({
                   <div
                     className={cn(
                       'pointer-events-none absolute z-30 w-max max-w-64 -translate-x-1/2 -translate-y-full',
-                      'rounded-md bg-primary px-2.5 py-1.5 text-xs text-anti-primary shadow-md'
+                      'rounded-md px-2.5 py-1.5 text-xs shadow-md'
                     )}
                     style={{
+                      // Resolved via CSS variables with hard fallbacks so the
+                      // text stays readable even when the consuming app's
+                      // Tailwind setup never defines anti-primary (e.g. a v3
+                      // config that only extends `primary`).
+                      backgroundColor: 'var(--color-primary, #111827)',
+                      color: 'var(--color-anti-primary, #ffffff)',
                       left: clamp(
                         snap.drag
                           ? (tooltipLayout.x1 + tooltipLayout.x2) / 2
