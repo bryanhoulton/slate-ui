@@ -86,7 +86,7 @@ export function Gantt({
   onTaskClick,
   onTaskDoubleClick,
   readOnly = false,
-  showToolbar = true,
+  showToolbar = false,
   showTaskList = true,
   showDependencies = true,
   showToday = true,
@@ -355,6 +355,49 @@ export function Gantt({
       ? rows.find((task) => task.id === hoveredTooltipId)
       : undefined
   const tooltipLayout = tooltipTask ? layout.get(tooltipTask.id) : undefined
+  const tooltipDesiredX = tooltipLayout
+    ? snap.drag
+      ? (tooltipLayout.x1 + tooltipLayout.x2) / 2
+      : (tooltipX ?? (tooltipLayout.x1 + tooltipLayout.x2) / 2)
+    : 0
+
+  // Boundary awareness: after render (pre-paint), measure the tooltip and
+  // keep it inside the visible viewport — clamp horizontally against the
+  // scrolled-in area (excluding the sticky task list) and flip below the bar
+  // when there is no room above it.
+  const tooltipRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const node = tooltipRef.current
+    const scroller = scrollRef.current
+    if (!node || !scroller || !tooltipLayout) return
+    const margin = 6
+
+    // Visible range in timeline-body coordinates (body starts at listWidth
+    // in content coordinates, hidden under the sticky task list).
+    const visibleStart = scroller.scrollLeft + margin
+    const visibleEnd =
+      scroller.scrollLeft + scroller.clientWidth - listWidth - margin
+    const halfWidth = node.offsetWidth / 2
+
+    let left = tooltipDesiredX
+    if (visibleEnd - visibleStart > node.offsetWidth) {
+      left = clamp(left, visibleStart + halfWidth, visibleEnd - halfWidth)
+    }
+    left = clamp(left, halfWidth, Math.max(scale.totalWidth - halfWidth, halfWidth))
+
+    // Flip below the bar if the tooltip would poke above the visible area
+    // (which is covered by the sticky header) or the content top.
+    const fitsAbove =
+      tooltipLayout.y - 2 - node.offsetHeight >=
+      Math.max(scroller.scrollTop, 0)
+    node.style.left = `${left}px`
+    node.style.top = fitsAbove
+      ? `${tooltipLayout.y - 2}px`
+      : `${tooltipLayout.y + rowHeight + 2}px`
+    node.style.transform = fitsAbove
+      ? 'translate(-50%, -100%)'
+      : 'translate(-50%, 0)'
+  })
 
   function defaultTooltip(task: ResolvedGanttTask): ReactNode {
     // While dragging, show where the task will land when it snaps.
@@ -704,8 +747,9 @@ export function Gantt({
                 {/* Tooltip. */}
                 {tooltipTask && tooltipLayout && (
                   <div
+                    ref={tooltipRef}
                     className={cn(
-                      'pointer-events-none absolute z-30 w-max max-w-64 -translate-x-1/2 -translate-y-full',
+                      'pointer-events-none absolute z-30 w-max max-w-64',
                       'rounded-md px-2.5 py-1.5 text-xs shadow-md'
                     )}
                     style={{
@@ -715,14 +759,9 @@ export function Gantt({
                       // config that only extends `primary`).
                       backgroundColor: 'var(--color-primary, #111827)',
                       color: 'var(--color-anti-primary, #ffffff)',
-                      left: clamp(
-                        snap.drag
-                          ? (tooltipLayout.x1 + tooltipLayout.x2) / 2
-                          : (tooltipX ?? 0),
-                        48,
-                        Math.max(scale.totalWidth - 48, 48)
-                      ),
+                      left: tooltipDesiredX,
                       top: tooltipLayout.y - 2,
+                      transform: 'translate(-50%, -100%)',
                       ...styles?.tooltip
                     }}
                   >

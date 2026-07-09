@@ -4,10 +4,12 @@ import type {
   Meta,
   StoryObj
 } from '@storybook/react-vite'
+import { Plus, RotateCcw, Trash } from 'lucide-react'
 
-import { args, STORY_SIZES } from '../../utilities'
+import { args, SlateId, STORY_SIZES } from '../../utilities'
+import { Button } from '../Button'
 import { Gantt } from './'
-import { GanttTask } from './Gantt.types'
+import { GanttTask, GanttUnit } from './Gantt.types'
 
 function day(offset: number): Date {
   const today = new Date()
@@ -169,7 +171,10 @@ const meta: Meta<typeof Gantt> = {
       description: 'Disable all editing interactions',
       control: 'boolean'
     },
-    showToolbar: { control: 'boolean' },
+    showToolbar: {
+      description: 'Show the unit-preset / Today toolbar. Off by default.',
+      control: 'boolean'
+    },
     showTaskList: { control: 'boolean' },
     showDependencies: { control: 'boolean' },
     showToday: { control: 'boolean' },
@@ -222,7 +227,8 @@ export const Default: Story = {
   },
   render: (storyArgs) => <StatefulGantt {...storyArgs} />,
   args: {
-    tasks: projectTasks
+    tasks: projectTasks,
+    showToolbar: true
   }
 }
 
@@ -252,7 +258,8 @@ export const ZoomedOut: Story = {
   render: (storyArgs) => <StatefulGantt {...storyArgs} />,
   args: {
     tasks: projectTasks,
-    defaultZoom: 4.4
+    defaultZoom: 4.4,
+    showToolbar: true
   }
 }
 
@@ -449,4 +456,150 @@ export const EmptyData: Story = {
       button: { children: 'Add task', variant: 'primary' }
     }
   }
+}
+
+/**
+ * A miniature app around the Gantt: fully controlled tasks, add/delete/reset,
+ * and a live readout of everything the component reports back.
+ */
+function Playground() {
+  const [tasks, setTasks] = useState<GanttTask[]>(projectTasks)
+  const [selected, setSelected] = useState<SlateId | null>(null)
+  const [zoom, setZoom] = useState(44)
+  const [unit, setUnit] = useState<GanttUnit>('day')
+  const [events, setEvents] = useState<string[]>([])
+  const [nextId, setNextId] = useState(1)
+
+  function logEvent(message: string) {
+    setEvents((prev) => [message, ...prev].slice(0, 5))
+  }
+
+  function formatRange(task: GanttTask): string {
+    const fmt = (date: Date) =>
+      date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    return `${fmt(task.start)} – ${fmt(task.end)}`
+  }
+
+  function handleTaskChange(changed: GanttTask) {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === changed.id ? changed : task))
+    )
+    logEvent(
+      `"${changed.name}" → ${formatRange(changed)} · ${changed.progress ?? 0}%`
+    )
+  }
+
+  function addTask() {
+    // If a project is selected, nest the new task under it.
+    const selectedTask = tasks.find((task) => task.id === selected)
+    const parentId =
+      selectedTask?.type === 'project' ? selectedTask.id : selectedTask?.parentId
+    const task: GanttTask = {
+      id: `new-${nextId}`,
+      name: `New task ${nextId}`,
+      start: day(0),
+      end: day(3),
+      progress: 0,
+      variant: 'secondary',
+      parentId
+    }
+    setNextId((n) => n + 1)
+    setTasks((prev) => [...prev, task])
+    setSelected(task.id)
+    logEvent(`Added "${task.name}"`)
+  }
+
+  function deleteSelected() {
+    const task = tasks.find((t) => t.id === selected)
+    if (!task) return
+    // Remove the task, any children, and references to it in dependencies.
+    setTasks((prev) =>
+      prev
+        .filter((t) => t.id !== task.id && t.parentId !== task.id)
+        .map((t) => ({
+          ...t,
+          dependencies: t.dependencies?.filter((id) => id !== task.id)
+        }))
+    )
+    setSelected(null)
+    logEvent(`Deleted "${task.name}"`)
+  }
+
+  const selectedTask = tasks.find((task) => task.id === selected)
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <Button size="sm" variant="primary" iconLeft={Plus} onClick={addTask}>
+          Add task
+        </Button>
+        <Button
+          size="sm"
+          variant="error"
+          iconLeft={Trash}
+          disabled={!selectedTask}
+          onClick={deleteSelected}
+        >
+          Delete selected
+        </Button>
+        <Button
+          size="sm"
+          iconLeft={RotateCcw}
+          onClick={() => {
+            setTasks(projectTasks)
+            setSelected(null)
+            setEvents([])
+            logEvent('Reset to the original plan')
+          }}
+        >
+          Reset
+        </Button>
+        <span className="ml-auto text-sm text-muted">
+          {zoom.toFixed(1)} px/day · {unit} grid ·{' '}
+          {selectedTask ? `selected: ${selectedTask.name}` : 'nothing selected'}
+        </span>
+      </div>
+
+      <div className="rounded-lg border overflow-hidden">
+        <Gantt
+          tasks={tasks}
+          selectedId={selected}
+          onSelectedChange={setSelected}
+          onTaskChange={handleTaskChange}
+          onZoomChange={setZoom}
+          onUnitChange={setUnit}
+          maxHeight={420}
+        />
+      </div>
+
+      <div className="text-sm">
+        <p className="font-medium">Recent changes</p>
+        {events.length === 0 ? (
+          <p className="text-muted">
+            Drag a bar, resize its edges, drag the progress dot, or pinch to
+            zoom — changes show up here.
+          </p>
+        ) : (
+          <ul className="text-muted">
+            {events.map((event, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={index}>{event}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export const InteractivePlayground: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A full working example: controlled tasks, selection, and zoom, with add/delete/reset actions and a live log of every change the chart emits. Use it to feel out dragging, resizing, progress dragging, pinch zoom, and collapsing.'
+      }
+    }
+  },
+  render: () => <Playground />
 }

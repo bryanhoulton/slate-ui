@@ -85,8 +85,8 @@ function findBar(name: string): HTMLElement {
 }
 
 describe('Gantt rendering layer', () => {
-  it('renders the toolbar, task list, bars, arrows, and today line', () => {
-    render(<Gantt tasks={makeTasks()} defaultZoom={44} />)
+  it('renders the toolbar (opt-in), task list, bars, arrows, and today line', () => {
+    render(<Gantt tasks={makeTasks()} defaultZoom={44} showToolbar />)
 
     // Toolbar: unit presets + Today, with the derived unit active.
     const buttons = Array.from(container.querySelectorAll('button')).map(
@@ -241,10 +241,24 @@ describe('Gantt rendering layer', () => {
     expect(onZoomChange).not.toHaveBeenCalled()
   })
 
+  it('hides the toolbar by default', () => {
+    render(<Gantt tasks={makeTasks()} />)
+    const buttons = Array.from(container.querySelectorAll('button')).map(
+      (button) => button.textContent
+    )
+    expect(buttons).not.toContain('Today')
+    expect(buttons).not.toContain('Month')
+  })
+
   it('jumps to unit presets from the toolbar', () => {
     const onUnitChange = vi.fn()
     render(
-      <Gantt tasks={makeTasks()} defaultZoom={44} onUnitChange={onUnitChange} />
+      <Gantt
+        tasks={makeTasks()}
+        defaultZoom={44}
+        showToolbar
+        onUnitChange={onUnitChange}
+      />
     )
     const monthButton = Array.from(
       container.querySelectorAll('button')

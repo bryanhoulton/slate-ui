@@ -77,6 +77,7 @@ export interface GanttProps
 
   /** Disable all moving, resizing, and progress dragging. */
   readOnly?: boolean
+  /** Show the unit-preset / Today toolbar above the chart. Off by default. */
   showToolbar?: boolean
   showTaskList?: boolean
   showDependencies?: boolean
