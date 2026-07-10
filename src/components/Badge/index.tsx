@@ -18,17 +18,18 @@ const variants = cva<
     iconLeft: boolean
     iconRight: boolean
   }>
->(['flex gap-1 items-center w-fit px-2 rounded-full shrink-0'], {
+>(['flex gap-2 items-center w-fit px-2 rounded-full shrink-0 border bg-white'], {
   variants: {
+    // Every variant shares the default look; the dot carries the color.
     variant: {
-      primary: 'bg-primary text-anti-primary',
-      secondary: 'bg-secondary text-anti-secondary border',
-      default: 'border',
-      subtle: 'border-transparent',
-      success: 'bg-success-100 text-success-700',
-      warning: 'bg-warning-100 text-warning-700',
-      error: 'bg-error text-anti-error',
-      info: 'bg-info-100 text-info-700'
+      primary: '',
+      secondary: '',
+      default: '',
+      subtle: '',
+      success: '',
+      warning: '',
+      error: '',
+      info: ''
     },
     size: {
       sm: 'h-5 text-xs',
@@ -50,6 +51,44 @@ const variants = cva<
       className: 'pr-1.5'
     }
   ]
+})
+
+const dotVariants = cva<
+  Variants<{ variant: SlateVariant; size: SlateSize }>
+>(['rounded-full shrink-0'], {
+  variants: {
+    variant: {
+      primary: 'bg-primary',
+      secondary: 'bg-secondary-400',
+      default: 'bg-primary-300',
+      subtle: 'bg-primary-100',
+      success: 'bg-success-500',
+      warning: 'bg-warning-500',
+      error: 'bg-error-500',
+      info: 'bg-info-500'
+    },
+    size: {
+      sm: 'h-1.5 w-1.5',
+      md: 'h-2 w-2',
+      lg: 'h-2.5 w-2.5'
+    }
+  }
+})
+
+/** When iconLeft replaces the dot, it takes over the variant color. */
+const iconColorVariants = cva<Variants<{ variant: SlateVariant }>>([''], {
+  variants: {
+    variant: {
+      primary: 'text-primary',
+      secondary: 'text-secondary-400',
+      default: 'text-primary-300',
+      subtle: 'text-primary-100',
+      success: 'text-success-500',
+      warning: 'text-warning-500',
+      error: 'text-error-500',
+      info: 'text-info-500'
+    }
+  }
 })
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
@@ -81,12 +120,17 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         )}
         style={styles?.root}
       >
-        {iconLeft && (
+        {iconLeft ? (
           <Icon
             icon={iconLeft}
             variant="default"
-            className={size === 'sm' ? 'h-3 w-3' : 'h-4 w-4'}
+            className={cn(
+              size === 'sm' ? 'h-3 w-3' : 'h-4 w-4',
+              iconColorVariants({ variant })
+            )}
           />
+        ) : (
+          <span className={dotVariants({ variant, size })} />
         )}
         <span className="shrink-0">{children}</span>
         {iconRight && (
