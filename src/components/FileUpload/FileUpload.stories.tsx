@@ -1,12 +1,16 @@
 import { useState } from 'react'
 
+import { File as FileIcon, Folder as FolderIcon } from 'lucide-react'
+
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import type {
   Meta,
   StoryObj
 } from '@storybook/react-vite'
 
+import { ActionIcon } from '../ActionIcon'
 import { FileUpload } from './'
+import { useUpload } from './useUpload'
 
 const meta: Meta<typeof FileUpload> = {
   title: 'Inputs/FileUpload',
@@ -83,4 +87,45 @@ export const Uploading: Story = {
   args: {
     uploading: true
   }
+}
+
+const UseUploadActionIconsExample = () => {
+  const [files, setFiles] = useState<File[]>([])
+  const upload = useUpload({ multiple: true, files, onFilesChange: setFiles })
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-2">
+        <ActionIcon
+          icon={FileIcon}
+          tooltip="Upload files"
+          onClick={upload.open}
+        />
+        <ActionIcon
+          icon={FolderIcon}
+          tooltip="Upload folder"
+          onClick={upload.openDirectory}
+        />
+        <input {...upload.inputProps} />
+        <input {...upload.directoryInputProps} />
+      </div>
+
+      {upload.files.length > 0 && (
+        <ul className="flex flex-col gap-1 text-sm">
+          {upload.files.map((file, index) => (
+            <li key={`${file.name}-${index}`}>{file.name}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+/**
+ * `useUpload` is a headless hook that can drive any trigger element. Here,
+ * two `ActionIcon`s open a file picker and a folder picker respectively,
+ * both feeding into the same controlled file list.
+ */
+export const UseUploadActionIcons: Story = {
+  render: () => <UseUploadActionIconsExample />
 }
