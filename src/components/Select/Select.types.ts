@@ -37,6 +37,17 @@ export interface SelectProps<IdType extends SlateId>
   onChange: (value: IdType | null, item: SelectItem<IdType> | null) => void
   clearable?: boolean
 
+  /**
+   * When true and the search text doesn't exactly match any item's name, show
+   * a `Create "<search>"` option at the bottom of the dropdown.
+   */
+  creatable?: boolean
+  /**
+   * Called with the search text when the create option is selected. The parent
+   * is responsible for adding the created item to `items` and selecting it.
+   */
+  onCreate?: (name: string) => void
+
   searchable?: boolean
   search?: string
   defaultSearch?: string

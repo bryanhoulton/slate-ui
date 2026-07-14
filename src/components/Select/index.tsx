@@ -7,6 +7,7 @@ import {
 import {
   Check,
   ChevronDown,
+  Plus,
   X
 } from 'lucide-react'
 
@@ -79,6 +80,8 @@ const SlateComboboxInput = forwardRef<
 )
 SlateComboboxInput.displayName = 'SlateComboboxInput'
 
+export const SELECT_CREATE_OPTION_ID = '__slate-select-create__'
+
 export function Select<IdType extends SlateId>({
   items,
   id = gid(),
@@ -100,6 +103,8 @@ export function Select<IdType extends SlateId>({
   onChange,
   defaultValue = null,
   clearable,
+  creatable,
+  onCreate,
 
   // Search controls.
   searchable = true,
@@ -136,12 +141,22 @@ export function Select<IdType extends SlateId>({
     setSearch(value?.name || '')
   }, [value?.name])
 
+  const showCreate =
+    Boolean(creatable) &&
+    search !== '' &&
+    !items.some((item) => item.name.toLowerCase() === search.toLowerCase())
+
   return (
     <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
       {label && <Label styles={styles?.label}>{label}</Label>}
       <Combobox
         value={value}
         onChange={(v: SelectItem<IdType> | null) => {
+          if (v && (v.id as SlateId) === SELECT_CREATE_OPTION_ID) {
+            onCreate?.(search)
+            setSearch('')
+            return
+          }
           setValue(v)
           setSearch(v?.name || '')
         }}
@@ -207,7 +222,28 @@ export function Select<IdType extends SlateId>({
             </ComboboxOption>
           ))}
 
-          {filteredItems.length === 0 && (
+          {showCreate && (
+            <ComboboxOption
+              value={
+                {
+                  id: SELECT_CREATE_OPTION_ID,
+                  name: search
+                } as unknown as SelectItem<IdType>
+              }
+              className={cn(
+                'flex items-center rounded-lg text-sm p-2 gap-2',
+                'bg-white data-[focus]:bg-muted-light'
+              )}
+              as="button"
+              type="button"
+              style={styles?.option}
+            >
+              <Icon icon={Plus} />
+              Create &quot;{search}&quot;
+            </ComboboxOption>
+          )}
+
+          {filteredItems.length === 0 && !showCreate && (
             <div className="text-muted text-center py-2">No results found!</div>
           )}
         </ComboboxOptions>

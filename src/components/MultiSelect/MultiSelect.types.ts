@@ -34,6 +34,17 @@ export interface MultiSelectProps<IdType extends SlateId>
   clearable?: boolean
 
   /**
+   * When true and the search text doesn't exactly match any item's name, show
+   * a `Create "<search>"` option at the bottom of the dropdown.
+   */
+  creatable?: boolean
+  /**
+   * Called with the search text when the create option is selected. The parent
+   * is responsible for adding the created item to `items` and selecting it.
+   */
+  onCreate?: (name: string) => void
+
+  /**
    * Limit the number of selectable items. When reached, remaining options are
    * disabled in the dropdown.
    */

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   BookAudio,
   HandPlatter,
@@ -246,6 +248,35 @@ export const SearchableSelect: Story = {
       />
     </div>
   )
+}
+
+const CreatableExample = () => {
+  const [items, setItems] = useState([
+    { id: 'apple', name: 'Apple' },
+    { id: 'banana', name: 'Banana' },
+    { id: 'cherry', name: 'Cherry' }
+  ])
+  const [value, setValue] = useState<string | null>(null)
+
+  return (
+    <Select<string>
+      label="Fruit (type to create)"
+      placeholder="Search or create a fruit..."
+      items={items}
+      value={value}
+      onChange={(v) => setValue(v)}
+      creatable
+      onCreate={(name) => {
+        const id = name.toLowerCase().replace(/\s+/g, '-')
+        setItems((prev) => [...prev, { id, name }])
+        setValue(id)
+      }}
+    />
+  )
+}
+
+export const Creatable: Story = {
+  render: () => <CreatableExample />
 }
 
 export const FormExample: Story = {

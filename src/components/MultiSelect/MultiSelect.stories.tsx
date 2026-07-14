@@ -176,6 +176,35 @@ export const MaxSelected: Story = {
   )
 }
 
+const CreatableExample = () => {
+  const [items, setItems] = useState([
+    { id: 'bug', name: 'Bug' },
+    { id: 'feature', name: 'Feature' },
+    { id: 'docs', name: 'Docs' }
+  ])
+  const [value, setValue] = useState<string[]>(['bug'])
+
+  return (
+    <MultiSelect<string>
+      label="Tags (type to create)"
+      placeholder="Search or create tags..."
+      items={items}
+      value={value}
+      onChange={(v) => setValue(v)}
+      creatable
+      onCreate={(name) => {
+        const id = name.toLowerCase().replace(/\s+/g, '-')
+        setItems((prev) => [...prev, { id, name }])
+        setValue((prev) => [...prev, id])
+      }}
+    />
+  )
+}
+
+export const Creatable: Story = {
+  render: () => <CreatableExample />
+}
+
 export const Variants: Story = {
   render: () => (
     <div className="space-y-4">

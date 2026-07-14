@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom'
 import {
   Check,
   ChevronDown,
+  Plus,
   X
 } from 'lucide-react'
 
@@ -30,6 +31,7 @@ import { ActionIcon } from '../ActionIcon'
 import { Badge } from '../Badge'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
+import { SELECT_CREATE_OPTION_ID } from '../Select'
 import { SelectItem } from '../Select/Select.types'
 import { MultiSelectProps } from './MultiSelect.types'
 
@@ -52,6 +54,8 @@ export function MultiSelect<IdType extends SlateId>({
   defaultValue = [],
   clearable,
   maxSelected,
+  creatable,
+  onCreate,
 
   searchable = true,
   defaultSearch = '',
@@ -147,6 +151,11 @@ export function MultiSelect<IdType extends SlateId>({
   const atLimit =
     typeof maxSelected === 'number' && value.length >= maxSelected
 
+  const showCreate =
+    Boolean(creatable) &&
+    search !== '' &&
+    !items.some((item) => item.name.toLowerCase() === search.toLowerCase())
+
   return (
     <div className={cn('flex flex-col gap-1', className)} style={styles?.root}>
       {label && <Label styles={styles?.label}>{label}</Label>}
@@ -154,6 +163,15 @@ export function MultiSelect<IdType extends SlateId>({
         multiple
         value={value}
         onChange={(newValues: IdType[]) => {
+          if (
+            newValues.some(
+              (v) => (v as SlateId) === SELECT_CREATE_OPTION_ID
+            )
+          ) {
+            onCreate?.(search)
+            setSearch('')
+            return
+          }
           setValue(newValues)
           setSearch('')
         }}
@@ -311,7 +329,23 @@ export function MultiSelect<IdType extends SlateId>({
                   )
                 })}
 
-                {filteredItems.length === 0 && (
+                {showCreate && (
+                  <ComboboxOption
+                    value={SELECT_CREATE_OPTION_ID as unknown as IdType}
+                    className={cn(
+                      'flex items-center rounded-lg text-sm p-2 gap-2',
+                      'bg-white data-[focus]:bg-muted-light cursor-pointer'
+                    )}
+                    as="button"
+                    type="button"
+                    style={styles?.option}
+                  >
+                    <Icon icon={Plus} />
+                    Create &quot;{search}&quot;
+                  </ComboboxOption>
+                )}
+
+                {filteredItems.length === 0 && !showCreate && (
                   <div className="text-muted text-center py-2">
                     No results found!
                   </div>
