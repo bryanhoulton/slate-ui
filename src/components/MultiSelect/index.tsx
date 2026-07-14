@@ -153,7 +153,6 @@ export function MultiSelect<IdType extends SlateId>({
 
   const showCreate =
     Boolean(creatable) &&
-    search !== '' &&
     !items.some((item) => item.name.toLowerCase() === search.toLowerCase())
 
   return (
@@ -168,6 +167,10 @@ export function MultiSelect<IdType extends SlateId>({
               (v) => (v as SlateId) === SELECT_CREATE_OPTION_ID
             )
           ) {
+            if (search.trim() === '') {
+              inputRef.current?.focus()
+              return
+            }
             onCreate?.(search)
             setSearch('')
             return
@@ -341,7 +344,9 @@ export function MultiSelect<IdType extends SlateId>({
                     style={styles?.option}
                   >
                     <Icon icon={Plus} />
-                    Create &quot;{search}&quot;
+                    {search.trim() === ''
+                      ? 'Create your own'
+                      : `Create "${search}"`}
                   </ComboboxOption>
                 )}
 

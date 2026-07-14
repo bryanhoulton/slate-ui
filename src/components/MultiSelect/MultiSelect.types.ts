@@ -34,8 +34,9 @@ export interface MultiSelectProps<IdType extends SlateId>
   clearable?: boolean
 
   /**
-   * When true and the search text doesn't exactly match any item's name, show
-   * a `Create "<search>"` option at the bottom of the dropdown.
+   * When true, show a create option at the bottom of the dropdown. Displays
+   * `Create your own` when the search is empty, or `Create "<search>"` when the
+   * search text doesn't exactly match any item's name.
    */
   creatable?: boolean
   /**

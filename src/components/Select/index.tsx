@@ -1,7 +1,8 @@
 import {
   forwardRef,
   useEffect,
-  useMemo
+  useMemo,
+  useRef
 } from 'react'
 
 import {
@@ -141,9 +142,10 @@ export function Select<IdType extends SlateId>({
     setSearch(value?.name || '')
   }, [value?.name])
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
   const showCreate =
     Boolean(creatable) &&
-    search !== '' &&
     !items.some((item) => item.name.toLowerCase() === search.toLowerCase())
 
   return (
@@ -153,6 +155,10 @@ export function Select<IdType extends SlateId>({
         value={value}
         onChange={(v: SelectItem<IdType> | null) => {
           if (v && (v.id as SlateId) === SELECT_CREATE_OPTION_ID) {
+            if (search.trim() === '') {
+              inputRef.current?.focus()
+              return
+            }
             onCreate?.(search)
             setSearch('')
             return
@@ -164,6 +170,7 @@ export function Select<IdType extends SlateId>({
         ref={ref}
       >
         <ComboboxInput
+          ref={inputRef}
           id={id}
           as={SlateComboboxInput}
           variant={variant}
@@ -239,7 +246,7 @@ export function Select<IdType extends SlateId>({
               style={styles?.option}
             >
               <Icon icon={Plus} />
-              Create &quot;{search}&quot;
+              {search.trim() === '' ? 'Create your own' : `Create "${search}"`}
             </ComboboxOption>
           )}
 
