@@ -27,7 +27,8 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
         <DropdownMenu.Content
           className={cn(
             'bg-white p-1 border border-muted-light shadow-sm rounded-lg flex flex-col gap-1',
-            'data-[state=open]:animate-slideDownAndFade z-40 overflow-y-auto max-h-60'
+            'data-[state=open]:animate-slideDownAndFade z-40 overflow-y-auto max-h-60',
+            'overscroll-contain'
           )}
           sideOffset={4}
           collisionPadding={collisionPadding}

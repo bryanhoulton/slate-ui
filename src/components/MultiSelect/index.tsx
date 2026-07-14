@@ -121,9 +121,15 @@ export function MultiSelect<IdType extends SlateId>({
   }, [])
 
   const sizeClasses = {
-    sm: 'min-h-6 px-1 text-xs gap-1',
-    md: 'min-h-8 px-1.5 text-sm gap-1.5',
-    lg: 'min-h-10 px-2 text-base gap-2'
+    sm: 'min-h-6 px-1 text-xs',
+    md: 'min-h-8 px-1.5 text-sm',
+    lg: 'min-h-10 px-2 text-base'
+  }[size]
+
+  const gapClasses = {
+    sm: 'gap-1',
+    md: 'gap-1.5',
+    lg: 'gap-2'
   }[size]
 
   const variantRingClasses = {
@@ -186,9 +192,9 @@ export function MultiSelect<IdType extends SlateId>({
           <div
             ref={triggerRef}
             className={cn(
-              'rounded-lg border flex flex-wrap items-center w-full cursor-text',
+              'rounded-lg border flex items-start w-full cursor-text',
               'transition focus-within:outline-none focus-within:ring-2 ring-offset-1',
-              'py-1 pr-8',
+              'py-1',
               sizeClasses,
               variantRingClasses,
               error && 'border-error-500',
@@ -197,92 +203,99 @@ export function MultiSelect<IdType extends SlateId>({
             style={styles?.input}
             onClick={() => inputRef.current?.focus()}
           >
-            {iconLeft && (
-              <Icon
-                icon={iconLeft}
-                variant={variant}
-                className="ml-1 shrink-0"
-              />
-            )}
-
-            {selectedItems.map((item) => (
-              <Badge
-                key={item.id}
-                variant="secondary"
-                size='md'
-                iconLeft={item.icon}
-                styles={styles?.badge}
-                className="max-w-full rounded-lg pr-0.5"
-              >
-                <span className="flex items-center gap-1 truncate">
-                  <span className="truncate">{item.name}</span>
-                  {!disabled && (
-                    <button
-                      type="button"
-                      aria-label={`Remove ${item.name}`}
-                      className={cn(
-                        'rounded-[6px] hover:bg-primary/10 p-0.5',
-                        'transition cursor-pointer'
-                      )}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        removeItem(item.id)
-                      }}
-                    >
-                      <Icon
-                        icon={X}
-                        variant="default"
-                        className="w-3.5 h-3.5"
-                      />
-                    </button>
-                  )}
-                </span>
-              </Badge>
-            ))}
-
-            <ComboboxInput
-              id={id}
-              ref={inputRef}
-              aria-label={id}
-              value={search}
-              placeholder={selectedItems.length === 0 ? placeholder : ''}
+            <div
               className={cn(
-                'flex-1 min-w-[60px] bg-transparent outline-none border-none',
-                'text-sm disabled:text-muted disabled:cursor-not-allowed',
-                size === 'sm' && 'h-5',
-                size === 'md' && 'h-6',
-                size === 'lg' && 'h-8'
+                'flex flex-1 flex-wrap items-center min-w-0',
+                gapClasses
               )}
-              onChange={(e) => {
-                if (!searchable) return
-                setSearch(e.target.value)
-              }}
-              onKeyDown={handleKeyDown}
-              readOnly={!searchable}
-              disabled={disabled}
-            />
-          </div>
+            >
+              {iconLeft && (
+                <Icon
+                  icon={iconLeft}
+                  variant={variant}
+                  className="ml-1 shrink-0"
+                />
+              )}
 
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-            {clearable && value.length > 0 && !disabled && (
-              <ActionIcon
-                icon={X}
-                size="sm"
-                variant="subtle"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setValue([])
-                  setSearch('')
+              {selectedItems.map((item) => (
+                <Badge
+                  key={item.id}
+                  variant="secondary"
+                  size='md'
+                  dot={false}
+                  iconLeft={item.icon}
+                  styles={styles?.badge}
+                  className="max-w-full rounded-lg pr-0.5"
+                >
+                  <span className="flex items-center gap-1 truncate">
+                    <span className="truncate">{item.name}</span>
+                    {!disabled && (
+                      <button
+                        type="button"
+                        aria-label={`Remove ${item.name}`}
+                        className={cn(
+                          'rounded-[6px] hover:bg-primary/10 p-0.5',
+                          'transition cursor-pointer'
+                        )}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          removeItem(item.id)
+                        }}
+                      >
+                        <Icon
+                          icon={X}
+                          variant="default"
+                          className="w-3.5 h-3.5"
+                        />
+                      </button>
+                    )}
+                  </span>
+                </Badge>
+              ))}
+
+              <ComboboxInput
+                id={id}
+                ref={inputRef}
+                aria-label={id}
+                value={search}
+                placeholder={selectedItems.length === 0 ? placeholder : ''}
+                className={cn(
+                  'flex-1 min-w-[60px] bg-transparent outline-none border-none',
+                  'text-sm disabled:text-muted disabled:cursor-not-allowed',
+                  size === 'sm' && 'h-5',
+                  size === 'md' && 'h-6',
+                  size === 'lg' && 'h-8'
+                )}
+                onChange={(e) => {
+                  if (!searchable) return
+                  setSearch(e.target.value)
                 }}
+                onKeyDown={handleKeyDown}
+                readOnly={!searchable}
+                disabled={disabled}
               />
-            )}
-            <Icon
-              icon={ChevronDown}
-              variant={variant}
-              className="pointer-events-none"
-            />
-          </div>
+            </div>
 
+            <div className="flex items-center gap-1 shrink-0 pl-1">
+              {clearable && value.length > 0 && !disabled && (
+                <ActionIcon
+                  icon={X}
+                  size="sm"
+                  variant="subtle"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setValue([])
+                    setSearch('')
+                  }}
+                />
+              )}
+              <Icon
+                icon={ChevronDown}
+                variant={variant}
+                className="pointer-events-none"
+              />
+            </div>
+          </div>
         </div>
 
         {typeof document !== 'undefined' &&
@@ -300,7 +313,7 @@ export function MultiSelect<IdType extends SlateId>({
                 className={cn(
                   'w-full rounded-lg p-1 flex flex-col gap-1 border bg-white',
                   'pointer-events-auto shadow-sm',
-                  'animate-slideDownAndFade max-h-72 overflow-auto'
+                  'animate-slideDownAndFade max-h-72 overflow-auto overscroll-contain'
                 )}
                 style={styles?.content}
               >

@@ -196,7 +196,7 @@ export function AddressInput({
               className={cn(
                 'w-full rounded-lg p-1 flex flex-col gap-1 border bg-white',
                 'pointer-events-auto shadow-sm',
-                'animate-slideDownAndFade max-h-72 overflow-auto'
+                'animate-slideDownAndFade max-h-72 overflow-auto overscroll-contain'
               )}
               style={styles?.content}
             >

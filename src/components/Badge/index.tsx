@@ -97,6 +97,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       variant = 'default',
       iconLeft,
       iconRight,
+      dot = true,
       size = 'md',
       className,
       styles,
@@ -130,7 +131,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
             )}
           />
         ) : (
-          <span className={dotVariants({ variant, size })} />
+          dot && <span className={dotVariants({ variant, size })} />
         )}
         <span className="shrink-0">{children}</span>
         {iconRight && (

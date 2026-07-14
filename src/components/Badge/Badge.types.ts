@@ -22,4 +22,6 @@ export interface BadgeProps
   size?: SlateSize
   iconLeft?: LucideIcon
   iconRight?: LucideIcon
+  /** Shows the variant-colored dot when there's no `iconLeft`. Defaults to true. */
+  dot?: boolean
 }
