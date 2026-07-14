@@ -245,7 +245,7 @@ export function MultiSelect<IdType extends SlateId>({
               placeholder={selectedItems.length === 0 ? placeholder : ''}
               className={cn(
                 'flex-1 min-w-[60px] bg-transparent outline-none border-none',
-                'placeholder:text-muted disabled:cursor-not-allowed',
+                'text-sm disabled:text-muted disabled:cursor-not-allowed',
                 size === 'sm' && 'h-5',
                 size === 'md' && 'h-6',
                 size === 'lg' && 'h-8'
